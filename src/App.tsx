@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Lenis from 'lenis';
 
 import { DataProvider } from './contexts/DataContext';
@@ -101,7 +101,7 @@ const SmoothScrollManager: React.FC = () => {
 
 export function App() {
   return (
-    <BrowserRouter basename={import.meta.env.BASE_URL}>
+    <HashRouter>
       <SmoothScrollManager />
       <DataProvider>
         <AuthProvider>
@@ -192,7 +192,7 @@ export function App() {
           </UserAuthProvider>
         </AuthProvider>
       </DataProvider>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
