@@ -101,7 +101,7 @@ const SmoothScrollManager: React.FC = () => {
 
 export function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <SmoothScrollManager />
       <DataProvider>
         <AuthProvider>
