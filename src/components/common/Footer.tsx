@@ -201,9 +201,6 @@ export const Footer: React.FC = () => {
             <Link to="/terms-and-conditions" className="hover:text-[#D6A84F] transition-colors">
               Terms & Conditions
             </Link>
-            <Link to="/dashboard" className="text-[#ECFDF5]/30 hover:text-[#D6A84F] transition-colors text-[11px]">
-              Admin Portal
-            </Link>
             <span className="text-[#D6A84F]/60">Pakistan</span>
           </div>
         </div>
