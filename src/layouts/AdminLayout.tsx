@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Outlet, Link, useLocation, useNavigate, Navigate } from 'react-router-dom';
+import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { useData } from '../contexts/DataContext';
+import { AdminLoginPage } from '../pages/admin/AdminLoginPage';
 import {
   LayoutDashboard,
   Building,
@@ -43,9 +44,9 @@ export const AdminLayout: React.FC = () => {
     );
   }
 
-  // Strict route protection: unauthenticated users redirected to /dashboard/login
+  // If not authenticated, render login directly on /dashboard/
   if (!isAuthenticated || !user) {
-    return <Navigate to="/dashboard/login" state={{ from: location }} replace />;
+    return <AdminLoginPage />;
   }
 
   const unreadInquiries = inquiries.filter((i) => i.status === 'New').length;
