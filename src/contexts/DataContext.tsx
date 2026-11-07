@@ -184,8 +184,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         if (!parsed.whatsapp || parsed.whatsapp.includes('8593450')) {
           parsed.whatsapp = '03117000900';
         }
-        if (parsed.phoneSecondary && parsed.phoneSecondary.includes('8593450')) {
-          parsed.phoneSecondary = '03117000900';
+        if (parsed.whatsappSettings) {
+          parsed.whatsappSettings.showNumberLabel = false;
         }
         if (!parsed.whatsappSettings || parsed.whatsappSettings.phoneNumber?.includes('8593450')) {
           parsed.whatsappSettings = {

@@ -358,11 +358,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         className="relative z-50 w-full pt-0 px-4 sm:px-8 lg:px-14 flex items-center justify-between"
       >
         {/* Left: Brand Logo */}
-        <Link to="/" className="flex items-center group py-1">
+        <Link to="/" className="flex items-center group py-1.5">
           <img
-            src="/assets/peshawer-gold-logo.png"
-            alt="PESHAWER REAL ESTATE"
-            className="h-20 sm:h-24 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-[0_2px_10px_rgba(230,198,120,0.35)]"
+            src="/assets/navbar-logo.png"
+            alt="PESHAWARS REAL ESTATE"
+            className="h-11 sm:h-12 md:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-[0_2px_10px_rgba(230,198,120,0.35)]"
           />
         </Link>
 
@@ -824,7 +824,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             className="text-center mb-3 sm:mb-6 max-w-3xl px-2 sm:px-4"
           >
             <h2 className="text-white font-heading text-sm sm:text-xl md:text-2xl lg:text-[26px] font-extrabold tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)] leading-snug sm:leading-tight">
-              Buy, Rent, or Sell – Simplifying Your Real Estate Journey
+              Buy, Sell and Invest – Simplifying Your Real Estate Journey
             </h2>
           </div>
 

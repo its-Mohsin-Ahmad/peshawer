@@ -184,11 +184,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInquiry, onOpenAppointment
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Left: Brand Logo */}
-            <Link to="/" className="flex items-center group py-2">
+            <Link to="/" className="flex items-center group py-1.5">
               <img
                 src="/assets/navbar-logo.png"
                 alt="PESHAWARS REAL ESTATE"
-                className="h-20 sm:h-24 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-[0_2px_10px_rgba(230,198,120,0.3)]"
+                className="h-11 sm:h-12 md:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-[0_2px_10px_rgba(230,198,120,0.3)]"
               />
             </Link>
 
@@ -669,7 +669,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInquiry, onOpenAppointment
                 <img
                   src="/assets/navbar-logo.png"
                   alt="PESHAWARS Logo"
-                  className="h-16 w-auto object-contain"
+                  className="h-10 sm:h-11 w-auto object-contain"
                 />
                 <button
                   onClick={() => setMobileMenuOpen(false)}

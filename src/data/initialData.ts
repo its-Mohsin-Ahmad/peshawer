@@ -1256,7 +1256,7 @@ export const initialSiteSettings: SiteSettings = {
     intlNumber: '923117000900',
     defaultMessage:
       'Assalam-o-Alaikum! I am interested in your real estate services. I would like to get more information about available properties and projects.',
-    showNumberLabel: true,
+    showNumberLabel: false,
     desktopVisible: true,
     mobileVisible: true,
     position: 'bottom-left',

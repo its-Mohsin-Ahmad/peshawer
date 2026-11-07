@@ -77,26 +77,26 @@ export const ProjectsProgressingSection: React.FC = () => {
 
                   {/* Body Content */}
                   <div className="p-5">
-                    <h3 className="font-heading text-lg font-bold text-[#102A24] mb-1 group-hover:text-[#064E3B] transition-colors leading-snug">
+                    <h3 className="font-heading text-lg sm:text-xl font-extrabold text-white mb-1.5 group-hover:text-[#FFC83D] transition-colors leading-snug drop-shadow-sm">
                       {project.name}
                     </h3>
 
                     {/* Stage status indicator */}
-                    <div className="flex items-center space-x-1.5 text-xs text-[#047857] font-semibold mb-4">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#047857] shrink-0" />
-                      <span className="truncate">{status}</span>
+                    <div className="flex items-center space-x-1.5 text-xs text-[#F4F7F2] font-semibold mb-4">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFC83D] shrink-0" />
+                      <span className="truncate text-white/95">{status}</span>
                     </div>
 
                     {/* Animated Progress Bar */}
                     <div className="space-y-1.5 mb-4">
                       <div className="flex items-center justify-between text-xs">
-                        <span className="text-[11px] font-bold text-[#E8F3EC]/70 uppercase tracking-wider">
+                        <span className="text-[11px] font-bold text-white uppercase tracking-wider">
                           Completion Rate
                         </span>
                         <span className="text-xs font-black text-[#FFC83D]">{percentage}%</span>
                       </div>
 
-                      <div className="w-full h-2.5 bg-[#002D1C] rounded-full overflow-hidden p-0.5 border border-[#E6AA27]/30">
+                      <div className="w-full h-2.5 bg-[#002D1C] rounded-full overflow-hidden p-0.5 border border-[#E6AA27]/40">
                         <div
                           className="h-full rounded-full bg-gradient-to-r from-[#006B40] via-[#E6AA27] to-[#FFC83D] transition-all duration-1000"
                           style={{ width: `${percentage}%` }}
@@ -105,9 +105,9 @@ export const ProjectsProgressingSection: React.FC = () => {
                     </div>
 
                     {/* Last Updated */}
-                    <div className="flex items-center space-x-1 text-[11px] text-[#E8F3EC]/60 font-medium">
-                      <Calendar className="w-3 h-3 text-[#FFC83D]" />
-                      <span>Updated: <strong className="text-white">{lastUpdated}</strong></span>
+                    <div className="flex items-center space-x-1.5 text-[11px] text-[#F4F7F2]/90 font-medium">
+                      <Calendar className="w-3.5 h-3.5 text-[#FFC83D]" />
+                      <span>Updated: <strong className="text-white font-bold">{lastUpdated}</strong></span>
                     </div>
                   </div>
                 </div>
