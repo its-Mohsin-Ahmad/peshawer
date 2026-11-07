@@ -19,8 +19,8 @@ export const Footer: React.FC = () => {
           <div className="lg:col-span-2 space-y-5">
             <Link to="/" className="flex items-center group">
               <img
-                src="/assets/peshawer-gold-logo.png"
-                alt="PESHAWER REAL ESTATE"
+                src="/assets/navbar-logo.png"
+                alt="PESHAWARS REAL ESTATE"
                 className="h-24 sm:h-28 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-[0_2px_12px_rgba(230,170,39,0.35)]"
               />
             </Link>

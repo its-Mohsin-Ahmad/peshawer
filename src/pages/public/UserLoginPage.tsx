@@ -94,8 +94,8 @@ export const UserLoginPage: React.FC = () => {
         <div className="relative z-10">
           <Link to="/" className="inline-block group">
             <img
-              src="/assets/peshawer-gold-logo.png"
-              alt="PESHAWER REAL ESTATE"
+              src="/assets/navbar-logo.png"
+              alt="PESHAWARS REAL ESTATE"
               className="h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-[0_4px_12px_rgba(214,168,79,0.4)]"
             />
           </Link>
@@ -145,8 +145,8 @@ export const UserLoginPage: React.FC = () => {
           <div className="text-center mb-5">
             <Link to="/" className="inline-block mb-2">
               <img
-                src="/assets/peshawer-gold-logo.png"
-                alt="PESHAWER REAL ESTATE"
+                src="/assets/navbar-logo.png"
+                alt="PESHAWARS REAL ESTATE"
                 className="h-9 sm:h-10 w-auto mx-auto object-contain drop-shadow"
               />
             </Link>

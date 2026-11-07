@@ -439,8 +439,8 @@ export const UserDashboardOverviewPage: React.FC = () => {
           <div className="rounded-3xl p-6 bg-gradient-to-br from-[#064E3B] via-[#022C22] to-[#0A1A15] text-white flex flex-col justify-between border border-[#D6A84F]/30 shadow-lg relative overflow-hidden">
             <div className="relative z-10 space-y-3">
               <img
-                src="/assets/peshawer-gold-logo.png"
-                alt="PESHAWER REAL ESTATE"
+                src="/assets/navbar-logo.png"
+                alt="PESHAWARS REAL ESTATE"
                 className="h-9 w-auto object-contain drop-shadow"
               />
 

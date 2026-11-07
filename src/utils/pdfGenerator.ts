@@ -229,8 +229,8 @@ export function printPaymentPlan(project: Project, apartment: ApartmentPlan) {
       </div>
 
       <div class="footer">
-        <div>PESHAWER REAL ESTATE • Head Office: Main University Road, Peshawar</div>
-        <div>UAN: +92 91 5842100 • info@peshawerrealestate.com</div>
+        <div>PESHAWARS REAL ESTATE • Head Office: Main University Road, Peshawar</div>
+        <div>UAN: +92 91 5842100 • info@peshawars.com</div>
       </div>
 
       <script>

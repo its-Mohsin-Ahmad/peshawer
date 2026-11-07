@@ -18,7 +18,7 @@ export const AdminMediaPage: React.FC = () => {
     { title: 'Carousel Slide 5 (City Concept)', path: '/assets/hero/slide5.jpg', category: 'Hero', size: '350 KB' },
     { title: 'Glamorous Heights 3D Render', path: '/assets/buildings/building-1.png', category: 'Renders', size: '318 KB' },
     { title: 'Town Garden 3D Render', path: '/assets/buildings/building-2.png', category: 'Renders', size: '324 KB' },
-    { title: 'Kalam Cottages 3D Render', path: '/assets/buildings/building-3.png', category: 'Renders', size: '290 KB' },
+    { title: 'Kalam Cottages 3D Render', path: '/assets/buildings/kalam-cottage.png', category: 'Renders', size: '290 KB' },
     { title: 'Corner Apartments 3D Render', path: '/assets/buildings/building-4.png', category: 'Renders', size: '310 KB' },
     { title: 'Glamorous Heights Hero Sunset', path: '/assets/projects/glamorous-heights/hero.png', category: 'Projects', size: '3.3 MB' },
     { title: 'Town Garden Luxury Villa Hero', path: '/assets/projects/town-garden/hero.png', category: 'Projects', size: '2.6 MB' },

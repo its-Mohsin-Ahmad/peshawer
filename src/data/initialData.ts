@@ -181,7 +181,7 @@ export const initialProjects: Project[] = [
       'Immerse in nature with Kalam Cottages, a master-planned community of handcrafted alpine chalets nestled along the pine forests and river streams of Kalam. Designed for peaceful retreats, eco-tourism, and substantial seasonal hospitality revenues.',
     coverImage: '/assets/projects/kalam-cottages/hero.png',
     heroImage: '/assets/projects/kalam-cottages/hero.png',
-    renderBuildingImage: '/assets/buildings/building-2.png',
+    renderBuildingImage: '/assets/buildings/kalam-cottage.png',
     hasVideo: false,
     status: 'Booking Open',
     featured: true,
@@ -1262,7 +1262,7 @@ export const initialSiteSettings: SiteSettings = {
     position: 'bottom-left',
     buttonSize: 'medium',
   },
-  email: 'info@peshawerrealestate.com',
+  email: 'info@peshawars.com',
   officeAddress: 'Main University Road, Opp. Islamia College, Peshawar, Khyber Pakhtunkhwa, Pakistan',
   businessHours: 'Monday – Saturday: 9:00 AM – 7:00 PM (Sunday by Appointment)',
   facebookUrl: 'https://facebook.com/peshawerrealestate',
@@ -1273,7 +1273,7 @@ export const initialSiteSettings: SiteSettings = {
 export const defaultAdminUser: AdminUser = {
   id: 'admin-1',
   name: 'Chief Administrator',
-  email: 'admin@peshawerrealestate.com',
+  email: 'info@peshawars.com',
   role: 'super_admin',
 };
 

@@ -97,8 +97,8 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoaded }) => {
         <div className="relative flex items-center justify-center w-full">
           <img
             ref={logoRef}
-            src="/assets/peshawer-gold-logo.png"
-            alt="PESHAWER REAL ESTATE"
+            src="/assets/loader-logo.png"
+            alt="PESHAWARS REAL ESTATE"
             className="w-full h-auto object-contain max-h-[260px] sm:max-h-[320px] md:max-h-[380px]"
           />
         </div>

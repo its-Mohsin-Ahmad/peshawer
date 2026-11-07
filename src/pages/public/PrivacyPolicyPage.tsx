@@ -45,7 +45,7 @@ export const PrivacyPolicyPage: React.FC = () => {
         </h2>
         <p>
           For questions regarding your stored information or to request removal from our notification
-          list, please reach us directly at info@peshawerrealestate.com.
+          list, please reach us directly at info@peshawars.com.
         </p>
       </div>
     </div>

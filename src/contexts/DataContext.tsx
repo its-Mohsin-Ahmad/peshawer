@@ -120,7 +120,23 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const [projects, setProjects] = useState<Project[]>(() => {
     const saved = localStorage.getItem(`${STORAGE_KEY}_PROJECTS`);
-    return saved ? JSON.parse(saved) : initialProjects;
+    if (saved) {
+      try {
+        const list: Project[] = JSON.parse(saved);
+        return list.map((p) => {
+          if (p.slug === 'kalam-cottages' || p.id === 'proj-2') {
+            return {
+              ...p,
+              renderBuildingImage: '/assets/buildings/kalam-cottage.png',
+            };
+          }
+          return p;
+        });
+      } catch {
+        return initialProjects;
+      }
+    }
+    return initialProjects;
   });
 
   const [heroSlides, setHeroSlides] = useState<HeroSlide[]>(() => {
@@ -163,6 +179,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
+        parsed.email = 'info@peshawars.com';
         // Ensure WhatsApp and inquiries are always updated to 03117000900
         if (!parsed.whatsapp || parsed.whatsapp.includes('8593450')) {
           parsed.whatsapp = '03117000900';

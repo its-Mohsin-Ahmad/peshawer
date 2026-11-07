@@ -22,8 +22,8 @@ export const UserForgotPasswordPage: React.FC = () => {
         <div className="text-center mb-6">
           <Link to="/" className="inline-block mb-3">
             <img
-              src="/assets/peshawer-gold-logo.png"
-              alt="PESHAWER REAL ESTATE"
+              src="/assets/navbar-logo.png"
+              alt="PESHAWARS REAL ESTATE"
               className="h-11 w-auto mx-auto object-contain drop-shadow"
             />
           </Link>

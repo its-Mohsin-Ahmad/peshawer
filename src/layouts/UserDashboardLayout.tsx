@@ -101,8 +101,8 @@ export const UserDashboardLayout: React.FC = () => {
       <header className="lg:hidden bg-[#022C22] text-white p-4 flex items-center justify-between sticky top-0 z-40 border-b border-[#D6A84F]/20 shrink-0">
         <Link to="/" className="flex items-center">
           <img
-            src="/assets/peshawer-gold-logo.png"
-            alt="PESHAWER REAL ESTATE"
+            src="/assets/navbar-logo.png"
+            alt="PESHAWARS REAL ESTATE"
             className="h-8 w-auto object-contain"
           />
         </Link>
@@ -140,8 +140,8 @@ export const UserDashboardLayout: React.FC = () => {
           <div className="px-3 mb-8 flex items-center justify-between">
             <Link to="/" className="inline-block group">
               <img
-                src="/assets/peshawer-gold-logo.png"
-                alt="PESHAWER REAL ESTATE"
+                src="/assets/navbar-logo.png"
+                alt="PESHAWARS REAL ESTATE"
                 className="h-10 sm:h-11 w-auto object-contain drop-shadow-[0_2px_10px_rgba(214,168,79,0.35)]"
               />
             </Link>

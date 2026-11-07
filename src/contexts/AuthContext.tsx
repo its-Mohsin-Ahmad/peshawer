@@ -35,22 +35,26 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     // Simulate network authentication delay for realism
     await new Promise((res) => setTimeout(res, 600));
 
+    const cleanEmail = email.toLowerCase().trim();
     // Admin authentication verification
     if (
-      email.toLowerCase().trim() === 'admin@peshawerrealestate.com' &&
-      pass === 'admin123456'
+      (cleanEmail === 'info@peshawars.com' ||
+        cleanEmail === 'admin@peshawars.com' ||
+        cleanEmail === 'admin@peshawerrealestate.com' ||
+        cleanEmail === 'admin@peshawer.com') &&
+      (pass === 'admin123456' || pass === 'admin123')
     ) {
-      const authUser: AdminUser = defaultAdminUser;
+      const authUser: AdminUser = {
+        ...defaultAdminUser,
+        email: cleanEmail.includes('@') ? cleanEmail : 'info@peshawars.com',
+      };
       setUser(authUser);
       localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(authUser));
       return { success: true };
     }
 
-    // Optional demo convenience fallback if user tries 'admin' or variations
-    if (
-      (email.toLowerCase().trim() === 'admin' || email.toLowerCase().trim() === 'admin@peshawer.com') &&
-      pass === 'admin123'
-    ) {
+    // Optional demo convenience fallback if user tries 'admin' username
+    if (cleanEmail === 'admin' && (pass === 'admin123456' || pass === 'admin123')) {
       const authUser: AdminUser = defaultAdminUser;
       setUser(authUser);
       localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(authUser));

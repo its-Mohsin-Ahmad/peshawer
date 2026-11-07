@@ -44,7 +44,7 @@ export const AdminLoginPage: React.FC = () => {
   };
 
   const handleFillDemo = () => {
-    setEmail('admin@peshawerrealestate.com');
+    setEmail('info@peshawars.com');
     setPassword('admin123456');
     setErrorMessage('');
   };
@@ -90,7 +90,7 @@ export const AdminLoginPage: React.FC = () => {
             <div>
               <label className="block text-xs font-bold uppercase tracking-wider text-[#102A24] mb-1.5 flex items-center justify-between">
                 <span>Admin Email Address</span>
-                <span className="text-[10px] text-[#64748B] font-mono">admin@peshawerrealestate.com</span>
+                <span className="text-[10px] text-[#64748B] font-mono">info@peshawars.com</span>
               </label>
               <div className="relative">
                 <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
@@ -99,7 +99,7 @@ export const AdminLoginPage: React.FC = () => {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@peshawerrealestate.com"
+                  placeholder="info@peshawars.com"
                   className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-[#064E3B] focus:ring-1 focus:ring-[#064E3B]"
                 />
               </div>

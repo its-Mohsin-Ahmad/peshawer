@@ -186,8 +186,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInquiry, onOpenAppointment
             {/* Left: Brand Logo */}
             <Link to="/" className="flex items-center group py-2">
               <img
-                src="/assets/peshawer-gold-logo.png"
-                alt="PESHAWER REAL ESTATE"
+                src="/assets/navbar-logo.png"
+                alt="PESHAWARS REAL ESTATE"
                 className="h-20 sm:h-24 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-[0_2px_10px_rgba(230,198,120,0.3)]"
               />
             </Link>
@@ -667,8 +667,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInquiry, onOpenAppointment
               {/* Header */}
               <div className="flex items-center justify-between p-5 border-b border-gray-100 bg-[#022C22] text-white">
                 <img
-                  src="/assets/peshawer-gold-logo.png"
-                  alt="PESHAWER Logo"
+                  src="/assets/navbar-logo.png"
+                  alt="PESHAWARS Logo"
                   className="h-16 w-auto object-contain"
                 />
                 <button
