@@ -172,9 +172,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInquiry, onOpenAppointment
   }
 
   const navBackgroundClass =
-    'bg-white/95 backdrop-blur-md text-[#102A24] shadow-md border-b border-gray-100';
+    'bg-[#002D1C]/95 backdrop-blur-md text-white shadow-[0_4px_30px_rgba(0,0,0,0.4)] border-b border-[#E6AA27]/25';
 
-  const linkColorClass = 'text-[#102A24] hover:text-[#064E3B]';
+  const linkColorClass = 'text-white/90 hover:text-[#FFC83D]';
 
   return (
     <>

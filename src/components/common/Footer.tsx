@@ -8,9 +8,10 @@ export const Footer: React.FC = () => {
   const { settings, projects } = useData();
 
   return (
-    <footer className="bg-[#022C22] text-white pt-16 pb-10 border-t-2 border-[#D6A84F]/40 relative overflow-hidden">
+    <footer className="bg-[#002417] text-white pt-16 pb-10 border-t-2 border-[#E6AA27]/30 relative overflow-hidden">
       {/* Background architectural glow */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-[#064E3B]/40 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 right-0 w-96 h-96 bg-[#004B2E]/30 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#006B40]/20 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <AnimatedSection stagger={0.1} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-white/10">
@@ -20,11 +21,11 @@ export const Footer: React.FC = () => {
               <img
                 src="/assets/peshawer-gold-logo.png"
                 alt="PESHAWER REAL ESTATE"
-                className="h-24 sm:h-28 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-[0_2px_12px_rgba(230,198,120,0.35)]"
+                className="h-24 sm:h-28 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-[0_2px_12px_rgba(230,170,39,0.35)]"
               />
             </Link>
 
-            <p className="text-sm text-[#ECFDF5]/80 leading-relaxed max-w-sm">
+            <p className="text-sm text-[#E8F3EC]/80 leading-relaxed max-w-sm">
               Peshawar’s premier real estate consultancy and project developer. Delivering verified
               investment opportunities, transparent 5-year installment plans, and architectural
               masterpieces across Khyber Pakhtunkhwa.
@@ -35,7 +36,7 @@ export const Footer: React.FC = () => {
                 href={settings.facebookUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="w-9 h-9 rounded-full bg-[#064E3B] flex items-center justify-center text-white hover:bg-[#D6A84F] hover:text-[#022C22] transition-colors btn-hover"
+                className="w-9 h-9 rounded-full bg-[#003D25] border border-[#E6AA27]/30 flex items-center justify-center text-white hover:bg-[#FFC83D] hover:text-[#002D1C] transition-colors btn-hover"
                 aria-label="Facebook"
               >
                 <Facebook className="w-4 h-4" />
@@ -44,7 +45,7 @@ export const Footer: React.FC = () => {
                 href={settings.instagramUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="w-9 h-9 rounded-full bg-[#064E3B] flex items-center justify-center text-white hover:bg-[#D6A84F] hover:text-[#022C22] transition-colors btn-hover"
+                className="w-9 h-9 rounded-full bg-[#003D25] border border-[#E6AA27]/30 flex items-center justify-center text-white hover:bg-[#FFC83D] hover:text-[#002D1C] transition-colors btn-hover"
                 aria-label="Instagram"
               >
                 <Instagram className="w-4 h-4" />
@@ -53,7 +54,7 @@ export const Footer: React.FC = () => {
                 href={settings.youtubeUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="w-9 h-9 rounded-full bg-[#064E3B] flex items-center justify-center text-white hover:bg-[#D6A84F] hover:text-[#022C22] transition-colors btn-hover"
+                className="w-9 h-9 rounded-full bg-[#003D25] border border-[#E6AA27]/30 flex items-center justify-center text-white hover:bg-[#FFC83D] hover:text-[#002D1C] transition-colors btn-hover"
                 aria-label="YouTube"
               >
                 <Youtube className="w-4 h-4" />
@@ -63,37 +64,37 @@ export const Footer: React.FC = () => {
 
           {/* Quick Links */}
           <div className="space-y-4">
-            <h3 className="font-heading text-sm font-extrabold uppercase tracking-wider text-[#D6A84F]">
+            <h3 className="font-heading text-sm font-extrabold uppercase tracking-wider text-[#FFC83D]">
               Quick Links
             </h3>
-            <ul className="space-y-2.5 text-sm text-[#ECFDF5]/80">
+            <ul className="space-y-2.5 text-sm text-[#E8F3EC]/80">
               <li>
-                <Link to="/" className="hover:text-[#D6A84F] transition-colors flex items-center">
+                <Link to="/" className="hover:text-[#FFC83D] transition-colors flex items-center">
                   <span>Home</span>
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="hover:text-[#D6A84F] transition-colors flex items-center">
+                <Link to="/about" className="hover:text-[#FFC83D] transition-colors flex items-center">
                   <span>About Us</span>
                 </Link>
               </li>
               <li>
-                <Link to="/properties" className="hover:text-[#D6A84F] transition-colors flex items-center">
+                <Link to="/properties" className="hover:text-[#FFC83D] transition-colors flex items-center">
                   <span>Properties</span>
                 </Link>
               </li>
               <li>
-                <Link to="/projects" className="hover:text-[#D6A84F] transition-colors flex items-center">
+                <Link to="/projects" className="hover:text-[#FFC83D] transition-colors flex items-center">
                   <span>Projects</span>
                 </Link>
               </li>
               <li>
-                <Link to="/blogs" className="hover:text-[#D6A84F] transition-colors flex items-center">
+                <Link to="/blogs" className="hover:text-[#FFC83D] transition-colors flex items-center">
                   <span>Blogs & Insights</span>
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="hover:text-[#D6A84F] transition-colors flex items-center">
+                <Link to="/contact" className="hover:text-[#FFC83D] transition-colors flex items-center">
                   <span>Contact</span>
                 </Link>
               </li>
@@ -102,37 +103,37 @@ export const Footer: React.FC = () => {
 
           {/* Categories */}
           <div className="space-y-4">
-            <h3 className="font-heading text-sm font-extrabold uppercase tracking-wider text-[#D6A84F]">
+            <h3 className="font-heading text-sm font-extrabold uppercase tracking-wider text-[#FFC83D]">
               Property Types
             </h3>
-            <ul className="space-y-2.5 text-sm text-[#ECFDF5]/80">
+            <ul className="space-y-2.5 text-sm text-[#E8F3EC]/80">
               <li>
-                <Link to="/properties/buy" className="hover:text-[#D6A84F] transition-colors">
+                <Link to="/properties/buy" className="hover:text-[#FFC83D] transition-colors">
                   Properties for Sale
                 </Link>
               </li>
               <li>
-                <Link to="/properties/rent" className="hover:text-[#D6A84F] transition-colors">
+                <Link to="/properties/rent" className="hover:text-[#FFC83D] transition-colors">
                   Properties for Rent
                 </Link>
               </li>
               <li>
-                <Link to="/properties?category=Apartment" className="hover:text-[#D6A84F] transition-colors">
+                <Link to="/properties?category=Apartment" className="hover:text-[#FFC83D] transition-colors">
                   Apartments & Suites
                 </Link>
               </li>
               <li>
-                <Link to="/properties?category=House" className="hover:text-[#D6A84F] transition-colors">
+                <Link to="/properties?category=House" className="hover:text-[#FFC83D] transition-colors">
                   Houses & Villas
                 </Link>
               </li>
               <li>
-                <Link to="/properties/commercial" className="hover:text-[#D6A84F] transition-colors">
+                <Link to="/properties/commercial" className="hover:text-[#FFC83D] transition-colors">
                   Commercial Offices
                 </Link>
               </li>
               <li>
-                <Link to="/properties/plots" className="hover:text-[#D6A84F] transition-colors">
+                <Link to="/properties/plots" className="hover:text-[#FFC83D] transition-colors">
                   Plots & Land
                 </Link>
               </li>
@@ -141,29 +142,29 @@ export const Footer: React.FC = () => {
 
           {/* Signature Projects */}
           <div className="space-y-4">
-            <h3 className="font-heading text-sm font-extrabold uppercase tracking-wider text-[#D6A84F]">
+            <h3 className="font-heading text-sm font-extrabold uppercase tracking-wider text-[#FFC83D]">
               Signature Projects
             </h3>
-            <ul className="space-y-2.5 text-sm text-[#ECFDF5]/80">
+            <ul className="space-y-2.5 text-sm text-[#E8F3EC]/80">
               {projects.map((p) => (
                 <li key={p.id}>
                   <Link
                     to={`/projects/${p.slug}`}
-                    className="hover:text-[#D6A84F] transition-colors flex items-center justify-between group"
+                    className="hover:text-[#FFC83D] transition-colors flex items-center justify-between group"
                   >
                     <span>{p.name}</span>
-                    <ArrowUpRight className="w-3.5 h-3.5 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-[#D6A84F]" />
+                    <ArrowUpRight className="w-3.5 h-3.5 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-[#FFC83D]" />
                   </Link>
                 </li>
               ))}
             </ul>
 
-            <div className="pt-3 border-t border-white/10 text-xs text-[#ECFDF5]/70 space-y-1.5">
+            <div className="pt-3 border-t border-white/10 text-xs text-[#E8F3EC]/70 space-y-1.5">
               <a
                 href={`tel:${settings.phonePrimary}`}
-                className="flex items-center space-x-2 hover:text-[#D6A84F] transition-colors"
+                className="flex items-center space-x-2 hover:text-[#FFC83D] transition-colors"
               >
-                <Phone className="w-3.5 h-3.5 text-[#D6A84F]" />
+                <Phone className="w-3.5 h-3.5 text-[#FFC83D]" />
                 <span>{settings.phonePrimary}</span>
               </a>
               <a
@@ -180,9 +181,9 @@ export const Footer: React.FC = () => {
               </a>
               <a
                 href={`mailto:${settings.email}`}
-                className="flex items-center space-x-2 hover:text-[#D6A84F] transition-colors"
+                className="flex items-center space-x-2 hover:text-[#FFC83D] transition-colors"
               >
-                <Mail className="w-3.5 h-3.5 text-[#D6A84F]" />
+                <Mail className="w-3.5 h-3.5 text-[#FFC83D]" />
                 <span>{settings.email}</span>
               </a>
             </div>
@@ -190,18 +191,18 @@ export const Footer: React.FC = () => {
         </AnimatedSection>
 
         {/* Bottom copyright and legal */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-[#ECFDF5]/60 space-y-4 sm:space-y-0">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-[#E8F3EC]/60 space-y-4 sm:space-y-0">
           <div>
             © {new Date().getFullYear()} <strong className="text-white">PESHAWER REAL ESTATE</strong>. All Rights Reserved.
           </div>
           <div className="flex items-center space-x-6">
-            <Link to="/privacy-policy" className="hover:text-[#D6A84F] transition-colors">
+            <Link to="/privacy-policy" className="hover:text-[#FFC83D] transition-colors">
               Privacy Policy
             </Link>
-            <Link to="/terms-and-conditions" className="hover:text-[#D6A84F] transition-colors">
+            <Link to="/terms-and-conditions" className="hover:text-[#FFC83D] transition-colors">
               Terms & Conditions
             </Link>
-            <span className="text-[#D6A84F]/60">Pakistan</span>
+            <span className="text-[#FFC83D]/60">Pakistan</span>
           </div>
         </div>
       </div>

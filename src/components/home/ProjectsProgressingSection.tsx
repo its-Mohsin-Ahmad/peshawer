@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useData } from '../../contexts/DataContext';
 import { HardHat, ArrowRight, Calendar, MapPin, TrendingUp, CheckCircle2 } from 'lucide-react';
+import { EmeraldWaveBackground } from '../common/EmeraldWaveBackground';
 
 export const ProjectsProgressingSection: React.FC = () => {
   const { projects } = useData();
@@ -12,26 +13,24 @@ export const ProjectsProgressingSection: React.FC = () => {
   if (progressingProjects.length === 0) return null;
 
   return (
-    <section className="py-20 bg-gradient-to-b from-white via-[#F8F6EA]/60 to-white relative overflow-hidden border-b border-gray-100">
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/2 left-0 w-80 h-80 bg-[#ECFDF5] rounded-full blur-3xl pointer-events-none -translate-y-1/2" />
-      <div className="absolute top-1/3 right-0 w-96 h-96 bg-[#D6A84F]/10 rounded-full blur-3xl pointer-events-none" />
+    <section className="py-24 bg-[#002D1C] text-white relative overflow-hidden border-t border-b border-[#E6AA27]/20">
+      <EmeraldWaveBackground intensity="deep" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#ECFDF5] border border-[#047857]/20 text-[#047857] text-xs font-bold uppercase tracking-wider mb-3">
-            <HardHat className="w-4 h-4 text-[#D6A84F]" />
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#004B2E]/90 border border-[#E6AA27]/40 text-[#FFC83D] text-xs font-bold uppercase tracking-wider mb-3">
+            <HardHat className="w-4 h-4 text-[#FFC83D]" />
             <span>Real-Time Development Milestones</span>
           </div>
 
-          <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#022C22] uppercase tracking-tight mb-4">
-            Our Projects Are <span className="text-[#D6A84F]">Progressing</span>
+          <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white uppercase tracking-tight mb-4">
+            Our Projects Are <span className="text-[#FFC83D]">Progressing</span>
           </h2>
 
-          <div className="w-24 h-1 bg-[#D6A84F] mx-auto rounded-full mb-4" />
+          <div className="w-24 h-1 bg-[#E6AA27] mx-auto rounded-full mb-4 shadow-[0_0_12px_rgba(230,170,39,0.4)]" />
 
-          <p className="text-base text-[#64748B] font-normal leading-relaxed">
+          <p className="text-base text-[#E8F3EC]/80 font-normal leading-relaxed">
             Follow the active development journey, structural milestones, and latest verified construction updates across our premier developments in Peshawar and Swat.
           </p>
         </div>
@@ -52,7 +51,7 @@ export const ProjectsProgressingSection: React.FC = () => {
             return (
               <div
                 key={project.id}
-                className="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-premium hover:shadow-premium-hover transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1.5"
+                className="bg-[#003D25]/90 rounded-3xl overflow-hidden border border-[#E6AA27]/25 shadow-2xl hover:border-[#E6AA27]/60 transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1.5 backdrop-blur-md"
               >
                 <div>
                   {/* Card Visual / Render — Clean Studio Stage (No Green Theme) */}
@@ -91,24 +90,24 @@ export const ProjectsProgressingSection: React.FC = () => {
                     {/* Animated Progress Bar */}
                     <div className="space-y-1.5 mb-4">
                       <div className="flex items-center justify-between text-xs">
-                        <span className="text-[11px] font-bold text-[#64748B] uppercase tracking-wider">
+                        <span className="text-[11px] font-bold text-[#E8F3EC]/70 uppercase tracking-wider">
                           Completion Rate
                         </span>
-                        <span className="text-xs font-black text-[#D6A84F]">{percentage}%</span>
+                        <span className="text-xs font-black text-[#FFC83D]">{percentage}%</span>
                       </div>
 
-                      <div className="w-full h-2.5 bg-gray-100 rounded-full overflow-hidden p-0.5 border border-gray-200/80">
+                      <div className="w-full h-2.5 bg-[#002D1C] rounded-full overflow-hidden p-0.5 border border-[#E6AA27]/30">
                         <div
-                          className="h-full rounded-full bg-gradient-to-r from-[#064E3B] to-[#D6A84F] transition-all duration-1000"
+                          className="h-full rounded-full bg-gradient-to-r from-[#006B40] via-[#E6AA27] to-[#FFC83D] transition-all duration-1000"
                           style={{ width: `${percentage}%` }}
                         />
                       </div>
                     </div>
 
                     {/* Last Updated */}
-                    <div className="flex items-center space-x-1 text-[11px] text-[#94A3B8] font-medium">
-                      <Calendar className="w-3 h-3 text-[#D6A84F]" />
-                      <span>Updated: <strong className="text-[#64748B]">{lastUpdated}</strong></span>
+                    <div className="flex items-center space-x-1 text-[11px] text-[#E8F3EC]/60 font-medium">
+                      <Calendar className="w-3 h-3 text-[#FFC83D]" />
+                      <span>Updated: <strong className="text-white">{lastUpdated}</strong></span>
                     </div>
                   </div>
                 </div>
@@ -117,7 +116,7 @@ export const ProjectsProgressingSection: React.FC = () => {
                 <div className="p-5 pt-0">
                   <Link
                     to={`/projects/${project.slug}#progress`}
-                    className="w-full py-2.5 px-4 rounded-xl bg-[#F8F6EA] hover:bg-[#064E3B] text-[#064E3B] hover:text-white text-xs font-heading font-extrabold uppercase tracking-wider transition-all duration-200 flex items-center justify-center space-x-2 group/btn"
+                    className="w-full py-2.5 px-4 rounded-xl bg-[#004B2E] hover:bg-[#E6AA27] text-[#FFC83D] hover:text-[#002D1C] border border-[#E6AA27]/40 text-xs font-heading font-extrabold uppercase tracking-wider transition-all duration-200 flex items-center justify-center space-x-2 group/btn"
                   >
                     <span>View Project</span>
                     <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
@@ -129,7 +128,7 @@ export const ProjectsProgressingSection: React.FC = () => {
         </div>
 
         {/* Provisional Note */}
-        <p className="text-center text-[11px] text-[#64748B] italic mt-8 max-w-2xl mx-auto">
+        <p className="text-center text-[11px] text-[#E8F3EC]/60 italic mt-8 max-w-2xl mx-auto">
           * Construction progress values are provisional display figures subject to administrator verification. Figures reflect on-site engineering milestones and do not represent an absolute guarantee of possession dates.
         </p>
       </div>

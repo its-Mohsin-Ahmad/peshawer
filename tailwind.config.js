@@ -7,23 +7,36 @@ export default {
   theme: {
     extend: {
       colors: {
-        forest: {
-          DEFAULT: '#064E3B',
-          dark: '#022C22',
-          light: '#047857',
+        emeraldTheme: {
+          primary: '#003D25',
+          deep: '#002D1C',
+          secondary: '#004B2E',
+          base: '#006B40',
+          light: '#087B4B',
         },
-        deepGreen: '#022C22',
-        emeraldCustom: '#047857',
+        goldTheme: {
+          DEFAULT: '#E6AA27',
+          bright: '#FFC83D',
+          light: '#DDB65A',
+        },
+        forest: {
+          DEFAULT: '#006B40',
+          dark: '#002D1C',
+          light: '#087B4B',
+        },
+        deepGreen: '#002D1C',
+        emeraldCustom: '#006B40',
         gold: {
-          light: '#E6C678',
-          DEFAULT: '#D6A84F',
+          light: '#DDB65A',
+          DEFAULT: '#E6AA27',
+          bright: '#FFC83D',
           dark: '#B88628',
         },
-        cream: '#F8F6EA',
-        mainText: '#102A24',
-        secondaryText: '#64748B',
-        lightGreen: '#ECFDF5',
-        customBorder: '#E5E7EB',
+        cream: '#003D25',
+        mainText: '#FFFFFF',
+        secondaryText: '#E8F3EC',
+        lightGreen: '#004B2E',
+        customBorder: 'rgba(230, 170, 39, 0.25)',
       },
       fontFamily: {
         heading: ['Plus Jakarta Sans', 'Manrope', 'sans-serif'],

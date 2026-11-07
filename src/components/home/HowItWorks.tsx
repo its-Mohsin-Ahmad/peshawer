@@ -34,20 +34,20 @@ export const HowItWorks: React.FC = () => {
   ];
 
   return (
-    <section className="py-24 bg-[#022C22] text-white relative overflow-hidden">
-      {/* Background glow */}
-      <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#064E3B] rounded-full blur-3xl pointer-events-none opacity-50" />
+    <section className="py-24 bg-[#003D25] text-white relative overflow-hidden">
+      {/* Background ambient lighting */}
+      <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#006B40] rounded-full blur-3xl pointer-events-none opacity-40" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#D6A84F] block mb-2">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#FFC83D] block mb-2">
             Seamless Four-Step Journey
           </span>
           <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white uppercase tracking-tight mb-4">
-            How The Platform <span className="text-[#D6A84F]">Works</span>
+            How The Platform <span className="text-[#FFC83D]">Works</span>
           </h2>
-          <div className="w-20 h-1 bg-[#D6A84F] mx-auto rounded-full mb-4" />
-          <p className="text-sm sm:text-base text-[#ECFDF5]/80">
+          <div className="w-20 h-1 bg-[#E6AA27] mx-auto rounded-full mb-4 shadow-[0_0_12px_rgba(230,170,39,0.5)]" />
+          <p className="text-sm sm:text-base text-[#E8F3EC]/85">
             A transparent and structured pathway from your initial discovery to registered property ownership.
           </p>
         </div>
@@ -58,24 +58,24 @@ export const HowItWorks: React.FC = () => {
             return (
               <div
                 key={idx}
-                className="relative bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-sm hover:border-[#D6A84F]/50 transition-all hover:-translate-y-1 group"
+                className="p-6 rounded-3xl bg-[#002D1C]/80 border border-[#E6AA27]/25 hover:border-[#FFC83D]/60 transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1.5 backdrop-blur-sm"
               >
-                {/* Number indicator */}
-                <div className="text-3xl font-mono font-extrabold text-[#D6A84F]/40 group-hover:text-[#D6A84F] transition-colors mb-4">
-                  {step.number}
+                <div>
+                  <div className="flex items-center justify-between mb-6">
+                    <span className="font-heading text-3xl font-black text-[#E6AA27]/40 group-hover:text-[#FFC83D] transition-colors">
+                      {step.number}
+                    </span>
+                    <div className="w-12 h-12 rounded-2xl bg-[#004B2E] text-[#FFC83D] flex items-center justify-center border border-[#E6AA27]/30 shadow-sm group-hover:scale-110 transition-transform">
+                      <Icon className="w-6 h-6" />
+                    </div>
+                  </div>
+                  <h3 className="font-heading text-lg font-bold text-white mb-2 group-hover:text-[#FFC83D] transition-colors leading-snug">
+                    {step.title}
+                  </h3>
+                  <p className="text-xs text-[#E8F3EC]/75 leading-relaxed">
+                    {step.description}
+                  </p>
                 </div>
-
-                <div className="w-12 h-12 rounded-xl bg-[#064E3B] border border-[#D6A84F]/30 flex items-center justify-center text-[#D6A84F] mb-4 group-hover:scale-110 transition-transform">
-                  <Icon className="w-6 h-6" />
-                </div>
-
-                <h3 className="font-heading text-base font-bold text-white mb-2 leading-snug">
-                  {step.title}
-                </h3>
-
-                <p className="text-xs text-[#ECFDF5]/70 leading-relaxed">
-                  {step.description}
-                </p>
               </div>
             );
           })}

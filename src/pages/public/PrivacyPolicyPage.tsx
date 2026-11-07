@@ -3,7 +3,7 @@ import { PageHero } from '../../components/common/PageHero';
 
 export const PrivacyPolicyPage: React.FC = () => {
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-[#002D1C] text-white min-h-screen">
       {/* Unique subtle architectural background for Privacy Policy */}
       <PageHero
         title="Privacy Policy"
@@ -12,9 +12,9 @@ export const PrivacyPolicyPage: React.FC = () => {
         breadcrumbs={[{ label: 'Privacy Policy' }]}
       />
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-sm text-[#64748B] leading-relaxed space-y-6">
-        <h2 className="font-heading text-xl font-bold text-[#022C22] uppercase">
-          1. Data Collection & Property Inquiries
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-sm text-[#E8F3EC]/80 leading-relaxed space-y-6">
+        <h2 className="font-heading text-xl font-bold text-white uppercase tracking-tight">
+          1. Data Collection & <span className="text-[#FFC83D]">Property Inquiries</span>
         </h2>
         <p>
           PESHAWER REAL ESTATE respects your privacy. When you submit inquiries, book site
@@ -23,8 +23,8 @@ export const PrivacyPolicyPage: React.FC = () => {
           email address, and specific property interests.
         </p>
 
-        <h2 className="font-heading text-xl font-bold text-[#022C22] uppercase">
-          2. Use of Information
+        <h2 className="font-heading text-xl font-bold text-white uppercase tracking-tight">
+          2. Use of <span className="text-[#FFC83D]">Information</span>
         </h2>
         <p>
           Your information is solely used to coordinate official property viewings, furnish verified
@@ -32,16 +32,16 @@ export const PrivacyPolicyPage: React.FC = () => {
           client contact information to third-party telemarketers or external entities.
         </p>
 
-        <h2 className="font-heading text-xl font-bold text-[#022C22] uppercase">
-          3. Security & Admin Storage
+        <h2 className="font-heading text-xl font-bold text-white uppercase tracking-tight">
+          3. Security & <span className="text-[#FFC83D]">Admin Storage</span>
         </h2>
         <p>
           All submitted inquiries and site visit records are securely maintained in our centralized
           administrative database, accessible strictly by authorized real estate advisors.
         </p>
 
-        <h2 className="font-heading text-xl font-bold text-[#022C22] uppercase">
-          4. Contact Details
+        <h2 className="font-heading text-xl font-bold text-white uppercase tracking-tight">
+          4. Contact <span className="text-[#FFC83D]">Details</span>
         </h2>
         <p>
           For questions regarding your stored information or to request removal from our notification

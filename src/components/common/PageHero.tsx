@@ -37,7 +37,7 @@ export const PageHero: React.FC<PageHeroProps> = ({
   overlayOpacity = 0.75,
 }) => {
   return (
-    <div className="relative min-h-[300px] sm:min-h-[380px] lg:min-h-[460px] flex items-center justify-center overflow-hidden bg-[#022C22] pt-24 pb-14 text-white">
+    <div className="relative min-h-[300px] sm:min-h-[380px] lg:min-h-[460px] flex items-center justify-center overflow-hidden bg-[#002D1C] pt-24 pb-14 text-white">
       {/* Background Image with Fallback */}
       <img
         src={image}
@@ -52,30 +52,30 @@ export const PageHero: React.FC<PageHeroProps> = ({
 
       {/* Dark Forest Green Overlay */}
       <div
-        className="absolute inset-0 bg-gradient-to-t from-[#022C22] via-[#022C22]/85 to-[#064E3B]/70"
+        className="absolute inset-0 bg-gradient-to-t from-[#002D1C] via-[#002D1C]/90 to-[#003D25]/75"
         style={{ opacity: overlayOpacity }}
       />
 
       {/* Subtle Gold light accent */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#D6A84F]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#FFC83D]/10 rounded-full blur-3xl pointer-events-none" />
 
       {/* Content Container */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
         {/* Breadcrumbs */}
         {breadcrumbs && breadcrumbs.length > 0 && (
-          <nav className="flex items-center space-x-2 text-xs text-[#ECFDF5]/80 mb-4 font-medium uppercase tracking-wider">
-            <Link to="/" className="hover:text-[#D6A84F] transition-colors">
+          <nav className="flex items-center space-x-2 text-xs text-[#E8F3EC]/80 mb-4 font-medium uppercase tracking-wider">
+            <Link to="/" className="hover:text-[#FFC83D] transition-colors">
               Home
             </Link>
             {breadcrumbs.map((crumb, idx) => (
               <React.Fragment key={idx}>
-                <ChevronRight className="w-3.5 h-3.5 text-[#D6A84F]" />
+                <ChevronRight className="w-3.5 h-3.5 text-[#FFC83D]" />
                 {crumb.link ? (
-                  <Link to={crumb.link} className="hover:text-[#D6A84F] transition-colors">
+                  <Link to={crumb.link} className="hover:text-[#FFC83D] transition-colors">
                     {crumb.label}
                   </Link>
                 ) : (
-                  <span className="text-[#D6A84F] font-semibold">{crumb.label}</span>
+                  <span className="text-[#FFC83D] font-semibold">{crumb.label}</span>
                 )}
               </React.Fragment>
             ))}
@@ -84,7 +84,7 @@ export const PageHero: React.FC<PageHeroProps> = ({
 
         {/* Optional Badge */}
         {badge && (
-          <div className="inline-flex items-center space-x-1.5 px-3.5 py-1 rounded-full bg-[#D6A84F]/20 border border-[#D6A84F]/50 text-[#D6A84F] text-xs font-bold uppercase tracking-wider mb-3">
+          <div className="inline-flex items-center space-x-1.5 px-3.5 py-1 rounded-full bg-[#003D25] border border-[#FFC83D]/50 text-[#FFC83D] text-xs font-bold uppercase tracking-wider mb-3">
             <span>★</span>
             <span>{badge}</span>
           </div>
@@ -96,10 +96,10 @@ export const PageHero: React.FC<PageHeroProps> = ({
         </h1>
 
         {/* Gold Architectural Divider */}
-        <div className="w-20 h-1 bg-[#D6A84F] rounded-full mb-4 shadow-[0_0_8px_#D6A84F]" />
+        <div className="w-20 h-1 bg-[#FFC83D] rounded-full mb-4 shadow-[0_0_12px_rgba(255,200,61,0.6)]" />
 
         {/* Subtitle / Description */}
-        <p className="text-sm sm:text-base lg:text-lg text-[#ECFDF5]/90 max-w-2xl font-normal leading-relaxed mb-6">
+        <p className="text-sm sm:text-base lg:text-lg text-[#E8F3EC]/90 max-w-2xl font-normal leading-relaxed mb-6">
           {subtitle}
         </p>
 
@@ -110,7 +110,7 @@ export const PageHero: React.FC<PageHeroProps> = ({
               (ctaPrimaryLink ? (
                 <Link
                   to={ctaPrimaryLink}
-                  className="px-6 py-3 rounded-lg bg-gradient-to-r from-[#D6A84F] to-[#B88628] text-[#022C22] font-heading font-extrabold text-xs uppercase tracking-wider shadow-lg hover:shadow-gold-glow hover:scale-105 active:scale-95 transition-all"
+                  className="px-6 py-3 rounded-lg bg-gradient-to-r from-[#E6AA27] to-[#FFC83D] text-[#002D1C] font-heading font-extrabold text-xs uppercase tracking-wider shadow-lg hover:shadow-gold-glow hover:scale-105 active:scale-95 transition-all"
                 >
                   {ctaPrimaryText}
                 </Link>
@@ -118,7 +118,7 @@ export const PageHero: React.FC<PageHeroProps> = ({
                 <button
                   type="button"
                   onClick={onCtaPrimaryClick}
-                  className="px-6 py-3 rounded-lg bg-gradient-to-r from-[#D6A84F] to-[#B88628] text-[#022C22] font-heading font-extrabold text-xs uppercase tracking-wider shadow-lg hover:shadow-gold-glow hover:scale-105 active:scale-95 transition-all"
+                  className="px-6 py-3 rounded-lg bg-gradient-to-r from-[#E6AA27] to-[#FFC83D] text-[#002D1C] font-heading font-extrabold text-xs uppercase tracking-wider shadow-lg hover:shadow-gold-glow hover:scale-105 active:scale-95 transition-all"
                 >
                   {ctaPrimaryText}
                 </button>
@@ -128,7 +128,7 @@ export const PageHero: React.FC<PageHeroProps> = ({
               (ctaSecondaryLink ? (
                 <Link
                   to={ctaSecondaryLink}
-                  className="px-6 py-3 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/30 font-heading font-bold text-xs uppercase tracking-wider backdrop-blur-sm hover:scale-105 active:scale-95 transition-all"
+                  className="px-6 py-3 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-[#E6AA27]/40 font-heading font-bold text-xs uppercase tracking-wider backdrop-blur-sm hover:scale-105 active:scale-95 transition-all"
                 >
                   {ctaSecondaryText}
                 </Link>
@@ -136,7 +136,7 @@ export const PageHero: React.FC<PageHeroProps> = ({
                 <button
                   type="button"
                   onClick={onCtaSecondaryClick}
-                  className="px-6 py-3 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/30 font-heading font-bold text-xs uppercase tracking-wider backdrop-blur-sm hover:scale-105 active:scale-95 transition-all"
+                  className="px-6 py-3 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-[#E6AA27]/40 font-heading font-bold text-xs uppercase tracking-wider backdrop-blur-sm hover:scale-105 active:scale-95 transition-all"
                 >
                   {ctaSecondaryText}
                 </button>

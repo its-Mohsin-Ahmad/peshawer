@@ -3,7 +3,7 @@ import { PageHero } from '../../components/common/PageHero';
 
 export const TermsPage: React.FC = () => {
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-[#002D1C] text-white min-h-screen">
       {/* Unique subtle architectural background for Terms and Conditions */}
       <PageHero
         title="Terms and Conditions"
@@ -12,9 +12,9 @@ export const TermsPage: React.FC = () => {
         breadcrumbs={[{ label: 'Terms & Conditions' }]}
       />
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-sm text-[#64748B] leading-relaxed space-y-6">
-        <h2 className="font-heading text-xl font-bold text-[#022C22] uppercase">
-          1. Digital Presentation & Pricing
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-sm text-[#E8F3EC]/80 leading-relaxed space-y-6">
+        <h2 className="font-heading text-xl font-bold text-white uppercase tracking-tight">
+          1. Digital Presentation & <span className="text-[#FFC83D]">Pricing</span>
         </h2>
         <p>
           Information published on PESHAWER REAL ESTATE reflects verified development specifications,
@@ -22,8 +22,8 @@ export const TermsPage: React.FC = () => {
           sponsors. All figures are presented in Pakistani Rupees (PKR).
         </p>
 
-        <h2 className="font-heading text-xl font-bold text-[#022C22] uppercase">
-          2. Installment Plans & Booking
+        <h2 className="font-heading text-xl font-bold text-white uppercase tracking-tight">
+          2. Installment Plans & <span className="text-[#FFC83D]">Booking</span>
         </h2>
         <p>
           Payment schedules, including those for Glamorous Heights, Town Garden, Kalam Cottages, and
@@ -32,8 +32,8 @@ export const TermsPage: React.FC = () => {
           booking token.
         </p>
 
-        <h2 className="font-heading text-xl font-bold text-[#022C22] uppercase">
-          3. Architectural Walkthroughs & Media
+        <h2 className="font-heading text-xl font-bold text-white uppercase tracking-tight">
+          3. Architectural Walkthroughs & <span className="text-[#FFC83D]">Media</span>
         </h2>
         <p>
           Renders, photographs, and the Town Garden dedicated video are the intellectual property of
@@ -41,8 +41,8 @@ export const TermsPage: React.FC = () => {
           architectural assets is strictly prohibited.
         </p>
 
-        <h2 className="font-heading text-xl font-bold text-[#022C22] uppercase">
-          4. Jurisdiction
+        <h2 className="font-heading text-xl font-bold text-white uppercase tracking-tight">
+          4. <span className="text-[#FFC83D]">Jurisdiction</span>
         </h2>
         <p>
           Any disputes arising out of property transactions or platform advisory shall be subject to the

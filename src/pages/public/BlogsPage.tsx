@@ -23,7 +23,11 @@ export const BlogsPage: React.FC = () => {
   });
 
   return (
-    <div className="bg-[#F8F6EA]/40 min-h-screen">
+    <div className="bg-[#002D1C] text-white min-h-screen relative overflow-hidden">
+      {/* Background glow effects */}
+      <div className="absolute top-1/4 right-0 w-96 h-96 bg-[#004B2E]/25 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-[#006B40]/20 rounded-full blur-3xl pointer-events-none" />
+
       {/* Unique dedicated Blogs hero */}
       <PageHero
         title="Real Estate Insights & Editorial"
@@ -32,7 +36,7 @@ export const BlogsPage: React.FC = () => {
         breadcrumbs={[{ label: 'Blogs' }]}
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
         {/* Filter bar */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-12">
           {/* Categories */}
@@ -43,8 +47,8 @@ export const BlogsPage: React.FC = () => {
                 onClick={() => setSelectedCategory(cat)}
                 className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all ${
                   selectedCategory === cat
-                    ? 'bg-[#064E3B] text-white shadow-sm'
-                    : 'bg-white text-[#64748B] hover:text-[#064E3B] border border-gray-200'
+                    ? 'bg-[#FFC83D] text-[#002D1C] shadow-sm font-extrabold'
+                    : 'bg-[#003D25] text-[#E8F3EC]/80 hover:text-white border border-[#E6AA27]/25'
                 }`}
               >
                 {cat}
@@ -54,13 +58,13 @@ export const BlogsPage: React.FC = () => {
 
           {/* Search */}
           <div className="relative w-full md:w-72">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#FFC83D]" />
             <input
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search articles..."
-              className="w-full pl-10 pr-4 py-2 rounded-xl border border-gray-200 text-xs focus:outline-none focus:border-[#064E3B] bg-white"
+              className="w-full pl-10 pr-4 py-2 rounded-xl border border-[#E6AA27]/30 text-xs focus:outline-none focus:border-[#FFC83D] bg-[#003D25] text-white placeholder:text-white/40"
             />
           </div>
         </div>
@@ -70,25 +74,25 @@ export const BlogsPage: React.FC = () => {
           {filtered.map((blog) => (
             <article
               key={blog.id}
-              className="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-premium hover:shadow-premium-hover transition-all duration-300 flex flex-col group"
+              className="bg-[#003D25]/90 rounded-3xl overflow-hidden border border-[#E6AA27]/25 shadow-xl hover:border-[#E6AA27]/60 hover:shadow-2xl transition-all duration-300 flex flex-col group backdrop-blur-sm"
             >
-              <div className="relative aspect-[16/10] overflow-hidden bg-gray-100">
+              <div className="relative aspect-[16/10] overflow-hidden bg-[#002D1C]">
                 <img
                   src={blog.coverImage}
                   alt={blog.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
                 />
-                <span className="absolute top-3 left-3 px-3 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-[#064E3B] text-white">
+                <span className="absolute top-3 left-3 px-3 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-[#FFC83D] text-[#002D1C]">
                   {blog.category}
                 </span>
               </div>
 
               <div className="p-6 sm:p-7 flex-1 flex flex-col justify-between">
                 <div>
-                  <div className="flex items-center space-x-3 text-xs text-[#64748B] mb-3">
+                  <div className="flex items-center space-x-3 text-xs text-[#E8F3EC]/70 mb-3">
                     <span className="flex items-center">
-                      <Calendar className="w-3.5 h-3.5 mr-1 text-[#D6A84F]" />
+                      <Calendar className="w-3.5 h-3.5 mr-1 text-[#FFC83D]" />
                       {new Date(blog.publishedAt).toLocaleDateString('en-US', {
                         month: 'short',
                         day: 'numeric',
@@ -97,25 +101,25 @@ export const BlogsPage: React.FC = () => {
                     </span>
                     <span>•</span>
                     <span className="flex items-center">
-                      <Clock className="w-3.5 h-3.5 mr-1" />
+                      <Clock className="w-3.5 h-3.5 mr-1 text-[#FFC83D]" />
                       {blog.readingTime}
                     </span>
                   </div>
 
                   <Link to={`/blogs/${blog.slug}`}>
-                    <h3 className="font-heading text-lg font-bold text-[#102A24] group-hover:text-[#064E3B] transition-colors leading-snug mb-3">
+                    <h3 className="font-heading text-lg font-bold text-white group-hover:text-[#FFC83D] transition-colors leading-snug mb-3">
                       {blog.title}
                     </h3>
                   </Link>
 
-                  <p className="text-xs text-[#64748B] leading-relaxed line-clamp-3 mb-6">
+                  <p className="text-xs text-[#E8F3EC]/75 leading-relaxed line-clamp-3 mb-6 font-normal">
                     {blog.excerpt}
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-[#064E3B]">
+                <div className="pt-4 border-t border-[#E6AA27]/20 flex items-center justify-between text-xs font-bold text-[#FFC83D]">
                   <span>Read Full Article</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform text-[#D6A84F]" />
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform text-[#FFC83D]" />
                 </div>
               </div>
             </article>

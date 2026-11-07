@@ -54,7 +54,7 @@ export const ProjectDetailPage: React.FC = () => {
   const otherProjects = projects.filter((p) => p.id !== project.id);
 
   return (
-    <div className="bg-[#F8F6EA]/30 min-h-screen">
+    <div className="bg-[#002D1C] text-white min-h-screen relative overflow-hidden">
       {/* 1. Unique Dedicated Project Hero */}
       <PageHero
         title={project.name}
@@ -72,43 +72,43 @@ export const ProjectDetailPage: React.FC = () => {
       />
 
       {/* 2. Project Overview & Architecture Intro */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-[#002D1C] relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Left 3D Architectural Visual */}
-            <div className="lg:col-span-5 bg-gradient-to-b from-[#F8F6EA] to-white rounded-3xl p-8 border border-gray-100 shadow-premium flex items-center justify-center">
+            <div className="lg:col-span-5 bg-gradient-to-b from-[#003D25] to-[#002D1C] rounded-3xl p-8 border border-[#E6AA27]/30 shadow-2xl flex items-center justify-center">
               <img
                 src={project.renderBuildingImage}
                 alt={project.name}
-                className="max-w-full max-h-96 object-contain filter drop-shadow-2xl"
+                className="max-w-full max-h-96 object-contain filter drop-shadow-[0_15px_30px_rgba(0,0,0,0.6)]"
               />
             </div>
 
             {/* Right Overview Details */}
             <div className="lg:col-span-7 space-y-6">
-              <div className="flex items-center space-x-2 text-xs font-semibold text-[#047857]">
-                <MapPin className="w-4 h-4 text-[#D6A84F]" />
+              <div className="flex items-center space-x-2 text-xs font-bold text-[#FFC83D] uppercase tracking-wider">
+                <MapPin className="w-4 h-4 text-[#FFC83D]" />
                 <span>{project.location}</span>
               </div>
 
-              <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-[#022C22] uppercase tracking-tight leading-tight">
+              <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-white uppercase tracking-tight leading-tight">
                 About {project.name}
               </h2>
 
-              <div className="w-20 h-1 bg-[#D6A84F] rounded-full" />
+              <div className="w-20 h-1 bg-[#FFC83D] rounded-full shadow-[0_0_12px_rgba(255,200,61,0.5)]" />
 
-              <p className="text-base text-[#64748B] leading-relaxed">
+              <p className="text-base text-[#E8F3EC]/80 leading-relaxed font-normal">
                 {project.description}
               </p>
 
               {/* Status & Approval Badges */}
               <div className="flex flex-wrap gap-3 pt-2">
-                <div className="px-4 py-2 rounded-xl bg-[#ECFDF5] border border-[#047857]/30 text-[#047857] text-xs font-bold flex items-center space-x-1.5">
+                <div className="px-4 py-2 rounded-xl bg-[#003D25] border border-[#FFC83D]/40 text-[#FFC83D] text-xs font-bold flex items-center space-x-1.5 shadow-sm">
                   <ShieldCheck className="w-4 h-4" />
                   <span>{project.verifiedApproval || 'Official Approval Verified'}</span>
                 </div>
 
-                <div className="px-4 py-2 rounded-xl bg-[#F8F6EA] border border-[#D6A84F]/40 text-[#B88628] text-xs font-bold flex items-center space-x-1.5">
+                <div className="px-4 py-2 rounded-xl bg-[#003D25] border border-[#E6AA27]/40 text-[#FFC83D] text-xs font-bold flex items-center space-x-1.5 shadow-sm">
                   <Calendar className="w-4 h-4" />
                   <span>Status: {project.status}</span>
                 </div>
@@ -131,7 +131,7 @@ export const ProjectDetailPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setAppointmentModalOpen(true)}
-                  className="px-6 py-3 rounded-xl bg-[#064E3B] hover:bg-[#022C22] text-white font-heading font-extrabold text-xs uppercase tracking-wider transition-all shadow-md"
+                  className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#E6AA27] to-[#FFC83D] hover:from-[#FFC83D] hover:to-[#E6AA27] text-[#002D1C] font-heading font-extrabold text-xs uppercase tracking-wider transition-all shadow-lg"
                 >
                   Schedule Guided Site Inspection
                 </button>
@@ -141,7 +141,7 @@ export const ProjectDetailPage: React.FC = () => {
                     setSelectedApartment(null);
                     setInquiryModalOpen(true);
                   }}
-                  className="px-6 py-3 rounded-xl bg-[#F8F6EA] hover:bg-[#ECFDF5] text-[#064E3B] font-heading font-bold text-xs uppercase tracking-wider border border-gray-200 transition-all"
+                  className="px-6 py-3 rounded-xl bg-[#003D25] hover:bg-[#004B2E] text-white font-heading font-bold text-xs uppercase tracking-wider border border-[#E6AA27]/40 transition-all"
                 >
                   General Project Inquiry
                 </button>
@@ -171,17 +171,17 @@ export const ProjectDetailPage: React.FC = () => {
 
       {/* 6. Apartment Types & Payment Plans */}
       {project.apartments && project.apartments.length > 0 && (
-        <section className="py-24 bg-white border-t border-gray-100" id="payment-plans">
+        <section className="py-24 bg-[#002417] border-t border-[#E6AA27]/20" id="payment-plans">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-3xl mx-auto mb-16">
-              <span className="text-xs font-bold uppercase tracking-widest text-[#047857] block mb-2">
+              <span className="text-xs font-bold uppercase tracking-widest text-[#FFC83D] block mb-2">
                 Transparent 5-Year Financing
               </span>
-              <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#022C22] uppercase tracking-tight mb-3">
-                Apartment Types & <span className="text-[#D6A84F]">Payment Plans</span>
+              <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white uppercase tracking-tight mb-3">
+                Apartment Types & <span className="text-[#FFC83D]">Payment Plans</span>
               </h2>
-              <div className="w-20 h-1 bg-[#D6A84F] mx-auto rounded-full mb-4" />
-              <p className="text-sm sm:text-base text-[#64748B]">
+              <div className="w-20 h-1 bg-[#FFC83D] mx-auto rounded-full mb-4 shadow-[0_0_12px_rgba(255,200,61,0.5)]" />
+              <p className="text-sm sm:text-base text-[#E8F3EC]/80 font-normal">
                 Review verified milestone schedules. Download printable official schedules with full legal transparency.
               </p>
             </div>
@@ -202,25 +202,25 @@ export const ProjectDetailPage: React.FC = () => {
       )}
 
       {/* 6. Master Plan & Amenities Section */}
-      <section className="py-20 bg-[#F8F6EA]/60 border-t border-gray-200">
+      <section className="py-20 bg-[#002D1C] border-t border-[#E6AA27]/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center mb-12">
-            <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-[#022C22] uppercase tracking-tight mb-3">
-              Features & Master Plan Amenities
+            <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-white uppercase tracking-tight mb-3">
+              Features & Master Plan <span className="text-[#FFC83D]">Amenities</span>
             </h2>
-            <div className="w-16 h-1 bg-[#D6A84F] mx-auto rounded-full" />
+            <div className="w-16 h-1 bg-[#FFC83D] mx-auto rounded-full shadow-[0_0_12px_rgba(255,200,61,0.5)]" />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {project.amenities.map((amenity, i) => (
               <div
                 key={i}
-                className="p-5 rounded-2xl bg-white border border-gray-100 shadow-sm flex items-center space-x-3"
+                className="p-5 rounded-2xl bg-[#003D25]/90 border border-[#E6AA27]/25 shadow-lg flex items-center space-x-3 hover:border-[#E6AA27]/50 transition-all"
               >
-                <div className="w-8 h-8 rounded-full bg-[#ECFDF5] text-[#047857] flex items-center justify-center shrink-0">
+                <div className="w-8 h-8 rounded-full bg-[#002D1C] border border-[#FFC83D]/40 text-[#FFC83D] flex items-center justify-center shrink-0">
                   <CheckCircle2 className="w-4 h-4" />
                 </div>
-                <span className="text-xs sm:text-sm font-bold text-[#102A24]">{amenity}</span>
+                <span className="text-xs sm:text-sm font-bold text-white">{amenity}</span>
               </div>
             ))}
           </div>
@@ -228,21 +228,21 @@ export const ProjectDetailPage: React.FC = () => {
       </section>
 
       {/* 7. Location Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-[#002417]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <MapPin className="w-10 h-10 text-[#D6A84F] mx-auto mb-3" />
-          <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-[#022C22] uppercase tracking-tight mb-2">
-            Strategic Location
+          <MapPin className="w-10 h-10 text-[#FFC83D] mx-auto mb-3" />
+          <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-white uppercase tracking-tight mb-2">
+            Strategic <span className="text-[#FFC83D]">Location</span>
           </h2>
-          <p className="text-sm font-semibold text-[#064E3B] mb-2">{project.location}</p>
-          <p className="text-xs text-[#64748B] max-w-xl mx-auto mb-8">
+          <p className="text-sm font-semibold text-[#FFC83D] mb-2">{project.location}</p>
+          <p className="text-xs text-[#E8F3EC]/80 max-w-xl mx-auto mb-8 font-normal">
             Accessible via paved metalled arterial roads with full infrastructure connections, municipal access, and scenic vantage points.
           </p>
 
           <button
             type="button"
             onClick={() => setAppointmentModalOpen(true)}
-            className="px-8 py-3.5 rounded-xl bg-gradient-to-r from-[#D6A84F] to-[#B88628] text-[#022C22] font-heading font-extrabold text-xs uppercase tracking-wider shadow-md hover:shadow-gold-glow transition-all"
+            className="px-8 py-3.5 rounded-xl bg-gradient-to-r from-[#E6AA27] to-[#FFC83D] text-[#002D1C] font-heading font-extrabold text-xs uppercase tracking-wider shadow-lg hover:shadow-xl transition-all"
           >
             Request GPS Coordinates & Guided Site Tour
           </button>
@@ -250,15 +250,15 @@ export const ProjectDetailPage: React.FC = () => {
       </section>
 
       {/* 8. Related Developments */}
-      <section className="py-20 bg-[#F8F6EA]/40 border-t border-gray-200">
+      <section className="py-20 bg-[#002D1C] border-t border-[#E6AA27]/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="font-heading text-xl sm:text-2xl font-bold text-[#022C22] uppercase tracking-tight">
-              Other Signature Developments
+            <h2 className="font-heading text-xl sm:text-2xl font-bold text-white uppercase tracking-tight">
+              Other Signature <span className="text-[#FFC83D]">Developments</span>
             </h2>
             <Link
               to="/projects"
-              className="text-xs font-bold text-[#064E3B] hover:text-[#D6A84F] uppercase tracking-wider"
+              className="text-xs font-bold text-[#FFC83D] hover:text-white uppercase tracking-wider"
             >
               View All Projects
             </Link>
@@ -269,26 +269,26 @@ export const ProjectDetailPage: React.FC = () => {
               <Link
                 key={p.id}
                 to={`/projects/${p.slug}`}
-                className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-all group flex flex-col justify-between"
+                className="bg-[#003D25]/90 rounded-2xl p-6 border border-[#E6AA27]/25 shadow-xl hover:border-[#E6AA27]/60 transition-all group flex flex-col justify-between"
               >
                 <div>
-                  <div className="h-44 flex items-center justify-center p-3 mb-4 bg-gradient-to-b from-[#F8F6EA] to-white rounded-xl">
+                  <div className="h-44 flex items-center justify-center p-3 mb-4 bg-gradient-to-b from-[#003D25] to-[#002D1C] rounded-xl">
                     <img
                       src={p.renderBuildingImage}
                       alt={p.name}
                       className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform"
                     />
                   </div>
-                  <div className="text-xs text-[#047857] font-semibold mb-1">
+                  <div className="text-xs text-[#FFC83D] font-bold mb-1">
                     {p.location.split(',')[0]}
                   </div>
-                  <h3 className="font-heading text-base font-bold text-[#102A24] group-hover:text-[#064E3B] transition-colors mb-2">
+                  <h3 className="font-heading text-base font-bold text-white group-hover:text-[#FFC83D] transition-colors mb-2">
                     {p.name}
                   </h3>
-                  <p className="text-xs text-[#64748B] line-clamp-2">{p.tagline}</p>
+                  <p className="text-xs text-[#E8F3EC]/70 line-clamp-2">{p.tagline}</p>
                 </div>
 
-                <div className="pt-4 mt-4 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-[#064E3B]">
+                <div className="pt-4 mt-4 border-t border-[#E6AA27]/20 flex items-center justify-between text-xs font-bold text-[#FFC83D]">
                   <span>Explore Project</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </div>

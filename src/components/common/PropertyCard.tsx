@@ -24,14 +24,14 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property, onInquire 
   return (
     <div
       ref={cardRef}
-      className="property-card bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-premium flex flex-col group will-change-transform"
+      className="property-card bg-[#003D25]/90 rounded-2xl overflow-hidden border border-[#E6AA27]/25 shadow-2xl flex flex-col group will-change-transform backdrop-blur-sm hover:border-[#E6AA27]/50 transition-all duration-300"
     >
       {/* Image Container */}
-      <div className="img-reveal relative aspect-[16/10] overflow-hidden bg-gray-100">
+      <div className="img-reveal relative aspect-[16/10] overflow-hidden bg-[#002D1C]">
         <img
           src={property.featuredImage}
           alt={property.title}
-          className="w-full h-full object-cover transition-transform duration-500"
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           loading="lazy"
           onError={(e) => {
             (e.target as HTMLImageElement).src = '/assets/hero/slide1.jpg';
@@ -43,13 +43,13 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property, onInquire 
           <span
             className={`px-2.5 py-1 rounded-md text-[11px] font-extrabold uppercase tracking-wider ${
               property.purpose === 'Buy'
-                ? 'bg-[#064E3B] text-white'
-                : 'bg-[#D6A84F] text-[#022C22]'
+                ? 'bg-[#FFC83D] text-[#002D1C]'
+                : 'bg-[#E6AA27] text-[#002D1C]'
             }`}
           >
             For {property.purpose}
           </span>
-          <span className="px-2.5 py-1 rounded-md text-[11px] font-bold uppercase tracking-wider bg-black/60 backdrop-blur-md text-white">
+          <span className="px-2.5 py-1 rounded-md text-[11px] font-bold uppercase tracking-wider bg-[#002D1C]/80 border border-white/20 backdrop-blur-md text-white">
             {property.category}
           </span>
         </div>
@@ -58,10 +58,10 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property, onInquire 
         <div className="absolute top-3 right-3 flex items-center space-x-1.5 z-10">
           {property.verified && (
             <div
-              className="bg-white/95 backdrop-blur-sm text-[#047857] p-1.5 rounded-full shadow-sm"
+              className="bg-[#002D1C]/90 border border-[#FFC83D]/40 backdrop-blur-sm text-[#FFC83D] p-1.5 rounded-full shadow-sm"
               title="Verified Listing"
             >
-              <CheckCircle2 className="w-4 h-4 fill-[#047857] text-white" />
+              <CheckCircle2 className="w-4 h-4 fill-[#FFC83D] text-[#002D1C]" />
             </div>
           )}
           <button
@@ -69,7 +69,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property, onInquire 
               e.preventDefault();
               setIsFavorite(!isFavorite);
             }}
-            className="p-1.5 rounded-full bg-black/40 backdrop-blur-sm text-white hover:bg-white hover:text-red-500 transition-colors"
+            className="p-1.5 rounded-full bg-black/50 backdrop-blur-sm text-white hover:bg-white hover:text-red-500 transition-colors"
             aria-label="Add to favorites"
           >
             <Heart className={`w-4 h-4 ${isFavorite ? 'fill-red-500 text-red-500' : ''}`} />
@@ -77,17 +77,17 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property, onInquire 
         </div>
 
         {/* Price Tag bar bottom of image */}
-        <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-3 pt-6 flex items-baseline justify-between text-white">
+        <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-[#002D1C] via-[#002D1C]/70 to-transparent p-3 pt-6 flex items-baseline justify-between text-white">
           <div>
-            <span className="font-heading text-lg font-black tracking-tight text-[#E6C678]">
+            <span className="font-heading text-lg font-black tracking-tight text-[#FFC83D]">
               {formatPKR(property.pricePKR)}
             </span>
-            <span className="text-xs text-gray-200 ml-1.5">
+            <span className="text-xs text-white/80 ml-1.5">
               ({formatPKRShort(property.pricePKR)})
             </span>
           </div>
           {property.purpose === 'Rent' && (
-            <span className="text-[11px] text-gray-300 font-medium">/ month</span>
+            <span className="text-[11px] text-white/70 font-medium">/ month</span>
           )}
         </div>
       </div>
@@ -96,14 +96,14 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property, onInquire 
       <div className="p-5 flex-1 flex flex-col justify-between">
         <div>
           {/* Location */}
-          <div className="flex items-center text-xs text-[#64748B] mb-2 font-medium">
-            <MapPin className="w-3.5 h-3.5 mr-1 text-[#064E3B] shrink-0" />
+          <div className="flex items-center text-xs text-[#E8F3EC]/70 mb-2 font-medium">
+            <MapPin className="w-3.5 h-3.5 mr-1 text-[#FFC83D] shrink-0" />
             <span className="truncate">{property.location}</span>
           </div>
 
           {/* Title */}
           <Link to={`/properties/${property.id}`} className="block">
-            <h3 className="font-heading text-base font-bold text-[#102A24] group-hover:text-[#064E3B] transition-colors line-clamp-2 leading-snug mb-3">
+            <h3 className="font-heading text-base font-bold text-white group-hover:text-[#FFC83D] transition-colors line-clamp-2 leading-snug mb-3">
               {property.title}
             </h3>
           </Link>
@@ -111,22 +111,22 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property, onInquire 
 
         <div>
           {/* Meta specs bar */}
-          <div className="pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-[#64748B] font-medium mb-4">
+          <div className="pt-3 border-t border-[#E6AA27]/20 flex items-center justify-between text-xs text-[#E8F3EC]/80 font-medium mb-4">
             <div className="flex items-center space-x-1" title="Area">
-              <Maximize className="w-4 h-4 text-[#D6A84F]" />
+              <Maximize className="w-4 h-4 text-[#FFC83D]" />
               <span>{formatArea(property.area, property.areaUnit)}</span>
             </div>
 
             {property.bedrooms !== undefined && (
               <div className="flex items-center space-x-1" title="Bedrooms">
-                <Bed className="w-4 h-4 text-[#064E3B]" />
+                <Bed className="w-4 h-4 text-[#087B4B]" />
                 <span>{property.bedrooms} Beds</span>
               </div>
             )}
 
             {property.bathrooms !== undefined && (
               <div className="flex items-center space-x-1" title="Bathrooms">
-                <Bath className="w-4 h-4 text-[#064E3B]" />
+                <Bath className="w-4 h-4 text-[#087B4B]" />
                 <span>{property.bathrooms} Baths</span>
               </div>
             )}
@@ -136,10 +136,10 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property, onInquire 
           <div className="flex items-center space-x-2">
             <Link
               to={`/properties/${property.slug || property.id}`}
-              className="btn-hover btn-arrow-hover flex-1 py-2 px-3 text-center rounded-lg bg-[#F8F6EA] hover:bg-[#ECFDF5] text-[#064E3B] text-xs font-bold flex items-center justify-center space-x-1"
+              className="btn-hover btn-arrow-hover flex-1 py-2 px-3 text-center rounded-lg bg-[#002D1C] hover:bg-[#004B2E] text-white text-xs font-bold flex items-center justify-center space-x-1 border border-[#E6AA27]/30 hover:border-[#E6AA27] transition-all"
             >
               <span>View Details</span>
-              <ArrowRight className="arrow-icon w-3.5 h-3.5" />
+              <ArrowRight className="arrow-icon w-3.5 h-3.5 text-[#FFC83D]" />
             </Link>
 
             <a

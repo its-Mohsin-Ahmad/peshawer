@@ -28,11 +28,11 @@ export const PaymentPlanCard: React.FC<PaymentPlanCardProps> = ({
   );
 
   return (
-    <div className="bg-[#F8F6EA] rounded-3xl overflow-hidden border border-[#D6A84F]/40 shadow-premium hover:shadow-premium-hover transition-all duration-300 flex flex-col justify-between">
+    <div className="bg-[#002D1C] rounded-3xl overflow-hidden border border-[#E6AA27]/30 shadow-2xl hover:border-[#E6AA27]/60 hover:shadow-gold-glow transition-all duration-300 flex flex-col justify-between">
       {/* Top Banner: PAYMENT PLAN */}
       <div>
-        <div className="bg-[#022C22] text-white text-center py-4 px-6 border-b-2 border-[#D6A84F] relative">
-          <div className="text-[10px] uppercase font-bold tracking-[0.25em] text-[#D6A84F] mb-0.5">
+        <div className="bg-[#002417] text-white text-center py-4 px-6 border-b-2 border-[#FFC83D] relative">
+          <div className="text-[10px] uppercase font-bold tracking-[0.25em] text-[#FFC83D] mb-0.5">
             {project.name.toUpperCase()}
           </div>
           <h3 className="font-heading text-lg sm:text-xl font-extrabold tracking-wider uppercase text-white">
@@ -44,18 +44,18 @@ export const PaymentPlanCard: React.FC<PaymentPlanCardProps> = ({
         <div className="p-6 pb-4">
           <div className="flex flex-wrap items-baseline justify-between gap-2 mb-4">
             <div>
-              <span className="inline-block px-3 py-1 rounded-md bg-[#D6A84F]/20 text-[#B88628] font-heading font-extrabold text-xs uppercase tracking-wider border border-[#D6A84F]/30 mb-1">
+              <span className="inline-block px-3 py-1 rounded-md bg-[#003D25] text-[#FFC83D] font-heading font-extrabold text-xs uppercase tracking-wider border border-[#FFC83D]/40 mb-1">
                 {apartment.title}
               </span>
-              <div className="text-xs text-[#64748B] font-semibold">
-                Area: <strong className="text-[#022C22]">{apartment.sizeSqFt} Sq Ft</strong>
+              <div className="text-xs text-[#E8F3EC]/70 font-semibold">
+                Area: <strong className="text-white">{apartment.sizeSqFt} Sq Ft</strong>
                 {apartment.floor && ` • ${apartment.floor}`}
               </div>
             </div>
 
             <div className="text-right">
-              <span className="text-[10px] uppercase font-bold text-[#64748B] block">Total Price</span>
-              <span className="font-heading text-xl sm:text-2xl font-black text-[#064E3B] tracking-tight">
+              <span className="text-[10px] uppercase font-bold text-[#E8F3EC]/70 block">Total Price</span>
+              <span className="font-heading text-xl sm:text-2xl font-black text-[#FFC83D] tracking-tight">
                 {formatPKR(apartment.totalPricePKR)}
               </span>
             </div>
@@ -63,68 +63,68 @@ export const PaymentPlanCard: React.FC<PaymentPlanCardProps> = ({
 
           {/* Validation Notice if any mismatch */}
           {!validation.isValid && (
-            <div className="mb-4 p-2.5 bg-amber-50 border border-amber-300 text-amber-800 text-xs rounded-xl flex items-center space-x-2">
-              <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0" />
+            <div className="mb-4 p-2.5 bg-amber-900/30 border border-amber-400 text-amber-200 text-xs rounded-xl flex items-center space-x-2">
+              <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0" />
               <span>Calculated: {formatPKR(validation.calculatedTotal)} (Difference: {formatPKR(validation.difference)})</span>
             </div>
           )}
 
-          {/* White Payment Information Card with Numbered Circles */}
-          <div className="bg-white rounded-2xl p-5 border border-gray-200/80 shadow-sm space-y-4">
+          {/* Emerald Payment Information Card with Numbered Circles */}
+          <div className="bg-[#003D25]/90 rounded-2xl p-5 border border-[#E6AA27]/25 shadow-sm space-y-4">
             {/* Step 1: Booking */}
-            <div className="flex items-center justify-between pb-3 border-b border-gray-100">
+            <div className="flex items-center justify-between pb-3 border-b border-white/10">
               <div className="flex items-center space-x-3">
-                <div className="w-7 h-7 rounded-full bg-[#064E3B] text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-sm">
+                <div className="w-7 h-7 rounded-full bg-[#FFC83D] text-[#002D1C] flex items-center justify-center font-extrabold text-xs shrink-0 shadow-sm">
                   1
                 </div>
                 <div>
-                  <div className="text-xs font-bold text-[#102A24] uppercase tracking-wide">
+                  <div className="text-xs font-bold text-white uppercase tracking-wide">
                     Booking Amount
                   </div>
-                  <div className="text-[11px] text-[#64748B]">Initial reservation deposit</div>
+                  <div className="text-[11px] text-[#E8F3EC]/70">Initial reservation deposit</div>
                 </div>
               </div>
-              <div className="font-heading font-extrabold text-sm text-[#022C22]">
+              <div className="font-heading font-extrabold text-sm text-[#FFC83D]">
                 {formatPKR(apartment.bookingAmountPKR)}
               </div>
             </div>
 
             {/* Step 2: Monthly Installments */}
-            <div className="flex items-center justify-between pb-3 border-b border-gray-100">
+            <div className="flex items-center justify-between pb-3 border-b border-white/10">
               <div className="flex items-center space-x-3">
-                <div className="w-7 h-7 rounded-full bg-[#064E3B] text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-sm">
+                <div className="w-7 h-7 rounded-full bg-[#FFC83D] text-[#002D1C] flex items-center justify-center font-extrabold text-xs shrink-0 shadow-sm">
                   2
                 </div>
                 <div>
-                  <div className="text-xs font-bold text-[#102A24] uppercase tracking-wide">
+                  <div className="text-xs font-bold text-white uppercase tracking-wide">
                     Monthly Installments
                   </div>
-                  <div className="text-[11px] text-[#64748B]">
+                  <div className="text-[11px] text-[#E8F3EC]/70">
                     {formatPKR(apartment.monthlyInstallmentPKR)} × {apartment.monthlyCount} Months
                   </div>
                 </div>
               </div>
-              <div className="font-heading font-extrabold text-sm text-[#064E3B]">
+              <div className="font-heading font-extrabold text-sm text-[#FFC83D]">
                 {formatPKR(apartment.monthlyTotalPKR)}
               </div>
             </div>
 
             {/* Step 3: Half-Yearly Installments */}
-            <div className="flex items-center justify-between pb-3 border-b border-gray-100">
+            <div className="flex items-center justify-between pb-3 border-b border-white/10">
               <div className="flex items-center space-x-3">
-                <div className="w-7 h-7 rounded-full bg-[#064E3B] text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-sm">
+                <div className="w-7 h-7 rounded-full bg-[#FFC83D] text-[#002D1C] flex items-center justify-center font-extrabold text-xs shrink-0 shadow-sm">
                   3
                 </div>
                 <div>
-                  <div className="text-xs font-bold text-[#102A24] uppercase tracking-wide">
+                  <div className="text-xs font-bold text-white uppercase tracking-wide">
                     Half-Yearly Installments
                   </div>
-                  <div className="text-[11px] text-[#64748B]">
+                  <div className="text-[11px] text-[#E8F3EC]/70">
                     {formatPKR(apartment.halfYearlyInstallmentPKR)} × {apartment.halfYearlyCount} Payments
                   </div>
                 </div>
               </div>
-              <div className="font-heading font-extrabold text-sm text-[#064E3B]">
+              <div className="font-heading font-extrabold text-sm text-[#FFC83D]">
                 {formatPKR(apartment.halfYearlyTotalPKR)}
               </div>
             </div>
@@ -132,31 +132,31 @@ export const PaymentPlanCard: React.FC<PaymentPlanCardProps> = ({
             {/* Step 4: Final Payment on Possession */}
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
-                <div className="w-7 h-7 rounded-full bg-[#064E3B] text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-sm">
+                <div className="w-7 h-7 rounded-full bg-[#FFC83D] text-[#002D1C] flex items-center justify-center font-extrabold text-xs shrink-0 shadow-sm">
                   4
                 </div>
                 <div>
-                  <div className="text-xs font-bold text-[#102A24] uppercase tracking-wide">
+                  <div className="text-xs font-bold text-white uppercase tracking-wide">
                     On Possession
                   </div>
-                  <div className="text-[11px] text-[#64748B]">Keys and handover milestone</div>
+                  <div className="text-[11px] text-[#E8F3EC]/70">Keys and handover milestone</div>
                 </div>
               </div>
-              <div className="font-heading font-extrabold text-sm text-[#022C22]">
+              <div className="font-heading font-extrabold text-sm text-[#FFC83D]">
                 {formatPKR(apartment.possessionPaymentPKR)}
               </div>
             </div>
           </div>
 
-          {/* Large Green Total Amount Bar */}
-          <div className="mt-4 p-4 rounded-2xl bg-gradient-to-r from-[#064E3B] to-[#022C22] text-white flex items-center justify-between shadow-md">
+          {/* Large Gold / Emerald Total Amount Bar */}
+          <div className="mt-4 p-4 rounded-2xl bg-[#004B2E] border border-[#E6AA27]/30 text-white flex items-center justify-between shadow-md">
             <div>
-              <span className="text-[10px] uppercase tracking-wider text-[#D6A84F] font-bold block">
+              <span className="text-[10px] uppercase tracking-wider text-[#FFC83D] font-bold block">
                 Total Package Price
               </span>
-              <span className="text-xs text-[#ECFDF5]/80 font-medium">5-Year Easy Plan</span>
+              <span className="text-xs text-[#E8F3EC]/80 font-medium">5-Year Easy Plan</span>
             </div>
-            <div className="font-heading text-lg sm:text-xl font-black text-[#E6C678]">
+            <div className="font-heading text-lg sm:text-xl font-black text-[#FFC83D]">
               {formatPKR(apartment.totalPricePKR)}
             </div>
           </div>
@@ -165,8 +165,8 @@ export const PaymentPlanCard: React.FC<PaymentPlanCardProps> = ({
           {apartment.benefits && apartment.benefits.length > 0 && (
             <div className="mt-5 space-y-2">
               {apartment.benefits.map((benefit, i) => (
-                <div key={i} className="flex items-center space-x-2 text-xs font-medium text-[#102A24]">
-                  <div className="w-4 h-4 rounded-full bg-[#ECFDF5] text-[#047857] flex items-center justify-center shrink-0">
+                <div key={i} className="flex items-center space-x-2 text-xs font-medium text-[#E8F3EC]">
+                  <div className="w-4 h-4 rounded-full bg-[#003D25] border border-[#FFC83D]/40 text-[#FFC83D] flex items-center justify-center shrink-0">
                     <Check className="w-3 h-3 stroke-[3]" />
                   </div>
                   <span>{benefit}</span>
@@ -178,21 +178,21 @@ export const PaymentPlanCard: React.FC<PaymentPlanCardProps> = ({
       </div>
 
       {/* Action Buttons */}
-      <div className="p-6 pt-3 border-t border-gray-200/60 bg-[#F8F6EA] space-y-2">
+      <div className="p-6 pt-3 border-t border-[#E6AA27]/20 bg-[#002417] space-y-2">
         <div className="grid grid-cols-2 gap-2">
           <button
             type="button"
             onClick={() => printPaymentPlan(project, apartment)}
-            className="py-2.5 px-3 rounded-xl bg-white hover:bg-[#ECFDF5] border border-gray-200 text-[#064E3B] text-xs font-heading font-bold uppercase tracking-wider flex items-center justify-center space-x-1.5 transition-colors shadow-sm"
+            className="py-2.5 px-3 rounded-xl bg-[#003D25] hover:bg-[#004B2E] border border-[#E6AA27]/30 text-white text-xs font-heading font-bold uppercase tracking-wider flex items-center justify-center space-x-1.5 transition-colors shadow-sm"
           >
-            <Download className="w-3.5 h-3.5 text-[#D6A84F]" />
+            <Download className="w-3.5 h-3.5 text-[#FFC83D]" />
             <span>PDF Plan</span>
           </button>
 
           <button
             type="button"
             onClick={() => onInquire(apartment)}
-            className="py-2.5 px-3 rounded-xl bg-gradient-to-r from-[#D6A84F] to-[#B88628] hover:shadow-gold-glow text-[#022C22] text-xs font-heading font-extrabold uppercase tracking-wider flex items-center justify-center space-x-1.5 transition-all shadow-sm"
+            className="py-2.5 px-3 rounded-xl bg-gradient-to-r from-[#E6AA27] to-[#FFC83D] hover:from-[#FFC83D] hover:to-[#E6AA27] text-[#002D1C] text-xs font-heading font-extrabold uppercase tracking-wider flex items-center justify-center space-x-1.5 transition-all shadow-sm"
           >
             <Send className="w-3.5 h-3.5" />
             <span>Inquire</span>

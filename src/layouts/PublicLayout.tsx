@@ -27,7 +27,7 @@ export const PublicLayout: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F8F6EA] text-[#102A24] w-full max-w-full overflow-x-hidden">
+    <div className="min-h-screen flex flex-col bg-[#003D25] text-white w-full max-w-full overflow-x-hidden">
       {initialLoading && (
         <LoadingScreen onLoaded={handleLoaded} />
       )}

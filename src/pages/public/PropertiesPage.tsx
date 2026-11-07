@@ -223,7 +223,7 @@ export const PropertiesPage: React.FC<PropertiesPageProps> = ({
   };
 
   return (
-    <div className="bg-[#F8F6EA]/40 min-h-screen">
+    <div className="bg-[#002D1C] min-h-screen text-white">
       {/* Unique Dedicated Page Hero */}
       <PageHero
         title={heroData.title}
@@ -237,24 +237,24 @@ export const PropertiesPage: React.FC<PropertiesPageProps> = ({
       />
 
       {/* Featured Signature Development Projects Section */}
-      <section className="bg-white border-b border-gray-100 py-12 overflow-hidden">
+      <section className="bg-[#003D25]/60 border-b border-[#E6AA27]/20 py-12 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8">
             <div>
-              <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-[#ECFDF5] text-[#047857] text-[10px] font-bold uppercase tracking-wider mb-2">
-                <Building2 className="w-3.5 h-3.5 text-[#D6A84F]" />
+              <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-[#002D1C] border border-[#FFC83D]/40 text-[#FFC83D] text-[10px] font-bold uppercase tracking-wider mb-2">
+                <Building2 className="w-3.5 h-3.5 text-[#FFC83D]" />
                 <span>Master-Planned Portfolio</span>
               </div>
-              <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-[#022C22] uppercase tracking-tight">
-                Our Four <span className="text-[#D6A84F]">Signature Developments</span>
+              <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-white uppercase tracking-tight">
+                Our Four <span className="text-[#FFC83D]">Signature Developments</span>
               </h2>
-              <p className="text-xs sm:text-sm text-[#64748B] mt-1">
+              <p className="text-xs sm:text-sm text-[#E8F3EC]/80 mt-1">
                 Explore dedicated apartment plans, construction updates, and master projects across University Town & Kalam.
               </p>
             </div>
             <Link
               to="/projects"
-              className="mt-3 sm:mt-0 text-xs font-bold text-[#064E3B] hover:text-[#D6A84F] flex items-center space-x-1 uppercase tracking-wider shrink-0"
+              className="mt-3 sm:mt-0 text-xs font-bold text-[#FFC83D] hover:text-white flex items-center space-x-1 uppercase tracking-wider shrink-0"
             >
               <span>View All Projects</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -267,36 +267,36 @@ export const PropertiesPage: React.FC<PropertiesPageProps> = ({
               return (
                 <div
                   key={proj.id}
-                  className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-premium transition-all flex flex-col justify-between group hover:-translate-y-1"
+                  className="bg-[#002D1C] rounded-2xl overflow-hidden border border-[#E6AA27]/25 shadow-xl hover:border-[#E6AA27]/60 hover:shadow-2xl transition-all flex flex-col justify-between group hover:-translate-y-1"
                 >
                   <div>
-                    <div className="relative h-56 bg-gradient-to-b from-[#F8FAFC] to-[#EEF2F6] p-4 flex items-center justify-center overflow-hidden">
+                    <div className="relative h-56 bg-gradient-to-b from-[#003D25] to-[#002D1C] p-4 flex items-center justify-center overflow-hidden">
                       <img
                         src={proj.renderBuildingImage || proj.coverImage}
                         alt={proj.name}
-                        className="max-h-[195px] max-w-[94%] object-contain filter drop-shadow-[0_10px_20px_rgba(15,23,42,0.15)] group-hover:scale-105 transition-transform duration-500"
+                        className="max-h-[195px] max-w-[94%] object-contain filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)] group-hover:scale-105 transition-transform duration-500"
                       />
-                      <div className="absolute top-2 right-2 bg-[#022C22] text-[#D6A84F] text-[10px] font-black px-2 py-0.5 rounded-full border border-[#D6A84F]/30 shadow">
+                      <div className="absolute top-2 right-2 bg-[#002D1C]/90 text-[#FFC83D] text-[10px] font-black px-2 py-0.5 rounded-full border border-[#FFC83D]/40 shadow">
                         {progressVal}% Built
                       </div>
-                      <div className="absolute bottom-2 left-2 bg-white/90 backdrop-blur-md text-[10px] font-semibold text-[#064E3B] px-2 py-0.5 rounded shadow-sm">
+                      <div className="absolute bottom-2 left-2 bg-[#002D1C]/90 border border-white/10 backdrop-blur-md text-[10px] font-semibold text-white px-2 py-0.5 rounded shadow-sm">
                         {proj.city || proj.location.split(',')[0]}
                       </div>
                     </div>
 
                     <div className="p-4">
-                      <h3 className="font-heading text-base font-bold text-[#102A24] group-hover:text-[#064E3B] transition-colors mb-1">
+                      <h3 className="font-heading text-base font-bold text-white group-hover:text-[#FFC83D] transition-colors mb-1">
                         {proj.name}
                       </h3>
-                      <p className="text-xs text-[#64748B] line-clamp-2 mb-3">
+                      <p className="text-xs text-[#E8F3EC]/70 line-clamp-2 mb-3">
                         {proj.tagline}
                       </p>
 
                       {/* Mini Progress bar */}
                       <div className="space-y-1 mb-2">
-                        <div className="w-full h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                        <div className="w-full h-1.5 bg-[#003D25] rounded-full overflow-hidden">
                           <div
-                            className="h-full bg-gradient-to-r from-[#064E3B] to-[#D6A84F] rounded-full"
+                            className="h-full bg-gradient-to-r from-[#E6AA27] to-[#FFC83D] rounded-full"
                             style={{ width: `${progressVal}%` }}
                           />
                         </div>
@@ -307,7 +307,7 @@ export const PropertiesPage: React.FC<PropertiesPageProps> = ({
                   <div className="p-4 pt-0 flex items-center space-x-2">
                     <Link
                       to={`/projects/${proj.slug}`}
-                      className="flex-1 py-2 text-center rounded-lg bg-white hover:bg-[#064E3B] text-[#064E3B] hover:text-white border border-gray-200 text-[11px] font-bold uppercase tracking-wider transition-colors"
+                      className="flex-1 py-2 text-center rounded-lg bg-[#003D25] hover:bg-[#FFC83D] text-[#FFC83D] hover:text-[#002D1C] border border-[#E6AA27]/30 text-[11px] font-bold uppercase tracking-wider transition-colors"
                     >
                       Explore Project
                     </Link>
@@ -317,7 +317,7 @@ export const PropertiesPage: React.FC<PropertiesPageProps> = ({
                         setSearchQuery(proj.name);
                         window.scrollTo({ top: 600, behavior: 'smooth' });
                       }}
-                      className="px-2.5 py-2 rounded-lg bg-[#F8F6EA] hover:bg-[#ECFDF5] text-[#064E3B] text-[11px] font-bold border border-gray-200"
+                      className="px-2.5 py-2 rounded-lg bg-[#003D25] hover:bg-[#004B2E] text-white text-[11px] font-bold border border-[#E6AA27]/30"
                       title={`Filter properties in ${proj.name}`}
                     >
                       Filter
@@ -333,23 +333,23 @@ export const PropertiesPage: React.FC<PropertiesPageProps> = ({
       {/* Filter & Listing Container */}
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 overflow-hidden">
         {/* Filter Control Bar */}
-        <div className="bg-white rounded-2xl p-6 shadow-premium border border-gray-100 mb-10">
+        <div className="bg-[#003D25]/90 rounded-2xl p-6 shadow-2xl border border-[#E6AA27]/25 backdrop-blur-md mb-10">
           {/* Top Row: Search and Quick Toggles */}
-          <div className="flex flex-col lg:flex-row gap-4 items-center justify-between pb-6 border-b border-gray-100">
+          <div className="flex flex-col lg:flex-row gap-4 items-center justify-between pb-6 border-b border-[#E6AA27]/20">
             {/* Search Input */}
             <div className="relative w-full lg:w-96">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#FFC83D]" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search properties by title, keyword, sector..."
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-[#064E3B]"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#E6AA27]/30 bg-[#002D1C] text-white text-sm focus:outline-none focus:border-[#FFC83D] placeholder:text-white/40"
               />
             </div>
 
             {/* Purpose Toggles */}
-            <div className="flex items-center space-x-1 bg-[#F8F6EA] p-1.5 rounded-xl border border-gray-100 w-full sm:w-auto overflow-x-auto">
+            <div className="flex items-center space-x-1 bg-[#002D1C] p-1.5 rounded-xl border border-[#E6AA27]/25 w-full sm:w-auto overflow-x-auto">
               {['All', 'Buy', 'Rent'].map((tab) => (
                 <button
                   key={tab}
@@ -360,8 +360,8 @@ export const PropertiesPage: React.FC<PropertiesPageProps> = ({
                   }}
                   className={`px-5 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all ${
                     purpose === tab
-                      ? 'bg-[#064E3B] text-white shadow-sm'
-                      : 'text-[#64748B] hover:text-[#064E3B]'
+                      ? 'bg-[#FFC83D] text-[#002D1C] shadow-sm font-extrabold'
+                      : 'text-[#E8F3EC]/70 hover:text-white hover:bg-[#003D25]'
                   }`}
                 >
                   {tab === 'All' ? 'All Purposes' : `For ${tab}`}
@@ -371,11 +371,11 @@ export const PropertiesPage: React.FC<PropertiesPageProps> = ({
 
             {/* Sort Dropdown */}
             <div className="flex items-center space-x-2 w-full sm:w-auto justify-end">
-              <span className="text-xs text-[#64748B] font-medium whitespace-nowrap">Sort By:</span>
+              <span className="text-xs text-[#E8F3EC]/70 font-medium whitespace-nowrap">Sort By:</span>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="px-3 py-2 rounded-xl border border-gray-200 text-xs font-semibold bg-white text-[#102A24] focus:outline-none focus:border-[#064E3B]"
+                className="px-3 py-2 rounded-xl border border-[#E6AA27]/30 text-xs font-semibold bg-[#002D1C] text-white focus:outline-none focus:border-[#FFC83D]"
               >
                 <option value="newest">Newest First</option>
                 <option value="price-low">Price: Low to High</option>
@@ -389,7 +389,7 @@ export const PropertiesPage: React.FC<PropertiesPageProps> = ({
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 pt-6">
             {/* Location */}
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-[#64748B] mb-1.5">
+              <label className="block text-xs font-bold uppercase tracking-wider text-[#FFC83D] mb-1.5">
                 Location
               </label>
               <select
@@ -398,14 +398,14 @@ export const PropertiesPage: React.FC<PropertiesPageProps> = ({
                   setLocation(e.target.value);
                   updateParam('location', e.target.value);
                 }}
-                className={`w-full px-3 py-2 rounded-xl border text-xs font-medium bg-white focus:outline-none focus:border-[#064E3B] ${
+                className={`w-full px-3 py-2 rounded-xl border text-xs font-medium bg-[#002D1C] focus:outline-none focus:border-[#FFC83D] ${
                   location !== 'All'
-                    ? 'border-[#064E3B] text-[#064E3B] font-bold bg-[#ECFDF5]/30'
-                    : 'border-gray-200 text-[#102A24]'
+                    ? 'border-[#FFC83D] text-[#FFC83D] font-bold bg-[#003D25]'
+                    : 'border-[#E6AA27]/30 text-white'
                 }`}
               >
                 {locationsList.map((loc) => (
-                  <option key={loc} value={loc}>
+                  <option key={loc} value={loc} className="bg-[#002D1C] text-white">
                     {loc === 'All' ? 'All Locations' : loc}
                   </option>
                 ))}
@@ -415,11 +415,11 @@ export const PropertiesPage: React.FC<PropertiesPageProps> = ({
             {/* Category */}
             <div>
               <div className="flex items-center justify-between mb-1.5">
-                <label className="block text-xs font-bold uppercase tracking-wider text-[#64748B]">
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#FFC83D]">
                   Category
                 </label>
                 {category !== 'All' && (
-                  <span className="text-[10px] text-[#064E3B] font-bold bg-[#ECFDF5] px-1.5 py-0.2 rounded">
+                  <span className="text-[10px] text-[#002D1C] font-bold bg-[#FFC83D] px-1.5 py-0.2 rounded">
                     Active
                   </span>
                 )}
@@ -430,14 +430,14 @@ export const PropertiesPage: React.FC<PropertiesPageProps> = ({
                   setCategory(e.target.value);
                   updateParam('category', e.target.value);
                 }}
-                className={`w-full px-3 py-2 rounded-xl border text-xs font-medium bg-white focus:outline-none focus:border-[#064E3B] ${
+                className={`w-full px-3 py-2 rounded-xl border text-xs font-medium bg-[#002D1C] focus:outline-none focus:border-[#FFC83D] ${
                   category !== 'All'
-                    ? 'border-[#064E3B] text-[#064E3B] font-bold bg-[#ECFDF5]/30 ring-1 ring-[#064E3B]/20'
-                    : 'border-gray-200 text-[#102A24]'
+                    ? 'border-[#FFC83D] text-[#FFC83D] font-bold bg-[#003D25]'
+                    : 'border-[#E6AA27]/30 text-white'
                 }`}
               >
                 {categoriesList.map((cat) => (
-                  <option key={cat} value={cat}>
+                  <option key={cat} value={cat} className="bg-[#002D1C] text-white">
                     {cat === 'All' ? 'All Categories' : cat}
                   </option>
                 ))}
@@ -446,7 +446,7 @@ export const PropertiesPage: React.FC<PropertiesPageProps> = ({
 
             {/* Min Price */}
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-[#64748B] mb-1.5">
+              <label className="block text-xs font-bold uppercase tracking-wider text-[#FFC83D] mb-1.5">
                 Min Price (PKR)
               </label>
               <input
@@ -454,13 +454,13 @@ export const PropertiesPage: React.FC<PropertiesPageProps> = ({
                 placeholder="e.g. 5000000"
                 value={minPrice}
                 onChange={(e) => setMinPrice(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl border border-gray-200 text-xs font-medium text-[#102A24] focus:outline-none focus:border-[#064E3B]"
+                className="w-full px-3 py-2 rounded-xl border border-[#E6AA27]/30 text-xs font-medium bg-[#002D1C] text-white focus:outline-none focus:border-[#FFC83D] placeholder:text-white/40"
               />
             </div>
 
             {/* Max Price */}
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-[#64748B] mb-1.5">
+              <label className="block text-xs font-bold uppercase tracking-wider text-[#FFC83D] mb-1.5">
                 Max Price (PKR)
               </label>
               <input
@@ -468,18 +468,18 @@ export const PropertiesPage: React.FC<PropertiesPageProps> = ({
                 placeholder="e.g. 50000000"
                 value={maxPrice}
                 onChange={(e) => setMaxPrice(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl border border-gray-200 text-xs font-medium text-[#102A24] focus:outline-none focus:border-[#064E3B]"
+                className="w-full px-3 py-2 rounded-xl border border-[#E6AA27]/30 text-xs font-medium bg-[#002D1C] text-white focus:outline-none focus:border-[#FFC83D] placeholder:text-white/40"
               />
             </div>
 
             {/* Reset / Verified */}
             <div className="flex items-center space-x-3 pt-6">
-              <label className="flex items-center space-x-2 text-xs text-[#102A24] font-medium cursor-pointer">
+              <label className="flex items-center space-x-2 text-xs text-white font-medium cursor-pointer">
                 <input
                   type="checkbox"
                   checked={verifiedOnly}
                   onChange={(e) => setVerifiedOnly(e.target.checked)}
-                  className="rounded text-[#064E3B] focus:ring-0"
+                  className="rounded text-[#FFC83D] focus:ring-0"
                 />
                 <span>Verified Only</span>
               </label>
@@ -487,7 +487,7 @@ export const PropertiesPage: React.FC<PropertiesPageProps> = ({
               <button
                 type="button"
                 onClick={handleResetFilters}
-                className="px-3 py-1.5 rounded-lg border border-gray-200 text-xs font-bold text-gray-600 hover:text-[#064E3B] hover:bg-gray-50 flex items-center space-x-1"
+                className="px-3 py-1.5 rounded-lg border border-[#E6AA27]/40 text-xs font-bold text-white hover:text-[#FFC83D] hover:bg-[#004B2E] flex items-center space-x-1"
                 title="Reset All Filters"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
@@ -499,19 +499,19 @@ export const PropertiesPage: React.FC<PropertiesPageProps> = ({
 
         {/* Results Counter & Layout View Switcher */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
-          <p className="text-xs sm:text-sm text-[#64748B] font-medium">
-            Showing <strong className="text-[#022C22]">{filteredProperties.length}</strong> verified flagship properties
+          <p className="text-xs sm:text-sm text-[#E8F3EC]/80 font-medium">
+            Showing <strong className="text-[#FFC83D]">{filteredProperties.length}</strong> verified flagship properties
           </p>
 
           {filteredProperties.length > 0 && (
-            <div className="inline-flex items-center p-1 bg-white border border-gray-200 rounded-2xl shadow-xs self-start sm:self-auto">
+            <div className="inline-flex items-center p-1 bg-[#003D25] border border-[#E6AA27]/30 rounded-2xl shadow-xs self-start sm:self-auto">
               <button
                 type="button"
                 onClick={() => setViewMode('flex')}
                 className={`flex items-center space-x-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
                   viewMode === 'flex'
-                    ? 'bg-[#064E3B] text-white shadow-sm'
-                    : 'text-gray-500 hover:text-[#064E3B] hover:bg-[#F8F6EA]'
+                    ? 'bg-[#FFC83D] text-[#002D1C] font-extrabold shadow-sm'
+                    : 'text-[#E8F3EC]/80 hover:text-white hover:bg-[#004B2E]'
                 }`}
                 title="Interactive Expanding Flex Cards"
               >
@@ -524,8 +524,8 @@ export const PropertiesPage: React.FC<PropertiesPageProps> = ({
                 onClick={() => setViewMode('grid')}
                 className={`flex items-center space-x-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
                   viewMode === 'grid'
-                    ? 'bg-[#064E3B] text-white shadow-sm'
-                    : 'text-gray-500 hover:text-[#064E3B] hover:bg-[#F8F6EA]'
+                    ? 'bg-[#FFC83D] text-[#002D1C] font-extrabold shadow-sm'
+                    : 'text-[#E8F3EC]/80 hover:text-white hover:bg-[#004B2E]'
                 }`}
                 title="Classic Grid View"
               >

@@ -8,22 +8,22 @@ export const BlogSection: React.FC = () => {
   const publishedBlogs = blogs.filter((b) => b.published).slice(0, 3);
 
   return (
-    <section className="py-24 bg-[#F8F6EA]/40">
+    <section className="py-24 bg-[#003D25] text-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-14">
           <div>
-            <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-[#ECFDF5] text-[#047857] text-xs font-bold uppercase tracking-wider mb-2">
-              <BookOpen className="w-3.5 h-3.5 text-[#D6A84F]" />
+            <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-[#002D1C] text-[#FFC83D] border border-[#E6AA27]/40 text-xs font-bold uppercase tracking-wider mb-2">
+              <BookOpen className="w-3.5 h-3.5 text-[#FFC83D]" />
               <span>Real Estate Knowledge</span>
             </div>
-            <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-[#022C22] uppercase tracking-tight">
-              Insights & <span className="text-[#D6A84F]">Market News</span>
+            <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-white uppercase tracking-tight">
+              Insights & <span className="text-[#FFC83D]">Market News</span>
             </h2>
           </div>
 
           <Link
             to="/blogs"
-            className="mt-4 md:mt-0 inline-flex items-center space-x-1 text-xs font-heading font-extrabold text-[#064E3B] hover:text-[#D6A84F] uppercase tracking-wider transition-colors"
+            className="mt-4 md:mt-0 inline-flex items-center space-x-1 text-xs font-heading font-extrabold text-[#FFC83D] hover:text-white uppercase tracking-wider transition-colors"
           >
             <span>View All Articles</span>
             <ArrowRight className="w-4 h-4" />
@@ -34,9 +34,9 @@ export const BlogSection: React.FC = () => {
           {publishedBlogs.map((blog) => (
             <article
               key={blog.id}
-              className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-premium hover:shadow-premium-hover transition-all duration-300 flex flex-col group"
+              className="bg-[#002D1C] rounded-2xl overflow-hidden border border-[#E6AA27]/25 shadow-xl hover:border-[#FFC83D]/60 transition-all duration-300 flex flex-col group"
             >
-              <div className="relative aspect-[16/10] overflow-hidden bg-gray-100">
+              <div className="relative aspect-[16/10] overflow-hidden bg-[#003D25]">
                 <img
                   src={blog.coverImage}
                   alt={blog.title}
@@ -46,45 +46,44 @@ export const BlogSection: React.FC = () => {
                     (e.target as HTMLImageElement).src = '/assets/hero/slide4.jpg';
                   }}
                 />
-                <span className="absolute top-3 left-3 px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-[#064E3B] text-white">
+                <span className="absolute top-3 left-3 px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-[#004B2E] text-[#FFC83D] border border-[#E6AA27]/30">
                   {blog.category}
                 </span>
               </div>
 
               <div className="p-6 flex-1 flex flex-col justify-between">
                 <div>
-                  <div className="flex items-center space-x-3 text-xs text-[#64748B] mb-2.5">
+                  <div className="flex items-center space-x-3 text-xs text-[#E8F3EC]/70 mb-2.5">
                     <span className="flex items-center">
-                      <Calendar className="w-3.5 h-3.5 mr-1 text-[#D6A84F]" />
+                      <Calendar className="w-3.5 h-3.5 mr-1 text-[#FFC83D]" />
                       {new Date(blog.publishedAt).toLocaleDateString('en-US', {
                         month: 'short',
                         day: 'numeric',
                         year: 'numeric',
                       })}
                     </span>
-                    <span>•</span>
                     <span className="flex items-center">
-                      <Clock className="w-3.5 h-3.5 mr-1" />
+                      <Clock className="w-3.5 h-3.5 mr-1 text-[#FFC83D]" />
                       {blog.readingTime}
                     </span>
                   </div>
 
                   <Link to={`/blogs/${blog.slug}`}>
-                    <h3 className="font-heading text-base font-bold text-[#102A24] group-hover:text-[#064E3B] transition-colors leading-snug line-clamp-2 mb-2">
+                    <h3 className="font-heading text-lg font-bold text-white group-hover:text-[#FFC83D] transition-colors leading-snug mb-2 line-clamp-2">
                       {blog.title}
                     </h3>
                   </Link>
 
-                  <p className="text-xs text-[#64748B] leading-relaxed line-clamp-3 mb-4">
+                  <p className="text-xs text-[#E8F3EC]/75 line-clamp-2 leading-relaxed mb-4">
                     {blog.excerpt}
                   </p>
                 </div>
 
                 <Link
                   to={`/blogs/${blog.slug}`}
-                  className="inline-flex items-center space-x-1.5 text-xs font-bold text-[#064E3B] group-hover:text-[#D6A84F] transition-colors pt-3 border-t border-gray-100"
+                  className="inline-flex items-center space-x-1.5 text-xs font-bold text-[#FFC83D] group-hover:text-white transition-colors"
                 >
-                  <span>Read Article</span>
+                  <span>Read Full Article</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>

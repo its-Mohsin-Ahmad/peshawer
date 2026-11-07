@@ -57,7 +57,11 @@ export const PropertyDetailPage: React.FC = () => {
     .slice(0, 3);
 
   return (
-    <div className="bg-[#F8F6EA]/40 min-h-screen">
+    <div className="bg-[#002D1C] text-white min-h-screen relative overflow-hidden">
+      {/* Background glow effects */}
+      <div className="absolute top-1/3 left-0 w-96 h-96 bg-[#004B2E]/25 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-[#006B40]/20 rounded-full blur-3xl pointer-events-none" />
+
       {/* Unique Hero Image: That property's own featured image */}
       <PageHero
         title={property.title}
@@ -76,22 +80,22 @@ export const PropertyDetailPage: React.FC = () => {
       />
 
       {/* Main Content Area */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
           {/* Left Column (2 Cols): Gallery, Details, Description, Features */}
           <div className="lg:col-span-2 space-y-10">
             {/* Gallery Grid preview */}
-            <div className="bg-white rounded-3xl p-6 shadow-premium border border-gray-100">
+            <div className="bg-[#003D25]/90 rounded-3xl p-6 shadow-2xl border border-[#E6AA27]/25 backdrop-blur-md">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="font-heading text-lg font-bold text-[#022C22]">
-                  Property Photography
+                <h2 className="font-heading text-lg font-bold text-white uppercase tracking-tight">
+                  Property <span className="text-[#FFC83D]">Photography</span>
                 </h2>
                 <button
                   onClick={() => {
                     setPhotoIndex(0);
                     setLightboxOpen(true);
                   }}
-                  className="text-xs font-bold text-[#064E3B] hover:text-[#D6A84F] uppercase tracking-wider"
+                  className="text-xs font-bold text-[#FFC83D] hover:text-white uppercase tracking-wider transition-colors"
                 >
                   View Fullscreen ({galleryImages.length})
                 </button>
@@ -105,89 +109,89 @@ export const PropertyDetailPage: React.FC = () => {
                       setPhotoIndex(idx);
                       setLightboxOpen(true);
                     }}
-                    className="relative aspect-video rounded-2xl overflow-hidden bg-gray-100 cursor-pointer group"
+                    className="relative aspect-video rounded-2xl overflow-hidden bg-[#002D1C] cursor-pointer group border border-white/10"
                   >
                     <img
                       src={img}
                       alt={`${property.title} photo ${idx + 1}`}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
-                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity" />
                   </div>
                 ))}
               </div>
             </div>
 
             {/* Key Specifications Grid */}
-            <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-premium border border-gray-100">
-              <h2 className="font-heading text-lg font-bold text-[#022C22] mb-6">
-                Overview & Specifications
+            <div className="bg-[#003D25]/90 rounded-3xl p-6 sm:p-8 shadow-2xl border border-[#E6AA27]/25 backdrop-blur-md">
+              <h2 className="font-heading text-lg font-bold text-white mb-6 uppercase tracking-tight">
+                Overview & <span className="text-[#FFC83D]">Specifications</span>
               </h2>
 
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
-                <div className="p-4 rounded-2xl bg-[#F8F6EA] flex flex-col justify-center">
-                  <div className="flex items-center text-[#64748B] text-xs font-medium mb-1">
-                    <Maximize className="w-4 h-4 text-[#D6A84F] mr-1.5" />
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div className="p-4 rounded-2xl bg-[#002D1C] border border-[#E6AA27]/20 flex flex-col justify-center">
+                  <div className="flex items-center text-[#E8F3EC]/70 text-xs font-medium mb-1">
+                    <Maximize className="w-4 h-4 text-[#FFC83D] mr-1.5" />
                     <span>Total Area</span>
                   </div>
-                  <div className="font-heading font-extrabold text-base text-[#022C22]">
+                  <div className="font-heading font-extrabold text-base text-white">
                     {formatArea(property.area, property.areaUnit)}
                   </div>
                 </div>
 
                 {property.bedrooms !== undefined && (
-                  <div className="p-4 rounded-2xl bg-[#F8F6EA] flex flex-col justify-center">
-                    <div className="flex items-center text-[#64748B] text-xs font-medium mb-1">
-                      <Bed className="w-4 h-4 text-[#064E3B] mr-1.5" />
+                  <div className="p-4 rounded-2xl bg-[#002D1C] border border-[#E6AA27]/20 flex flex-col justify-center">
+                    <div className="flex items-center text-[#E8F3EC]/70 text-xs font-medium mb-1">
+                      <Bed className="w-4 h-4 text-[#FFC83D] mr-1.5" />
                       <span>Bedrooms</span>
                     </div>
-                    <div className="font-heading font-extrabold text-base text-[#022C22]">
+                    <div className="font-heading font-extrabold text-base text-white">
                       {property.bedrooms} Beds
                     </div>
                   </div>
                 )}
 
                 {property.bathrooms !== undefined && (
-                  <div className="p-4 rounded-2xl bg-[#F8F6EA] flex flex-col justify-center">
-                    <div className="flex items-center text-[#64748B] text-xs font-medium mb-1">
-                      <Bath className="w-4 h-4 text-[#064E3B] mr-1.5" />
+                  <div className="p-4 rounded-2xl bg-[#002D1C] border border-[#E6AA27]/20 flex flex-col justify-center">
+                    <div className="flex items-center text-[#E8F3EC]/70 text-xs font-medium mb-1">
+                      <Bath className="w-4 h-4 text-[#FFC83D] mr-1.5" />
                       <span>Bathrooms</span>
                     </div>
-                    <div className="font-heading font-extrabold text-base text-[#022C22]">
+                    <div className="font-heading font-extrabold text-base text-white">
                       {property.bathrooms} Baths
                     </div>
                   </div>
                 )}
 
-                <div className="p-4 rounded-2xl bg-[#F8F6EA] flex flex-col justify-center">
-                  <div className="flex items-center text-[#64748B] text-xs font-medium mb-1">
-                    <ShieldCheck className="w-4 h-4 text-[#047857] mr-1.5" />
+                <div className="p-4 rounded-2xl bg-[#002D1C] border border-[#E6AA27]/20 flex flex-col justify-center">
+                  <div className="flex items-center text-[#E8F3EC]/70 text-xs font-medium mb-1">
+                    <ShieldCheck className="w-4 h-4 text-[#FFC83D] mr-1.5" />
                     <span>Purpose</span>
                   </div>
-                  <div className="font-heading font-extrabold text-base text-[#022C22]">
+                  <div className="font-heading font-extrabold text-base text-white">
                     For {property.purpose}
                   </div>
                 </div>
 
                 {property.parkingSpaces !== undefined && (
-                  <div className="p-4 rounded-2xl bg-[#F8F6EA] flex flex-col justify-center">
-                    <div className="flex items-center text-[#64748B] text-xs font-medium mb-1">
-                      <Car className="w-4 h-4 text-[#064E3B] mr-1.5" />
+                  <div className="p-4 rounded-2xl bg-[#002D1C] border border-[#E6AA27]/20 flex flex-col justify-center">
+                    <div className="flex items-center text-[#E8F3EC]/70 text-xs font-medium mb-1">
+                      <Car className="w-4 h-4 text-[#FFC83D] mr-1.5" />
                       <span>Parking</span>
                     </div>
-                    <div className="font-heading font-extrabold text-base text-[#022C22]">
+                    <div className="font-heading font-extrabold text-base text-white">
                       {property.parkingSpaces} Vehicles
                     </div>
                   </div>
                 )}
 
                 {property.yearBuilt && (
-                  <div className="p-4 rounded-2xl bg-[#F8F6EA] flex flex-col justify-center">
-                    <div className="flex items-center text-[#64748B] text-xs font-medium mb-1">
-                      <Clock className="w-4 h-4 text-[#064E3B] mr-1.5" />
+                  <div className="p-4 rounded-2xl bg-[#002D1C] border border-[#E6AA27]/20 flex flex-col justify-center">
+                    <div className="flex items-center text-[#E8F3EC]/70 text-xs font-medium mb-1">
+                      <Clock className="w-4 h-4 text-[#FFC83D] mr-1.5" />
                       <span>Year Built</span>
                     </div>
-                    <div className="font-heading font-extrabold text-base text-[#022C22]">
+                    <div className="font-heading font-extrabold text-base text-white">
                       {property.yearBuilt}
                     </div>
                   </div>
@@ -196,25 +200,25 @@ export const PropertyDetailPage: React.FC = () => {
             </div>
 
             {/* Description */}
-            <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-premium border border-gray-100">
-              <h2 className="font-heading text-lg font-bold text-[#022C22] mb-4">
-                Property Description
+            <div className="bg-[#003D25]/90 rounded-3xl p-6 sm:p-8 shadow-2xl border border-[#E6AA27]/25 backdrop-blur-md">
+              <h2 className="font-heading text-lg font-bold text-white mb-4 uppercase tracking-tight">
+                Property <span className="text-[#FFC83D]">Description</span>
               </h2>
-              <p className="text-sm sm:text-base text-[#64748B] leading-relaxed whitespace-pre-line">
+              <p className="text-sm sm:text-base text-[#E8F3EC]/80 leading-relaxed whitespace-pre-line font-normal">
                 {property.description}
               </p>
             </div>
 
             {/* Features & Amenities Checklist */}
             {property.features && property.features.length > 0 && (
-              <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-premium border border-gray-100">
-                <h2 className="font-heading text-lg font-bold text-[#022C22] mb-6">
-                  Key Property Highlights & Amenities
+              <div className="bg-[#003D25]/90 rounded-3xl p-6 sm:p-8 shadow-2xl border border-[#E6AA27]/25 backdrop-blur-md">
+                <h2 className="font-heading text-lg font-bold text-white mb-6 uppercase tracking-tight">
+                  Key Property Highlights & <span className="text-[#FFC83D]">Amenities</span>
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {property.features.map((feat, i) => (
-                    <div key={i} className="flex items-center space-x-2.5 text-xs sm:text-sm font-semibold text-[#102A24]">
-                      <div className="w-5 h-5 rounded-full bg-[#ECFDF5] text-[#047857] flex items-center justify-center shrink-0">
+                    <div key={i} className="flex items-center space-x-2.5 text-xs sm:text-sm font-semibold text-[#E8F3EC]">
+                      <div className="w-5 h-5 rounded-full bg-[#002D1C] border border-[#FFC83D]/40 text-[#FFC83D] flex items-center justify-center shrink-0">
                         <CheckCircle2 className="w-4 h-4" />
                       </div>
                       <span>{feat}</span>
@@ -227,22 +231,22 @@ export const PropertyDetailPage: React.FC = () => {
 
           {/* Right Column: Pricing & Inquiry Card */}
           <div className="space-y-6">
-            <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-2xl border border-gray-100 sticky top-28">
-              <div className="border-b border-gray-100 pb-5 mb-5">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-[#64748B] block mb-1">
+            <div className="bg-[#003D25]/95 rounded-3xl p-6 sm:p-8 shadow-2xl border border-[#E6AA27]/30 sticky top-28 backdrop-blur-md">
+              <div className="border-b border-[#E6AA27]/20 pb-5 mb-5">
+                <span className="text-[10px] font-bold uppercase tracking-widest text-[#FFC83D] block mb-1">
                   OFFICIAL ASKING PRICE
                 </span>
-                <div className="font-heading text-2xl sm:text-3xl font-black text-[#064E3B] tracking-tight">
+                <div className="font-heading text-2xl sm:text-3xl font-black text-[#FFC83D] tracking-tight">
                   {formatPKR(property.pricePKR)}
                 </div>
-                <div className="text-xs text-[#64748B] font-semibold mt-1">
+                <div className="text-xs text-[#E8F3EC]/70 font-semibold mt-1">
                   ({formatPKRShort(property.pricePKR)}) {property.purpose === 'Rent' && 'per month'}
                 </div>
               </div>
 
               {/* Verified badge */}
-              <div className="flex items-center space-x-2 text-xs font-semibold text-[#047857] bg-[#ECFDF5] p-3 rounded-xl mb-6">
-                <ShieldCheck className="w-4 h-4 shrink-0 text-[#047857]" />
+              <div className="flex items-center space-x-2 text-xs font-semibold text-[#FFC83D] bg-[#002D1C] border border-[#FFC83D]/30 p-3 rounded-xl mb-6">
+                <ShieldCheck className="w-4 h-4 shrink-0 text-[#FFC83D]" />
                 <span>Verified Legal Title & Documentation</span>
               </div>
 
@@ -264,7 +268,7 @@ export const PropertyDetailPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setInquiryModalOpen(true)}
-                  className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-[#D6A84F] to-[#B88628] hover:shadow-gold-glow text-[#022C22] font-heading font-extrabold text-xs uppercase tracking-wider transition-all flex items-center justify-center space-x-2"
+                  className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-[#E6AA27] to-[#FFC83D] hover:from-[#FFC83D] hover:to-[#E6AA27] text-[#002D1C] font-heading font-extrabold text-xs uppercase tracking-wider transition-all flex items-center justify-center space-x-2 shadow-lg"
                 >
                   <Send className="w-4 h-4" />
                   <span>Submit Inquiry</span>
@@ -273,23 +277,23 @@ export const PropertyDetailPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setAppointmentModalOpen(true)}
-                  className="w-full py-3.5 px-4 rounded-xl bg-[#064E3B] hover:bg-[#022C22] text-white font-heading font-extrabold text-xs uppercase tracking-wider transition-all flex items-center justify-center space-x-2"
+                  className="w-full py-3.5 px-4 rounded-xl bg-[#002D1C] hover:bg-[#004B2E] text-white border border-[#E6AA27]/40 font-heading font-extrabold text-xs uppercase tracking-wider transition-all flex items-center justify-center space-x-2"
                 >
-                  <Calendar className="w-4 h-4 text-[#D6A84F]" />
+                  <Calendar className="w-4 h-4 text-[#FFC83D]" />
                   <span>Book Site Inspection</span>
                 </button>
 
                 <a
                   href={`tel:${settings.phonePrimary}`}
-                  className="w-full py-3 px-4 rounded-xl border border-gray-200 hover:bg-[#F8F6EA] text-[#102A24] font-semibold text-xs transition-colors flex items-center justify-center space-x-2"
+                  className="w-full py-3 px-4 rounded-xl border border-[#E6AA27]/30 hover:border-[#FFC83D] bg-[#002D1C] text-white font-semibold text-xs transition-colors flex items-center justify-center space-x-2"
                 >
-                  <Phone className="w-4 h-4 text-[#064E3B]" />
+                  <Phone className="w-4 h-4 text-[#FFC83D]" />
                   <span>Call Advisor: {settings.phonePrimary}</span>
                 </a>
               </div>
 
-              <div className="mt-6 pt-6 border-t border-gray-100 text-[11px] text-[#64748B] text-center">
-                Ref ID: <strong className="text-[#102A24]">{property.id}</strong> • Listed by PESHAWER REAL ESTATE
+              <div className="mt-6 pt-6 border-t border-white/10 text-[11px] text-[#E8F3EC]/70 text-center">
+                Ref ID: <strong className="text-[#FFC83D]">{property.id}</strong> • Listed by PESHAWER REAL ESTATE
               </div>
             </div>
           </div>
@@ -297,9 +301,9 @@ export const PropertyDetailPage: React.FC = () => {
 
         {/* Similar Properties Section */}
         {similarProperties.length > 0 && (
-          <div className="mt-20 pt-12 border-t border-gray-200">
-            <h2 className="font-heading text-2xl font-bold text-[#022C22] mb-8">
-              Similar Properties You May Like
+          <div className="mt-20 pt-12 border-t border-[#E6AA27]/20">
+            <h2 className="font-heading text-2xl font-bold text-white mb-8 uppercase tracking-tight">
+              Similar Properties <span className="text-[#FFC83D]">You May Like</span>
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {similarProperties.map((p) => (
