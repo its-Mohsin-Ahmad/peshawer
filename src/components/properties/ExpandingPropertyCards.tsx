@@ -20,7 +20,7 @@ export const ExpandingPropertyCards: React.FC<ExpandingPropertyCardsProps> = ({
   return (
     <div className="w-full">
       {/* DESKTOP & TABLET: HORIZONTAL FLEX EXPANDING ACCORDION */}
-      <div className="hidden md:flex items-stretch gap-3 lg:gap-4 h-[57vh] min-h-[460px] max-h-[700px] w-full">
+      <div className="hidden md:flex items-stretch gap-3.5 lg:gap-5 h-[62vh] min-h-[500px] max-h-[720px] w-full">
         {properties.map((property, idx) => {
           const isExpanded = idx === activeIndex;
           const numberLabel = idx + 1;
@@ -29,20 +29,20 @@ export const ExpandingPropertyCards: React.FC<ExpandingPropertyCardsProps> = ({
             <div
               key={property.id}
               onClick={() => setActiveIndex(idx)}
-              className={`relative rounded-[28px] lg:rounded-[34px] overflow-hidden cursor-pointer select-none border transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group ${
+              className={`relative rounded-[28px] lg:rounded-[34px] overflow-hidden cursor-pointer select-none transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group ${
                 isExpanded
-                  ? 'flex-[4] lg:flex-[5] border-[#D6A84F]/40 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.4)]'
-                  : 'flex-[0.9] lg:flex-[1] min-w-[80px] lg:min-w-[95px] border-white/10 hover:border-white/30 shadow-lg'
+                  ? 'flex-[4.5] lg:flex-[5.5] border-2 border-[#FFC83D] shadow-[0_0_35px_rgba(255,200,61,0.3),0_25px_60px_-15px_rgba(0,0,0,0.7)]'
+                  : 'flex-[0.9] lg:flex-[1] min-w-[85px] lg:min-w-[105px] border border-[#E6AA27]/30 hover:border-[#FFC83D]/80 shadow-lg hover:shadow-xl'
               }`}
             >
-              {/* Background Property Image */}
+              {/* Background Property Image - Bright, crisp and vivid */}
               <img
                 src={property.featuredImage}
                 alt={property.title}
                 className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-out ${
                   isExpanded
-                    ? 'scale-100 filter brightness-95'
-                    : 'scale-105 group-hover:scale-110 filter brightness-[0.6] group-hover:brightness-[0.75]'
+                    ? 'scale-100 filter brightness-105 contrast-[1.03]'
+                    : 'scale-105 group-hover:scale-110 filter brightness-85 group-hover:brightness-100'
                 }`}
                 loading="lazy"
                 onError={(e) => {
@@ -50,28 +50,35 @@ export const ExpandingPropertyCards: React.FC<ExpandingPropertyCardsProps> = ({
                 }}
               />
 
-              {/* Dynamic Gradient Overlays */}
+              {/* Dynamic Lighting & Gradient Overlays - Subtle & Bright */}
               {isExpanded ? (
-                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/20 pointer-events-none transition-opacity duration-500" />
+                <>
+                  {/* Gentle top vignette so badges stay super crisp */}
+                  <div className="absolute top-0 inset-x-0 h-28 bg-gradient-to-b from-[#002D1C]/80 via-[#002D1C]/30 to-transparent pointer-events-none" />
+                  {/* Clean bottom glass gradient container */}
+                  <div className="absolute bottom-0 inset-x-0 h-3/5 bg-gradient-to-t from-[#002417] via-[#002417]/85 to-transparent pointer-events-none" />
+                  {/* Ambient golden corner illumination */}
+                  <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#FFC83D]/10 rounded-full blur-3xl pointer-events-none" />
+                </>
               ) : (
-                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/80 pointer-events-none group-hover:opacity-75 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-b from-[#002D1C]/60 via-transparent to-[#002D1C]/85 pointer-events-none group-hover:opacity-60 transition-opacity duration-300" />
               )}
 
               {/* COLLAPSED STATE CONTENT (Vertical Pill View) */}
               {!isExpanded && (
                 <div className="absolute inset-0 flex flex-col items-center justify-between py-6 px-2 z-10">
                   {/* Category Pill Mini Tag */}
-                  <div className="w-2 h-2 rounded-full bg-[#D6A84F] group-hover:scale-150 transition-transform duration-300" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#FFC83D] shadow-[0_0_8px_#FFC83D] group-hover:scale-150 transition-transform duration-300" />
 
                   {/* Vertical Rotated Title */}
                   <div className="flex-1 flex items-center justify-center my-4 overflow-hidden pointer-events-none">
-                    <span className="[writing-mode:vertical-rl] rotate-180 text-xs lg:text-[13px] font-extrabold uppercase tracking-[0.2em] text-white/85 group-hover:text-white transition-colors truncate max-h-[380px]">
+                    <span className="[writing-mode:vertical-rl] rotate-180 text-xs lg:text-[13px] font-extrabold uppercase tracking-[0.2em] text-white group-hover:text-[#FFC83D] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] transition-colors truncate max-h-[380px]">
                       {property.title}
                     </span>
                   </div>
 
                   {/* Number Badge at Bottom */}
-                  <div className="w-11 h-11 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white font-extrabold text-sm flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:border-[#D6A84F] group-hover:text-[#D6A84F] transition-all duration-300">
+                  <div className="w-11 h-11 rounded-full bg-[#002D1C]/90 backdrop-blur-md border border-[#FFC83D]/40 text-[#FFC83D] font-black text-sm flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:bg-[#FFC83D] group-hover:text-[#002D1C] transition-all duration-300">
                     {numberLabel}
                   </div>
                 </div>
@@ -83,23 +90,23 @@ export const ExpandingPropertyCards: React.FC<ExpandingPropertyCardsProps> = ({
                   {/* Top Bar: Badges & Location */}
                   <div className="flex items-center justify-between flex-wrap gap-2.5">
                     <div className="flex items-center space-x-2">
-                      <span className="px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-[#064E3B] text-white border border-[#047857]/40 shadow-sm">
+                      <span className="px-3.5 py-1.5 rounded-full text-xs font-black uppercase tracking-wider bg-gradient-to-r from-[#E6AA27] to-[#FFC83D] text-[#002D1C] shadow-md">
                         For {property.purpose}
                       </span>
-                      <span className="px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-black/60 backdrop-blur-md text-[#D6A84F] border border-[#D6A84F]/30">
+                      <span className="px-3.5 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-wider bg-[#002D1C]/90 backdrop-blur-md text-white border border-[#FFC83D]/40 shadow-sm">
                         {property.category}
                       </span>
                       {property.verified && (
-                        <span className="hidden sm:inline-flex items-center space-x-1 px-2.5 py-1 rounded-full text-xs font-bold bg-[#ECFDF5] text-[#047857] shadow-sm">
-                          <CheckCircle2 className="w-3.5 h-3.5" />
-                          <span>Verified</span>
+                        <span className="hidden sm:inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-[#003D25]/90 border border-[#FFC83D]/40 text-[#FFC83D] backdrop-blur-md shadow-sm">
+                          <CheckCircle2 className="w-3.5 h-3.5 fill-[#FFC83D] text-[#002D1C]" />
+                          <span>Verified Title</span>
                         </span>
                       )}
                     </div>
 
-                    <div className="inline-flex items-center space-x-1.5 px-3.5 py-1 rounded-full bg-black/55 backdrop-blur-md text-white/90 text-xs font-medium border border-white/15">
-                      <MapPin className="w-3.5 h-3.5 text-[#D6A84F]" />
-                      <span className="truncate max-w-[200px] sm:max-w-none">
+                    <div className="inline-flex items-center space-x-1.5 px-4 py-1.5 rounded-full bg-[#002D1C]/90 backdrop-blur-md text-white text-xs font-bold border border-[#FFC83D]/30 shadow-md">
+                      <MapPin className="w-3.5 h-3.5 text-[#FFC83D]" />
+                      <span className="truncate max-w-[200px] sm:max-w-none text-white font-semibold">
                         {property.city || property.location}
                       </span>
                     </div>
@@ -109,59 +116,59 @@ export const ExpandingPropertyCards: React.FC<ExpandingPropertyCardsProps> = ({
                   <div className="space-y-4">
                     {/* Number Badge + Subtitle */}
                     <div className="flex items-center space-x-3.5">
-                      <div className="w-12 h-12 rounded-full bg-[#022C22] text-[#D6A84F] border border-[#D6A84F]/50 font-black text-lg flex items-center justify-center shadow-2xl shrink-0 ring-2 ring-[#D6A84F]/20">
+                      <div className="w-12 h-12 rounded-full bg-[#FFC83D] text-[#002D1C] font-black text-xl flex items-center justify-center shadow-[0_0_15px_rgba(255,200,61,0.5)] shrink-0 ring-4 ring-[#002D1C]">
                         {numberLabel}
                       </div>
                       <div>
                         <div className="flex items-center space-x-2">
-                          <span className="text-[11px] font-black uppercase tracking-[0.2em] text-[#D6A84F]">
+                          <span className="text-[11px] font-black uppercase tracking-[0.2em] text-[#FFC83D]">
                             {property.category} Collection
                           </span>
                           <span className="text-white/40">•</span>
-                          <span className="text-xs text-white/80 font-medium">
+                          <span className="text-xs text-[#E8F3EC] font-semibold">
                             {property.location.split(',')[0]}
                           </span>
                         </div>
-                        <h3 className="font-heading text-xl sm:text-2xl lg:text-3xl font-black text-white tracking-tight leading-snug drop-shadow-md">
+                        <h3 className="font-heading text-xl sm:text-2xl lg:text-3xl font-black text-white tracking-tight leading-snug drop-shadow-lg">
                           {property.title}
                         </h3>
                       </div>
                     </div>
 
                     {/* Short Description */}
-                    <p className="text-xs sm:text-sm text-gray-200/90 line-clamp-2 max-w-2xl leading-relaxed">
+                    <p className="text-xs sm:text-sm text-[#E8F3EC]/95 line-clamp-2 max-w-2xl leading-relaxed font-normal drop-shadow-sm">
                       {property.description}
                     </p>
 
                     {/* Specs & Pricing Row */}
-                    <div className="flex flex-wrap items-center justify-between gap-4 pt-2 border-t border-white/15">
+                    <div className="flex flex-wrap items-center justify-between gap-4 pt-3 border-t border-[#FFC83D]/30">
                       {/* Specs */}
-                      <div className="flex items-center space-x-4 sm:space-x-6 text-white/90 text-xs sm:text-sm">
+                      <div className="flex items-center space-x-4 sm:space-x-6 text-white text-xs sm:text-sm">
                         {property.bedrooms !== undefined && (
-                          <div className="flex items-center space-x-1.5">
-                            <Bed className="w-4 h-4 text-[#D6A84F]" />
-                            <span className="font-semibold">{property.bedrooms} Beds</span>
+                          <div className="flex items-center space-x-1.5 bg-[#002D1C]/70 px-3 py-1.5 rounded-lg border border-white/10">
+                            <Bed className="w-4 h-4 text-[#FFC83D]" />
+                            <span className="font-bold">{property.bedrooms} Beds</span>
                           </div>
                         )}
                         {property.bathrooms !== undefined && (
-                          <div className="flex items-center space-x-1.5">
-                            <Bath className="w-4 h-4 text-[#D6A84F]" />
-                            <span className="font-semibold">{property.bathrooms} Baths</span>
+                          <div className="flex items-center space-x-1.5 bg-[#002D1C]/70 px-3 py-1.5 rounded-lg border border-white/10">
+                            <Bath className="w-4 h-4 text-[#FFC83D]" />
+                            <span className="font-bold">{property.bathrooms} Baths</span>
                           </div>
                         )}
-                        <div className="flex items-center space-x-1.5">
-                          <Maximize className="w-4 h-4 text-[#D6A84F]" />
-                          <span className="font-semibold">{formatArea(property.area, property.areaUnit)}</span>
+                        <div className="flex items-center space-x-1.5 bg-[#002D1C]/70 px-3 py-1.5 rounded-lg border border-white/10">
+                          <Maximize className="w-4 h-4 text-[#FFC83D]" />
+                          <span className="font-bold">{formatArea(property.area, property.areaUnit)}</span>
                         </div>
                       </div>
 
                       {/* Price & Actions */}
                       <div className="flex items-center flex-wrap gap-3">
-                        <div className="text-right mr-2">
-                          <span className="block text-[10px] uppercase tracking-wider text-gray-300 font-bold">
+                        <div className="text-right mr-2 bg-[#002D1C]/80 px-4 py-1.5 rounded-xl border border-[#FFC83D]/30 shadow-sm">
+                          <span className="block text-[10px] uppercase tracking-wider text-[#E8F3EC]/80 font-bold">
                             Total Valuation
                           </span>
-                          <span className="font-heading text-xl sm:text-2xl font-black text-[#D6A84F] tracking-tight">
+                          <span className="font-heading text-xl sm:text-2xl font-black text-[#FFC83D] tracking-tight drop-shadow-[0_2px_8px_rgba(255,200,61,0.3)]">
                             {formatPKR(property.pricePKR)}
                           </span>
                         </div>
@@ -169,10 +176,10 @@ export const ExpandingPropertyCards: React.FC<ExpandingPropertyCardsProps> = ({
                         <Link
                           to={`/properties/${property.slug || property.id}`}
                           onClick={(e) => e.stopPropagation()}
-                          className="px-5 py-2.5 rounded-full bg-[#D6A84F] hover:bg-[#c49742] text-[#022C22] font-heading font-black text-xs uppercase tracking-wider flex items-center space-x-2 transition-all shadow-lg hover:shadow-[#D6A84F]/30 hover:scale-[1.02]"
+                          className="px-6 py-3 rounded-full bg-gradient-to-r from-[#E6AA27] to-[#FFC83D] hover:from-[#FFC83D] hover:to-[#E6AA27] text-[#002D1C] font-heading font-black text-xs uppercase tracking-wider flex items-center space-x-2 transition-all shadow-[0_4px_20px_rgba(255,200,61,0.4)] hover:scale-105 active:scale-95"
                         >
                           <span>Explore Details</span>
-                          <ArrowRight className="w-3.5 h-3.5" />
+                          <ArrowRight className="w-3.5 h-3.5 stroke-[3]" />
                         </Link>
 
                         {onInquire && (
@@ -182,9 +189,9 @@ export const ExpandingPropertyCards: React.FC<ExpandingPropertyCardsProps> = ({
                               e.stopPropagation();
                               onInquire(property);
                             }}
-                            className="px-4 py-2.5 rounded-full bg-white/15 hover:bg-white text-white hover:text-[#022C22] backdrop-blur-md border border-white/30 font-heading font-bold text-xs uppercase tracking-wider transition-all flex items-center space-x-1.5"
+                            className="px-4 py-3 rounded-full bg-[#003D25] hover:bg-[#004B2E] text-white border border-[#FFC83D]/50 font-heading font-bold text-xs uppercase tracking-wider transition-all flex items-center space-x-1.5 hover:scale-105"
                           >
-                            <MessageSquare className="w-3.5 h-3.5" />
+                            <MessageSquare className="w-3.5 h-3.5 text-[#FFC83D]" />
                             <span>Inquire</span>
                           </button>
                         )}
@@ -210,37 +217,37 @@ export const ExpandingPropertyCards: React.FC<ExpandingPropertyCardsProps> = ({
               onClick={() => setActiveIndex(idx)}
               className={`relative rounded-3xl overflow-hidden cursor-pointer select-none border transition-all duration-500 ease-out ${
                 isExpanded
-                  ? 'h-[420px] border-[#D6A84F]/50 shadow-xl'
-                  : 'h-20 border-gray-200 bg-gray-900 shadow-sm'
+                  ? 'h-[440px] border-2 border-[#FFC83D] shadow-[0_0_25px_rgba(255,200,61,0.3)]'
+                  : 'h-20 border-[#E6AA27]/30 bg-[#002D1C] shadow-sm'
               }`}
             >
               <img
                 src={property.featuredImage}
                 alt={property.title}
                 className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ${
-                  isExpanded ? 'filter brightness-90' : 'filter brightness-50'
+                  isExpanded ? 'filter brightness-105 contrast-[1.02]' : 'filter brightness-75'
                 }`}
                 loading="lazy"
               />
 
-              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/30 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#002417] via-[#002417]/60 to-transparent pointer-events-none" />
 
               {!isExpanded ? (
                 <div className="absolute inset-0 flex items-center justify-between px-5 z-10">
                   <div className="flex items-center space-x-3.5">
-                    <div className="w-9 h-9 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white font-black text-sm flex items-center justify-center">
+                    <div className="w-9 h-9 rounded-full bg-[#FFC83D] text-[#002D1C] font-black text-sm flex items-center justify-center shadow-md">
                       {numberLabel}
                     </div>
                     <div>
                       <h4 className="text-sm font-bold text-white truncate max-w-[200px]">
                         {property.title}
                       </h4>
-                      <p className="text-[11px] text-[#D6A84F] font-semibold">
+                      <p className="text-[11px] text-[#FFC83D] font-bold">
                         {property.location.split(',')[0]} • {formatPKRShort(property.pricePKR)}
                       </p>
                     </div>
                   </div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider bg-white/20 text-white px-2.5 py-1 rounded-full">
+                  <span className="text-[10px] font-bold uppercase tracking-wider bg-[#003D25] border border-[#FFC83D]/40 text-[#FFC83D] px-2.5 py-1 rounded-full">
                     Tap to Open
                   </span>
                 </div>
@@ -248,21 +255,21 @@ export const ExpandingPropertyCards: React.FC<ExpandingPropertyCardsProps> = ({
                 <div className="absolute inset-0 flex flex-col justify-between p-5 z-10 animate-in fade-in duration-300">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-2">
-                      <div className="w-8 h-8 rounded-full bg-[#022C22] text-[#D6A84F] border border-[#D6A84F]/40 font-black text-xs flex items-center justify-center">
+                      <div className="w-8 h-8 rounded-full bg-[#FFC83D] text-[#002D1C] font-black text-xs flex items-center justify-center shadow">
                         {numberLabel}
                       </div>
-                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-[#064E3B] text-white">
+                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-gradient-to-r from-[#E6AA27] to-[#FFC83D] text-[#002D1C]">
                         For {property.purpose}
                       </span>
                     </div>
-                    <span className="text-xs font-black text-[#D6A84F]">
+                    <span className="text-sm font-black text-[#FFC83D] bg-[#002D1C]/80 px-2.5 py-1 rounded-lg border border-[#FFC83D]/30">
                       {formatPKR(property.pricePKR)}
                     </span>
                   </div>
 
                   <div className="space-y-3">
                     <div>
-                      <span className="text-[10px] font-black uppercase tracking-wider text-[#D6A84F]">
+                      <span className="text-[10px] font-black uppercase tracking-wider text-[#FFC83D]">
                         {property.category} • {property.location.split(',')[0]}
                       </span>
                       <h3 className="font-heading text-lg font-black text-white leading-tight">
@@ -270,7 +277,7 @@ export const ExpandingPropertyCards: React.FC<ExpandingPropertyCardsProps> = ({
                       </h3>
                     </div>
 
-                    <div className="flex items-center space-x-4 text-white/90 text-xs">
+                    <div className="flex items-center space-x-3 text-white text-xs font-semibold">
                       {property.bedrooms !== undefined && <span>{property.bedrooms} Beds</span>}
                       {property.bathrooms !== undefined && <span>{property.bathrooms} Baths</span>}
                       <span>{formatArea(property.area, property.areaUnit)}</span>
@@ -280,7 +287,7 @@ export const ExpandingPropertyCards: React.FC<ExpandingPropertyCardsProps> = ({
                       <Link
                         to={`/properties/${property.slug || property.id}`}
                         onClick={(e) => e.stopPropagation()}
-                        className="flex-1 py-2 text-center rounded-xl bg-[#D6A84F] text-[#022C22] font-bold text-xs uppercase tracking-wider shadow"
+                        className="flex-1 py-2.5 text-center rounded-xl bg-gradient-to-r from-[#E6AA27] to-[#FFC83D] text-[#002D1C] font-black text-xs uppercase tracking-wider shadow-md"
                       >
                         View Details
                       </Link>
@@ -291,7 +298,7 @@ export const ExpandingPropertyCards: React.FC<ExpandingPropertyCardsProps> = ({
                             e.stopPropagation();
                             onInquire(property);
                           }}
-                          className="px-4 py-2 rounded-xl bg-white/20 text-white font-bold text-xs uppercase tracking-wider"
+                          className="px-4 py-2.5 rounded-xl bg-[#003D25] text-white border border-[#FFC83D]/40 font-bold text-xs uppercase tracking-wider"
                         >
                           Inquire
                         </button>
