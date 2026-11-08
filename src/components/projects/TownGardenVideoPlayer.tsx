@@ -101,22 +101,30 @@ export const TownGardenVideoPlayer: React.FC<TownGardenVideoPlayerProps> = ({
   };
 
   return (
-    <section className="py-20 bg-white" id="project-video-section">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-24 bg-[#002417] text-white border-t border-[#E6AA27]/20 relative overflow-hidden" id="project-video-section">
+      {/* Background ambient lighting */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-[#004B2E]/30 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#006B40]/20 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center space-x-1.5 px-3.5 py-1 rounded-full bg-[#ECFDF5] text-[#047857] text-xs font-bold uppercase tracking-wider mb-3">
-            <Video className="w-3.5 h-3.5 text-[#D6A84F]" />
+          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-[#002D1C] border border-[#FFC83D]/40 text-[#FFC83D] text-xs font-bold uppercase tracking-wider mb-4 shadow-md">
+            <Video className="w-3.5 h-3.5 text-[#FFC83D]" />
             <span>Exclusive Architectural Walkthrough</span>
           </div>
 
-          <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-[#022C22] uppercase tracking-tight mb-3">
-            {title}
+          <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white uppercase tracking-tight mb-3 drop-shadow-sm">
+            {title.includes('Town Garden') ? (
+              <>Experience <span className="text-[#FFC83D]">Town Garden</span></>
+            ) : (
+              title
+            )}
           </h2>
 
-          <div className="w-20 h-1 bg-[#D6A84F] mx-auto rounded-full mb-4" />
+          <div className="w-20 h-1 bg-[#E6AA27] mx-auto rounded-full mb-4 shadow-[0_0_12px_rgba(230,170,39,0.5)]" />
 
-          <p className="text-sm sm:text-base text-[#64748B] leading-relaxed">
+          <p className="text-sm sm:text-base text-[#E8F3EC]/85 leading-relaxed font-normal">
             {description}
           </p>
         </div>
@@ -125,7 +133,7 @@ export const TownGardenVideoPlayer: React.FC<TownGardenVideoPlayerProps> = ({
         <div
           ref={containerRef}
           onMouseMove={handleMouseMove}
-          className="relative aspect-video rounded-3xl overflow-hidden bg-black shadow-2xl border-2 border-[#D6A84F]/30 group"
+          className="relative aspect-video rounded-3xl overflow-hidden bg-black shadow-2xl border-2 border-[#E6AA27]/40 group"
         >
           {/* HTML5 Video */}
           <video
@@ -146,8 +154,8 @@ export const TownGardenVideoPlayer: React.FC<TownGardenVideoPlayerProps> = ({
               className="absolute inset-0 bg-gradient-to-t from-[#022C22]/90 via-[#022C22]/40 to-transparent flex flex-col items-center justify-center cursor-pointer p-6 transition-opacity duration-300"
             >
               <div className="relative mb-4">
-                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#D6A84F] text-[#022C22] flex items-center justify-center shadow-gold-glow hover:scale-110 active:scale-95 transition-transform duration-300">
-                  <Play className="w-10 h-10 sm:w-12 sm:h-12 ml-1 fill-[#022C22]" />
+                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-r from-[#E6AA27] to-[#FFC83D] text-[#002D1C] flex items-center justify-center shadow-[0_0_30px_rgba(255,200,61,0.6)] hover:scale-110 active:scale-95 transition-transform duration-300">
+                  <Play className="w-10 h-10 sm:w-12 sm:h-12 ml-1 fill-[#002D1C]" />
                 </div>
                 <div className="absolute inset-0 rounded-full border-2 border-white/60 animate-ping pointer-events-none" />
               </div>
