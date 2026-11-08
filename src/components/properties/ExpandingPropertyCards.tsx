@@ -107,7 +107,11 @@ export const ExpandingPropertyCards: React.FC<ExpandingPropertyCardsProps> = ({
                     <div className="inline-flex items-center space-x-1.5 px-4 py-1.5 rounded-full bg-[#002D1C]/90 backdrop-blur-md text-white text-xs font-bold border border-[#FFC83D]/30 shadow-md">
                       <MapPin className="w-3.5 h-3.5 text-[#FFC83D]" />
                       <span className="truncate max-w-[200px] sm:max-w-none text-white font-semibold">
-                        {property.city || property.location}
+                        {(property.city || property.location)
+                          .replace(/Kalam,\s*S?wat/gi, 'Kalam')
+                          .replace(/Kalam\s+S?wat/gi, 'Kalam')
+                          .replace(/,\s*S?wat/gi, '')
+                          .trim()}
                       </span>
                     </div>
                   </div>

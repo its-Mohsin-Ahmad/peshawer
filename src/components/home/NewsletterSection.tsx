@@ -27,7 +27,7 @@ export const NewsletterSection: React.FC = () => {
         </h2>
 
         <p className="text-xs sm:text-sm text-[#E8F3EC]/80 max-w-xl mx-auto mb-8 leading-relaxed">
-          Get privileged early notifications on pre-launch development prices, TMA approval updates, and exclusive installment releases in Swat and Peshawar.
+          Get privileged early notifications on pre-launch development prices, TMA approval updates, and exclusive installment releases in Kalam and Peshawar.
         </p>
 
         {subscribed ? (

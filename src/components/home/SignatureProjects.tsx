@@ -28,7 +28,7 @@ export const SignatureProjects: React.FC = () => {
           <div className="w-24 h-1 bg-[#E6AA27] mx-auto rounded-full mb-4 shadow-[0_0_12px_rgba(230,170,39,0.5)]" />
 
           <p className="text-base sm:text-lg text-[#E8F3EC] font-normal leading-relaxed max-w-2xl mx-auto">
-            Explore thoughtfully planned residential developments in Peshawar and the beautiful region of Swat.
+            Explore thoughtfully planned residential developments in Peshawar and the beautiful region of Kalam.
           </p>
         </AnimatedSection>
 
@@ -100,7 +100,13 @@ export const SignatureProjects: React.FC = () => {
                   {/* Location */}
                   <div className="flex items-center text-xs text-[#E6AA27] font-bold mb-1.5">
                     <MapPin className="w-3.5 h-3.5 mr-1 shrink-0 text-[#FFC83D]" />
-                    <span>{project.city || project.location.split(',')[0]}</span>
+                    <span>
+                      {(project.city || project.location.split(',')[0] || '')
+                        .replace(/Kalam,\s*S?wat/gi, 'Kalam')
+                        .replace(/Kalam\s+S?wat/gi, 'Kalam')
+                        .replace(/,\s*S?wat/gi, '')
+                        .trim()}
+                    </span>
                   </div>
 
                   {/* Project Title */}

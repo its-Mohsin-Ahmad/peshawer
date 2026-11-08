@@ -105,11 +105,27 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       // ignore
     }
     const validIds = new Set(initialProperties.map((p) => p.id));
+    const sanitizeKalam = (str?: string) => {
+      if (!str) return str;
+      return str
+        .replace(/Kalam,\s*S?wat/gi, 'Kalam')
+        .replace(/Kalam\s+S?wat/gi, 'Kalam')
+        .replace(/,\s*S?wat/gi, '')
+        .trim();
+    };
+
     const saved = localStorage.getItem(`${STORAGE_KEY}_PROPERTIES`);
     if (saved) {
       try {
         const parsed = JSON.parse(saved) as Property[];
-        const filtered = parsed.filter((p) => validIds.has(p.id) || p.id.startsWith('custom-'));
+        const filtered = parsed
+          .filter((p) => validIds.has(p.id) || p.id.startsWith('custom-'))
+          .map((p) => ({
+            ...p,
+            location: sanitizeKalam(p.location) || p.location,
+            city: sanitizeKalam(p.city) || p.city,
+            address: sanitizeKalam(p.address) || p.address,
+          }));
         if (filtered.length > 0) return filtered;
       } catch (e) {
         console.error(e);
@@ -119,18 +135,32 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   });
 
   const [projects, setProjects] = useState<Project[]>(() => {
+    const sanitizeKalam = (str?: string) => {
+      if (!str) return str;
+      return str
+        .replace(/Kalam,\s*S?wat/gi, 'Kalam')
+        .replace(/Kalam\s+S?wat/gi, 'Kalam')
+        .replace(/,\s*S?wat/gi, '')
+        .trim();
+    };
+
     const saved = localStorage.getItem(`${STORAGE_KEY}_PROJECTS`);
     if (saved) {
       try {
         const list: Project[] = JSON.parse(saved);
         return list.map((p) => {
+          const updated = {
+            ...p,
+            city: sanitizeKalam(p.city) || p.city,
+            location: sanitizeKalam(p.location) || p.location,
+          };
           if (p.slug === 'kalam-cottages' || p.id === 'proj-2') {
             return {
-              ...p,
+              ...updated,
               renderBuildingImage: '/assets/buildings/kalam-cottage.png',
             };
           }
-          return p;
+          return updated;
         });
       } catch {
         return initialProjects;

@@ -291,7 +291,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInquiry, onOpenAppointment
                           className="flex items-center justify-between px-3 py-2 text-sm rounded-xl hover:bg-[#F8F6EA] hover:text-[#064E3B] transition-colors group/item"
                         >
                           <span className="font-semibold text-gray-800 group-hover/item:text-[#064E3B]">
-                            Swat & Kalam Cottages
+                            Kalam Cottages
                           </span>
                           <span className="text-[10px] text-[#047857] font-semibold">
                             Scenic

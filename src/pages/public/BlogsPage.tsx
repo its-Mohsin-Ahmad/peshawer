@@ -31,7 +31,7 @@ export const BlogsPage: React.FC = () => {
       {/* Unique dedicated Blogs hero */}
       <PageHero
         title="Real Estate Insights & Editorial"
-        subtitle="In-depth market intelligence, legal due diligence advice, and investment analysis for Peshawar and Swat."
+        subtitle="In-depth market intelligence, legal due diligence advice, and investment analysis for Peshawar and Kalam."
         image="/assets/hero/slide4.jpg"
         breadcrumbs={[{ label: 'Blogs' }]}
       />

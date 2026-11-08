@@ -235,7 +235,7 @@ export const initialProjects: Project[] = [
     amenities: [
       'Authentic Pine Wood & Stone Architecture',
       'Private Fireplace & Wooden Sun Decks',
-      'Panoramic Swat Valley Vistas',
+      'Panoramic Kalam Valley Vistas',
       'On-site Hospitality & Rental Management',
       'Dedicated Hiking & Trail Access',
       'Round-the-clock Security Staff',
@@ -555,7 +555,7 @@ export const initialProjects: Project[] = [
       'TMA Approved Project',
       '5-Year Easy Installments',
       'Panoramic Alpine Valley Views',
-      'Prime Kalam Swat Location',
+      'Prime Kalam Location',
       'High Rental Yield for Tourism',
       'High-Speed Elevators',
       '24/7 Security & CCTV',
@@ -624,7 +624,7 @@ export const initialProjects: Project[] = [
         benefits: [
           '5-Year Easy Installments',
           'TMA Approved Project',
-          'Prime Kalam Swat Location',
+          'Prime Kalam Location',
           'Great for Tourism & Rental Income',
         ],
         exteriorGallery: [
@@ -660,7 +660,7 @@ export const initialProjects: Project[] = [
         benefits: [
           '5-Year Easy Installments',
           'TMA Approved Project',
-          'Prime Kalam Swat Location',
+          'Prime Kalam Location',
           'Great for Tourism & Rental Income',
         ],
         exteriorGallery: [
@@ -696,7 +696,7 @@ export const initialProjects: Project[] = [
         benefits: [
           '5-Year Easy Installments',
           'TMA Approved Project',
-          'Prime Kalam Swat Location',
+          'Prime Kalam Location',
           'Great for Tourism & Rental Income',
         ],
         exteriorGallery: [
@@ -757,13 +757,13 @@ export const initialProperties: Property[] = [
   },
   {
     id: 'prop-kalam-cottage-chalet',
-    title: 'Kalam Cottages - Alpine Wooden Chalet (Swat Valley)',
+    title: 'Kalam Cottages - Alpine Wooden Chalet (Kalam)',
     slug: 'kalam-cottages-alpine-wooden-chalet-swat',
     purpose: 'Buy',
     category: 'Cottage',
     pricePKR: 8500000,
     location: 'Kalam',
-    address: 'Pine Forest Road, Kalam Valley, Swat',
+    address: 'Pine Forest Road, Kalam',
     city: 'Kalam',
     area: 1100,
     areaUnit: 'sq ft',
@@ -788,7 +788,7 @@ export const initialProperties: Property[] = [
       'Private Fireplace & Wooden Sun Decks',
       'Managed Tourism Rental Pool',
       '3.5-Year Flexible Installments',
-      'Panoramic Swat Valley Vistas',
+      'Panoramic Kalam Valley Vistas',
     ],
     yearBuilt: 2026,
     parkingSpaces: 2,
@@ -804,7 +804,7 @@ export const initialProperties: Property[] = [
     category: 'Apartment',
     pricePKR: 4800000,
     location: 'Kalam',
-    address: 'Main Kalam Bypass, Swat',
+    address: 'Main Kalam Bypass, Kalam',
     city: 'Kalam',
     area: 450,
     areaUnit: 'sq ft',
@@ -845,7 +845,7 @@ export const initialProperties: Property[] = [
     category: 'Apartment',
     pricePKR: 5200000,
     location: 'Kalam',
-    address: 'Bazaar Junction, Kalam Valley, Swat',
+    address: 'Bazaar Junction, Kalam',
     city: 'Kalam',
     area: 850,
     areaUnit: 'sq ft',
@@ -922,7 +922,7 @@ export const initialHeroSlides: HeroSlide[] = [
   {
     id: 'slide-4',
     title: 'Your Next Investment Starts Here',
-    subtitle: 'Explore property opportunities across Peshawar and the scenic locations of Swat.',
+    subtitle: 'Explore property opportunities across Peshawar and the scenic destination of Kalam.',
     image: '/assets/hero/slide4.jpg',
     ctaPrimaryText: 'Explore Plots',
     ctaPrimaryLink: '/properties/plots',
@@ -988,7 +988,7 @@ export const initialPageHeroes: Record<string, PageHero> = {
     pageName: 'Plots & Land',
     title: 'Prime Plots and Land',
     subtitle:
-      'Residential and commercial land opportunities across DHA Peshawar, Regi Model Town, and Swat.',
+      'Residential and commercial land opportunities across DHA Peshawar, Regi Model Town, and Kalam.',
     image: '/assets/hero/slide5.jpg',
     overlayOpacity: 0.75,
   },
@@ -997,7 +997,7 @@ export const initialPageHeroes: Record<string, PageHero> = {
     pageName: 'Signature Projects',
     title: 'Our Signature Developments',
     subtitle:
-      'Explore thoughtfully planned residential developments in Peshawar and the beautiful region of Swat.',
+      'Explore thoughtfully planned residential developments in Peshawar and the beautiful region of Kalam.',
     image: '/assets/hero/slide2.jpg',
     overlayOpacity: 0.75,
   },
@@ -1024,7 +1024,7 @@ export const initialPageHeroes: Record<string, PageHero> = {
     pageName: 'Real Estate Blog',
     title: 'Real Estate Insights & News',
     subtitle:
-      'Expert property advice, market trend analysis, and destination guides for Peshawar and Swat.',
+      'Expert property advice, market trend analysis, and destination guides for Peshawar and Kalam.',
     image: '/assets/hero/slide4.jpg',
     overlayOpacity: 0.75,
   },
@@ -1138,18 +1138,18 @@ export const initialMessages: ContactMessage[] = [
 export const initialBlogPosts: BlogPost[] = [
   {
     id: 'blog-1',
-    title: 'Why Swat & Kalam Are Becoming Pakistan’s Hottest Real Estate Destinations',
+    title: 'Why Kalam Is Becoming Pakistan’s Hottest Real Estate Destination',
     slug: 'swat-kalam-hot-real-estate-destinations',
     category: 'Market Trends',
     excerpt:
       'With booming tourism, improved highway infrastructure, and high rental yields during summer, scenic northern properties are outperforming conventional urban investments.',
     content: `
-# Swat & Kalam Real Estate Revolution
+# Kalam Real Estate Revolution
 
 The scenic landscapes of Khyber Pakhtunkhwa have transformed from seasonal tourist spots into premier real estate investment corridors. With modern arterial expressways cutting travel times dramatically, investors from Peshawar, Islamabad, and overseas Pakistanis are directing capital into high-yield vacation homes and boutique serviced apartments.
 
 ## 1. High Seasonal Rental Yields
-Unlike traditional residential urban properties yielding 3-4% annually, serviced apartments in Kalam and Swat routinely generate upwards of 10-14% during peak summer and winter snow seasons through short-term vacation rentals.
+Unlike traditional residential urban properties yielding 3-4% annually, serviced apartments in Kalam routinely generate upwards of 10-14% during peak summer and winter snow seasons through short-term vacation rentals.
 
 ## 2. Institutional Master-Planned Communities
 Developments like **Glamorous Heights** and **Corner Apartments Kalam** are introducing formal structural engineering, earthquake-resistant design, standby backup electricity, and TMA approvals that provide investors absolute legal peace of mind.
@@ -1237,7 +1237,7 @@ export const initialTestimonials: Testimonial[] = [
     name: 'Hamza Shinwari',
     role: 'Entrepreneur & Tourism Operator',
     feedback:
-      'Kalam Cottages combines authentic stone-and-timber mountain warmth with institutional building quality. Truly proud to see this standard of development in Swat Valley.',
+      'Kalam Cottages combines authentic stone-and-timber mountain warmth with institutional building quality. Truly proud to see this standard of development in Kalam.',
     projectName: 'Kalam Cottages',
     rating: 5,
     date: '2026-09-28',

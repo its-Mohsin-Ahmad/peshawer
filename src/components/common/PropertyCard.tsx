@@ -98,7 +98,13 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property, onInquire 
           {/* Location */}
           <div className="flex items-center text-xs text-[#E8F3EC]/70 mb-2 font-medium">
             <MapPin className="w-3.5 h-3.5 mr-1 text-[#FFC83D] shrink-0" />
-            <span className="truncate">{property.location}</span>
+            <span className="truncate">
+              {property.location
+                .replace(/Kalam,\s*S?wat/gi, 'Kalam')
+                .replace(/Kalam\s+S?wat/gi, 'Kalam')
+                .replace(/,\s*S?wat/gi, '')
+                .trim()}
+            </span>
           </div>
 
           {/* Title */}

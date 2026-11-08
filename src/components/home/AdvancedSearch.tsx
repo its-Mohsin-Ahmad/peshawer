@@ -24,7 +24,6 @@ export const AdvancedSearch: React.FC = () => {
     'Saddar',
     'Ring Road',
     'Kalam',
-    'Swat',
   ];
 
   const categoriesList = [
@@ -218,7 +217,7 @@ export const AdvancedSearch: React.FC = () => {
 
               <div className="flex items-end">
                 <span className="text-xs text-[#64748B] leading-relaxed">
-                  Showing verified listings in Peshawar and scenic Swat valley.
+                  Showing verified listings in Peshawar and scenic Kalam valley.
                 </span>
               </div>
             </div>

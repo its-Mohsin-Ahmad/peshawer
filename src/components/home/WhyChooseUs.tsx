@@ -26,7 +26,7 @@ export const WhyChooseUs: React.FC = () => {
       icon: Headset,
       title: 'Dedicated Senior Advisory',
       description:
-        'Direct consultation with real estate specialists and architectural directors who understand both urban Peshawar and the high-yield tourism dynamics of Swat.',
+        'Direct consultation with real estate specialists and architectural directors who understand both urban Peshawar and the high-yield tourism dynamics of Kalam.',
     },
   ];
 

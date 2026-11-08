@@ -89,7 +89,7 @@ export const AdminBlogsPage: React.FC = () => {
             Blog & Market Intelligence
           </h1>
           <p className="text-xs text-[#64748B] mt-0.5">
-            Publish educational guides, Swat destination articles, and installment explanations.
+            Publish educational guides, Kalam destination articles, and installment explanations.
           </p>
         </div>
 

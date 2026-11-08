@@ -124,7 +124,13 @@ export const ProjectsPage: React.FC = () => {
                   <div>
                     <div className="flex items-center space-x-2 text-xs font-bold text-[#FFC83D] mb-2 uppercase tracking-wider">
                       <MapPin className="w-4 h-4 text-[#FFC83D]" />
-                      <span>{project.location}</span>
+                      <span>
+                        {project.location
+                          .replace(/Kalam,\s*S?wat/gi, 'Kalam')
+                          .replace(/Kalam\s+S?wat/gi, 'Kalam')
+                          .replace(/,\s*S?wat/gi, '')
+                          .trim()}
+                      </span>
                     </div>
 
                     <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-white uppercase tracking-tight mb-4">

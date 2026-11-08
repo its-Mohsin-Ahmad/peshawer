@@ -31,7 +31,7 @@ export const ProjectsProgressingSection: React.FC = () => {
           <div className="w-24 h-1 bg-[#E6AA27] mx-auto rounded-full mb-4 shadow-[0_0_12px_rgba(230,170,39,0.4)]" />
 
           <p className="text-base text-[#E8F3EC]/80 font-normal leading-relaxed">
-            Follow the active development journey, structural milestones, and latest verified construction updates across our premier developments in Peshawar and Swat.
+            Follow the active development journey, structural milestones, and latest verified construction updates across our premier developments in Peshawar and Kalam.
           </p>
         </div>
 
@@ -69,9 +69,15 @@ export const ProjectsProgressingSection: React.FC = () => {
                     </div>
 
                     {/* Location Badge Top Left */}
-                    <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-[#047857] text-[10px] font-bold px-2 py-0.5 rounded-md border border-gray-200/80 flex items-center space-x-1 shadow-sm">
-                      <MapPin className="w-3 h-3 text-[#D6A84F]" />
-                      <span className="truncate max-w-[120px]">{project.city || project.location.split(',')[0]}</span>
+                    <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-md text-[#047857] text-[10px] font-bold px-2.5 py-1 rounded-md border border-gray-200/80 flex items-center space-x-1.5 shadow-sm">
+                      <MapPin className="w-3.5 h-3.5 text-[#D6A84F] shrink-0" />
+                      <span className="truncate max-w-[120px] font-bold">
+                        {(project.city || project.location.split(',')[0] || '')
+                          .replace(/Kalam,\s*S?wat/gi, 'Kalam')
+                          .replace(/Kalam\s+S?wat/gi, 'Kalam')
+                          .replace(/,\s*S?wat/gi, '')
+                          .trim()}
+                      </span>
                     </div>
                   </div>
 

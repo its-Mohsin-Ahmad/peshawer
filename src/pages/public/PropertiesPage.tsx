@@ -60,7 +60,7 @@ export const PropertiesPage: React.FC<PropertiesPageProps> = ({
     : forcedCategory === 'Plot'
     ? {
         title: 'Plots & Prime Land',
-        subtitle: 'Residential and commercial land opportunities across DHA Peshawar, Regi Model Town, and Swat.',
+        subtitle: 'Residential and commercial land opportunities across DHA Peshawar, Regi Model Town, and Kalam.',
         image: '/assets/hero/slide5.jpg',
       }
     : {
@@ -125,7 +125,6 @@ export const PropertiesPage: React.FC<PropertiesPageProps> = ({
     'All',
     'University Town Peshawar (Town Garden)',
     'Kalam',
-    'Swat',
   ];
 
   const categoriesList = [

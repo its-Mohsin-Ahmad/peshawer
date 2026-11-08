@@ -41,7 +41,7 @@ export const PropertyCategories: React.FC = () => {
     },
     {
       title: 'Development Projects',
-      description: 'Discover master-planned tourism and urban residential projects in Swat & Peshawar.',
+      description: 'Discover master-planned tourism and urban residential projects in Kalam & Peshawar.',
       image: '/assets/projects/glamorous-heights/hero.png',
       link: '/projects',
       icon: Building2,

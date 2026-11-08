@@ -44,7 +44,7 @@ export const AboutPage: React.FC = () => {
                 </p>
                 <p>
                   Specializing in premier residential sectors of Peshawar and the high-yield alpine
-                  destinations of Swat and Kalam, we operate at the intersection of design excellence,
+                  destination of Kalam, we operate at the intersection of design excellence,
                   verified civic approvals, and flexible 5-year installment plans.
                 </p>
                 <p>

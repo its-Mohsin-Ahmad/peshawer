@@ -10,7 +10,7 @@ export const StatsSection: React.FC = () => {
     {
       label: 'Signature Developments',
       value: `${projects.length}`,
-      subtext: 'Peshawar & Swat Valley',
+      subtext: 'Peshawar & Kalam Valley',
       icon: Building,
     },
     {

@@ -78,10 +78,11 @@ export const PopularLocations: React.FC = () => {
                 {/* Gradient Overlays */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#002D1C] via-[#003D25]/60 to-transparent" />
 
-                {/* Badge Top */}
+                {/* Badge Top with Location Pin */}
                 <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-[#002D1C]/85 text-[#FFC83D] border border-[#E6AA27]/40 backdrop-blur-md">
-                    {loc.badge}
+                  <span className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-[#002D1C]/85 text-[#FFC83D] border border-[#E6AA27]/40 backdrop-blur-md flex items-center space-x-1 shadow-sm">
+                    <MapPin className="w-3 h-3 text-[#FFC83D] shrink-0" />
+                    <span>{loc.badge}</span>
                   </span>
                 </div>
 
