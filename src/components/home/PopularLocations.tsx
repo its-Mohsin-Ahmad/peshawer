@@ -17,24 +17,24 @@ export const PopularLocations: React.FC = () => {
     },
     {
       name: 'Glamorous Heights',
-      tagline: 'Premium high-rise apartments with panoramic alpine valley views in Kalam, Swat.',
+      tagline: 'Premium high-rise apartments with panoramic alpine valley views in Kalam.',
       image: '/assets/projects/glamorous-heights/hero.png',
       query: 'Kalam',
-      badge: 'Kalam, Swat',
+      badge: 'Kalam',
     },
     {
       name: 'Kalam Cottages',
       tagline: 'Handcrafted alpine chalets nestled among pine forests and river streams of Kalam.',
       image: '/assets/projects/kalam-cottages/hero.png',
       query: 'Kalam',
-      badge: 'Kalam, Swat',
+      badge: 'Kalam',
     },
     {
       name: 'Corner Apartments',
       tagline: 'Dual-balcony corner residences overlooking Kalam Bazaar and surrounding peaks.',
       image: '/assets/projects/corner-apartments-kalam/hero.png',
       query: 'Kalam',
-      badge: 'Kalam, Swat',
+      badge: 'Kalam',
     },
   ];
 
@@ -52,7 +52,7 @@ export const PopularLocations: React.FC = () => {
           </h2>
           <div className="w-20 h-1 bg-[#E6AA27] mx-auto rounded-full mb-4 shadow-[0_0_12px_rgba(230,170,39,0.5)]" />
           <p className="text-base text-[#E8F3EC]/85">
-            From University Town's elite Peshawar enclaves to the breathtaking alpine valleys of Kalam, Swat.
+            From University Town's elite Peshawar enclaves to the breathtaking alpine valleys of Kalam.
           </p>
         </div>
 

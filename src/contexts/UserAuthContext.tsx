@@ -97,7 +97,7 @@ const initialDemoAppointments: UserAppointment[] = [
     propertyOrProjectTitle: 'Glamorous Heights Kalam',
     type: 'Project',
     targetSlug: 'glamorous-heights',
-    location: 'Kalam, Swat',
+    location: 'Kalam',
     date: '2026-11-18',
     time: '11:30 AM',
     status: 'Pending',

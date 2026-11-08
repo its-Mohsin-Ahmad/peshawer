@@ -17,7 +17,7 @@ export const ProjectsPage: React.FC = () => {
 
       <PageHero
         title="Our Signature Developments"
-        subtitle="Explore master-planned residential developments in Peshawar and the scenic alpine destination of Kalam, Swat."
+        subtitle="Explore master-planned residential developments in Peshawar and the scenic alpine destination of Kalam."
         image="/assets/hero/slide2.jpg"
         breadcrumbs={[{ label: 'Projects' }]}
       />

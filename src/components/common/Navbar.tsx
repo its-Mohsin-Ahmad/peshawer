@@ -468,11 +468,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInquiry, onOpenAppointment
               {/* Search Toggle */}
               <button
                 onClick={() => setSearchOpen(!searchOpen)}
-                className={`p-2 rounded-full transition-colors ${
-                  isHomepage && !isScrolled
-                    ? 'hover:bg-white/10 text-white'
-                    : 'hover:bg-gray-100 text-[#102A24]'
-                }`}
+                className="p-2 rounded-full transition-colors text-white hover:bg-white/15"
                 title="Search Properties"
               >
                 <Search className="w-5 h-5" />
@@ -482,11 +478,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInquiry, onOpenAppointment
               {onOpenAppointment && (
                 <button
                   onClick={onOpenAppointment}
-                  className={`flex items-center space-x-1.5 px-3 py-2 text-xs font-bold rounded-lg border transition-all ${
-                    isHomepage && !isScrolled
-                      ? 'border-white/30 text-white hover:bg-white/10'
-                      : 'border-[#064E3B]/20 text-[#064E3B] hover:bg-[#ECFDF5]'
-                  }`}
+                  className="flex items-center space-x-1.5 px-3 py-2 text-xs font-bold rounded-lg border transition-all border-white/50 text-white hover:bg-white/15"
                 >
                   <Calendar className="w-3.5 h-3.5 text-[#D6A84F]" />
                   <span>Book Site Visit</span>
@@ -598,17 +590,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInquiry, onOpenAppointment
             <div className="flex lg:hidden items-center space-x-2">
               <button
                 onClick={() => setSearchOpen(!searchOpen)}
-                className={`p-2 rounded-lg ${
-                  isHomepage && !isScrolled ? 'text-white' : 'text-[#102A24]'
-                }`}
+                className="p-2 rounded-lg text-white"
               >
                 <Search className="w-5 h-5" />
               </button>
               <button
                 onClick={() => setMobileMenuOpen(true)}
-                className={`p-2 rounded-lg ${
-                  isHomepage && !isScrolled ? 'text-white' : 'text-[#102A24]'
-                }`}
+                className="p-2 rounded-lg text-white"
                 aria-label="Open Menu"
               >
                 <Menu className="w-7 h-7" />
