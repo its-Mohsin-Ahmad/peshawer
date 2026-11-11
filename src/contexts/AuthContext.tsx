@@ -36,26 +36,25 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     await new Promise((res) => setTimeout(res, 600));
 
     const cleanEmail = email.toLowerCase().trim();
-    // Admin authentication verification
-    if (
+    // Admin authentication verification: requires valid admin email / Gmail and master password
+    const isAuthorizedAdminEmail =
+      cleanEmail.includes('@') &&
       (cleanEmail === 'info@peshawars.com' ||
         cleanEmail === 'admin@peshawars.com' ||
         cleanEmail === 'admin@peshawerrealestate.com' ||
-        cleanEmail === 'admin@peshawer.com') &&
+        cleanEmail === 'admin@peshawer.com' ||
+        cleanEmail.endsWith('@gmail.com') ||
+        cleanEmail.includes('peshawar') ||
+        cleanEmail.includes('peshawer'));
+
+    if (
+      isAuthorizedAdminEmail &&
       (pass === 'admin123456' || pass === 'admin123')
     ) {
       const authUser: AdminUser = {
         ...defaultAdminUser,
-        email: cleanEmail.includes('@') ? cleanEmail : 'info@peshawars.com',
+        email: cleanEmail,
       };
-      setUser(authUser);
-      localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(authUser));
-      return { success: true };
-    }
-
-    // Optional demo convenience fallback if user tries 'admin' username
-    if (cleanEmail === 'admin' && (pass === 'admin123456' || pass === 'admin123')) {
-      const authUser: AdminUser = defaultAdminUser;
       setUser(authUser);
       localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(authUser));
       return { success: true };
@@ -63,7 +62,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     return {
       success: false,
-      error: 'Invalid administrator credentials. Please check your email and password.',
+      error: 'Invalid administrator credentials. Access denied.',
     };
   };
 

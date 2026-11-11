@@ -98,11 +98,6 @@ export const Footer: React.FC = () => {
                   <span>Contact</span>
                 </Link>
               </li>
-              <li className="pt-1 border-t border-white/10">
-                <Link to="/dashboard" className="text-[#FFC83D] hover:text-white transition-colors font-bold flex items-center space-x-1.5">
-                  <span>Admin Dashboard</span>
-                </Link>
-              </li>
             </ul>
           </div>
 
@@ -206,9 +201,6 @@ export const Footer: React.FC = () => {
             </Link>
             <Link to="/terms-and-conditions" className="hover:text-[#FFC83D] transition-colors">
               Terms & Conditions
-            </Link>
-            <Link to="/dashboard" className="text-[#FFC83D] hover:text-white transition-colors font-bold flex items-center space-x-1">
-              <span>Admin Portal</span>
             </Link>
             <span className="text-[#FFC83D]/60">Pakistan</span>
           </div>

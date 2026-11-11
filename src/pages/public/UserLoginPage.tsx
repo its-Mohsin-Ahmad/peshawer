@@ -266,26 +266,18 @@ export const UserLoginPage: React.FC = () => {
             </button>
           </form>
 
-          {/* Quick Demo Autofill Helper & Admin Portal link */}
-          <div className="mt-2.5 flex items-center justify-center gap-2 text-[11px] flex-wrap">
+          {/* Quick Demo Autofill Helper */}
+          <div className="mt-2 text-center">
             <button
               type="button"
               onClick={() => {
                 setEmail('mohsin@peshawer.com');
                 setPassword('user123');
               }}
-              className="text-[#B88628] hover:underline font-semibold"
+              className="text-[11px] text-[#B88628] hover:underline font-semibold"
             >
-              Demo Client (Mohsin)
+              Fill Demo User (Mohsin Ahmad)
             </button>
-            <span className="text-gray-300">•</span>
-            <Link
-              to="/dashboard/login"
-              className="text-[#064E3B] hover:text-[#022C22] hover:underline font-bold inline-flex items-center gap-1"
-            >
-              <ShieldCheck className="w-3.5 h-3.5 text-[#D6A84F]" />
-              <span>Admin Portal Login</span>
-            </Link>
           </div>
 
           {/* Divider */}

@@ -43,12 +43,6 @@ export const AdminLoginPage: React.FC = () => {
     }
   };
 
-  const handleFillDemo = () => {
-    setEmail('info@peshawars.com');
-    setPassword('admin123456');
-    setErrorMessage('');
-  };
-
   return (
     <div className="min-h-screen relative flex items-center justify-center p-4 bg-[#022C22] overflow-hidden select-none">
       {/* Background Architectural Image with Overlay */}
@@ -88,9 +82,8 @@ export const AdminLoginPage: React.FC = () => {
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-[#102A24] mb-1.5 flex items-center justify-between">
-                <span>Admin Email Address</span>
-                <span className="text-[10px] text-[#64748B] font-mono">info@peshawars.com</span>
+              <label className="block text-xs font-bold uppercase tracking-wider text-[#102A24] mb-1.5">
+                Admin Email Address / Gmail
               </label>
               <div className="relative">
                 <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
@@ -99,16 +92,15 @@ export const AdminLoginPage: React.FC = () => {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="info@peshawars.com"
+                  placeholder="admin@peshawars.com"
                   className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-[#064E3B] focus:ring-1 focus:ring-[#064E3B]"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-[#102A24] mb-1.5 flex items-center justify-between">
-                <span>Master Password</span>
-                <span className="text-[10px] text-[#64748B] font-mono">admin123456</span>
+              <label className="block text-xs font-bold uppercase tracking-wider text-[#102A24] mb-1.5">
+                Password
               </label>
               <div className="relative">
                 <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
@@ -159,18 +151,6 @@ export const AdminLoginPage: React.FC = () => {
               <ArrowRight className="w-4 h-4 text-[#D6A84F]" />
             </button>
           </form>
-
-          {/* Quick Demo Autofill Button */}
-          <div className="mt-6 pt-6 border-t border-gray-100">
-            <button
-              type="button"
-              onClick={handleFillDemo}
-              className="w-full py-2.5 px-4 rounded-xl bg-[#F8F6EA] hover:bg-[#ECFDF5] border border-[#D6A84F]/40 text-[#064E3B] text-xs font-bold transition-colors flex items-center justify-center space-x-2"
-            >
-              <ShieldCheck className="w-4 h-4 text-[#D6A84F]" />
-              <span>Fill Default Admin Credentials</span>
-            </button>
-          </div>
 
           <div className="mt-6 text-center">
             <Link
