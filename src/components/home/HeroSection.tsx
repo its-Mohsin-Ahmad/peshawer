@@ -340,10 +340,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
       {/* LAYER 1.5: MOBILE-ONLY TAGLINE – sits just below PESHAWAR on small screens, z-25 above the cutout */}
       <div
-        className="sm:hidden absolute inset-x-0 z-[25] flex justify-center px-6 pointer-events-none"
+        className="sm:hidden absolute inset-x-0 z-[25] flex justify-center px-4 pointer-events-none"
         style={{ top: 'calc(11vh + clamp(2.5rem, 16vw, 10rem) + 0.75rem)' }}
       >
-        <p className="text-white font-heading text-xs sm:text-sm font-black tracking-wide drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)] leading-snug bg-black/40 backdrop-blur-sm rounded-full px-5 py-1.5 text-center">
+        <p className="text-white font-heading text-sm sm:text-base font-black tracking-normal drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] leading-snug bg-black/45 backdrop-blur-md rounded-full px-5 py-1.5 text-center border border-white/20">
           Buy, Sell, Invest
         </p>
       </div>
@@ -830,9 +830,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           {/* Main Hero Description — hidden on mobile (shown near PESHAWAR heading above) */}
           <div
             ref={descriptionRef}
-            className="text-center mb-4 sm:mb-7 max-w-3xl px-2 sm:px-4 hidden sm:block"
+            className="text-center mb-4 sm:mb-8 max-w-4xl px-2 sm:px-4 hidden sm:block"
           >
-            <h2 className="text-white font-heading text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black tracking-tight drop-shadow-[0_3px_16px_rgba(0,0,0,0.9)] leading-tight">
+            <h2 className="text-white font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-[54px] font-black tracking-tight drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)] leading-tight">
               Buy, Sell, Invest
             </h2>
           </div>
