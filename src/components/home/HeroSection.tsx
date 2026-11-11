@@ -156,7 +156,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     { label: 'PKR 10 Crore+', min: '100000000', max: '' },
   ];
 
-  const headlineWord = 'PESHAWAR';
+  const headlineWord = 'PESHAWARS';
   const letters = headlineWord.split('');
 
   // 3D GSAP Orchestrated Animation
@@ -310,12 +310,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       >
         <div className="w-full max-w-7xl mx-auto flex items-center justify-center overflow-hidden">
           <h1
-            className="font-heading font-black text-white uppercase select-none text-center max-w-full"
+            className="font-heading font-black uppercase select-none text-center max-w-full"
             style={{
-              fontSize: 'clamp(2.5rem, 16vw, 18rem)',
-              letterSpacing: '-0.04em',
+              fontSize: 'clamp(2.2rem, 14vw, 16rem)',
+              letterSpacing: '-0.045em',
               lineHeight: 0.88,
-              textShadow: '1px 1px 0 rgba(0,0,0,0.35), 2px 2px 0 rgba(0,0,0,0.32), 3px 3px 0 rgba(0,0,0,0.28), 4px 4px 0 rgba(0,0,0,0.24), 5px 5px 0 rgba(0,0,0,0.20), 6px 6px 0 rgba(0,0,0,0.16), 7px 7px 0 rgba(0,0,0,0.12), 8px 8px 0 rgba(0,0,0,0.08), 9px 9px 20px rgba(0,0,0,0.40)',
+              color: '#FFC83D',
+              textShadow:
+                '1px 1px 0 #D6971E, 2px 2px 0 #C48714, 3px 3px 0 #B2770B, 4px 4px 0 #9E6805, 5px 5px 0 #855502, 6px 6px 0 #6B4401, 7px 7px 0 #523400, 8px 8px 16px rgba(0,0,0,0.7), 12px 12px 28px rgba(0,0,0,0.5)',
               transformStyle: 'preserve-3d',
             }}
           >
@@ -338,12 +340,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         </div>
       </div>
 
-      {/* LAYER 1.5: MOBILE-ONLY TAGLINE – sits just below PESHAWAR on small screens, z-25 above the cutout */}
+      {/* LAYER 1.5: MOBILE-ONLY TAGLINE – sits just below PESHAWARS on small screens, z-25 above the cutout */}
       <div
         className="sm:hidden absolute inset-x-0 z-[25] flex justify-center px-4 pointer-events-none"
         style={{ top: 'calc(11vh + clamp(2.5rem, 16vw, 10rem) + 0.75rem)' }}
       >
-        <p className="text-white font-heading text-sm sm:text-base font-black tracking-normal drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] leading-snug bg-black/45 backdrop-blur-md rounded-full px-5 py-1.5 text-center border border-white/20">
+        <p className="font-heading text-sm sm:text-base font-black tracking-normal drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] leading-snug bg-black/60 backdrop-blur-md rounded-full px-5 py-1.5 text-center border border-[#E6AA27]/40 text-[#FFC83D]">
           Buy, Sell, Invest
         </p>
       </div>
@@ -827,12 +829,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       {/* LOWER SECTION: DESCRIPTION & SEARCH PANEL */}
       <div className="relative z-30 w-full pb-5 sm:pb-8 lg:pb-10 px-3 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto flex flex-col items-center">
-          {/* Main Hero Description — hidden on mobile (shown near PESHAWAR heading above) */}
+          {/* Main Hero Description — hidden on mobile (shown near PESHAWARS heading above) */}
           <div
             ref={descriptionRef}
             className="text-center mb-4 sm:mb-8 max-w-4xl px-2 sm:px-4 hidden sm:block"
           >
-            <h2 className="text-white font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-[54px] font-black tracking-tight drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)] leading-tight">
+            <h2 className="text-[#FFC83D] font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-[54px] font-black tracking-tight drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)] leading-tight">
               Buy, Sell, Invest
             </h2>
           </div>
