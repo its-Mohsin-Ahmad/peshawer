@@ -317,7 +317,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               lineHeight: 0.88,
               color: '#FFC83D',
               textShadow:
-                '1px 1px 0 #D6971E, 2px 2px 0 #C48714, 3px 3px 0 #B2770B, 4px 4px 0 #9E6805, 5px 5px 0 #855502, 6px 6px 0 #6B4401, 7px 7px 0 #523400, 8px 8px 16px rgba(0,0,0,0.7), 12px 12px 28px rgba(0,0,0,0.5)',
+                '1px 1px 0 #C48714, 2px 2px 0 #9E6805, 4px 4px 12px rgba(0,0,0,0.5)',
               transformStyle: 'preserve-3d',
             }}
           >
