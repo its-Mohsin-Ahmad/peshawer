@@ -343,8 +343,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         className="sm:hidden absolute inset-x-0 z-[25] flex justify-center px-6 pointer-events-none"
         style={{ top: 'calc(11vh + clamp(2.5rem, 16vw, 10rem) + 0.75rem)' }}
       >
-        <p className="text-white font-heading text-[11px] font-extrabold tracking-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)] leading-snug bg-black/35 backdrop-blur-sm rounded-full px-4 py-1.5 text-center">
-          Buy, Sell and Invest – Simplifying Your Real Estate Journey
+        <p className="text-white font-heading text-xs sm:text-sm font-black tracking-wide drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)] leading-snug bg-black/40 backdrop-blur-sm rounded-full px-5 py-1.5 text-center">
+          Buy, Sell, Invest
         </p>
       </div>
 
@@ -830,10 +830,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           {/* Main Hero Description — hidden on mobile (shown near PESHAWAR heading above) */}
           <div
             ref={descriptionRef}
-            className="text-center mb-3 sm:mb-6 max-w-3xl px-2 sm:px-4 hidden sm:block"
+            className="text-center mb-4 sm:mb-7 max-w-3xl px-2 sm:px-4 hidden sm:block"
           >
-            <h2 className="text-white font-heading text-sm sm:text-xl md:text-2xl lg:text-[26px] font-extrabold tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)] leading-snug sm:leading-tight">
-              Buy, Sell and Invest – Simplifying Your Real Estate Journey
+            <h2 className="text-white font-heading text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black tracking-tight drop-shadow-[0_3px_16px_rgba(0,0,0,0.9)] leading-tight">
+              Buy, Sell, Invest
             </h2>
           </div>
 
