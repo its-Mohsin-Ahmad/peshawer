@@ -11,6 +11,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Path to HashRouter redirect script for direct URL navigation on GitHub Pages / Vercel -->
+    <script>
+      (function() {
+        var path = window.location.pathname;
+        var search = window.location.search || '';
+        var hash = window.location.hash;
+        var base = path.startsWith('/peshawer') ? '/peshawer' : '';
+        var route = path.slice(base.length);
+        if (route && route !== '/' && route !== '/index.html' && !hash) {
+          window.location.replace((base ? base : '') + '/#' + route + search);
+        }
+      })();
+    </script>
   </head>
   <body class="bg-[#F8F6EA] text-[#102A24] font-body antialiased selection:bg-[#D6A84F] selection:text-[#022C22]">
     <div id="root"></div>

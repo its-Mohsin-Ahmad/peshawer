@@ -161,8 +161,12 @@ export function App() {
                 <Route path="/terms-and-conditions" element={<TermsPage />} />
               </Route>
 
-              {/* ─── Admin Authentication Login ─── */}
+              {/* ─── Admin Authentication Login & Aliases ─── */}
               <Route path="/dashboard/login" element={<AdminLoginPage />} />
+              <Route path="/admin/login" element={<AdminLoginPage />} />
+              <Route path="/admin-login" element={<AdminLoginPage />} />
+              <Route path="/admin" element={<Navigate to="/dashboard" replace />} />
+              <Route path="/admin/*" element={<Navigate to="/dashboard" replace />} />
 
               {/* ─── SINGLE ADMIN DASHBOARD at /dashboard ─── */}
               <Route path="/dashboard" element={<AdminLayout />}>

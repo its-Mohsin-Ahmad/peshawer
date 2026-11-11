@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Mail, Lock, Eye, EyeOff, Home, ShieldCheck, Zap, Headphones, ArrowRight } from 'lucide-react';
 import { useUserAuth } from '../../contexts/UserAuthContext';
+import { useAuth } from '../../contexts/AuthContext';
 
 export const UserLoginPage: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { user, isAuthenticated, login, loginWithGoogle, loginWithGitHub } = useUserAuth();
+  const { login: adminLogin } = useAuth();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -37,6 +39,24 @@ export const UserLoginPage: React.FC = () => {
     }
 
     setLoading(true);
+
+    const cleanEmail = email.toLowerCase().trim();
+    const isAdminCandidate =
+      cleanEmail === 'info@peshawars.com' ||
+      cleanEmail === 'admin@peshawars.com' ||
+      cleanEmail === 'admin@peshawer.com' ||
+      cleanEmail === 'admin@peshawerrealestate.com' ||
+      cleanEmail === 'admin';
+
+    if (isAdminCandidate) {
+      const adminRes = await adminLogin(email, password);
+      if (adminRes.success) {
+        setLoading(false);
+        navigate('/dashboard');
+        return;
+      }
+    }
+
     const res = await login(email, password, rememberMe);
     setLoading(false);
 
@@ -246,18 +266,26 @@ export const UserLoginPage: React.FC = () => {
             </button>
           </form>
 
-          {/* Quick Demo Autofill Helper */}
-          <div className="mt-2 text-center">
+          {/* Quick Demo Autofill Helper & Admin Portal link */}
+          <div className="mt-2.5 flex items-center justify-center gap-2 text-[11px] flex-wrap">
             <button
               type="button"
               onClick={() => {
                 setEmail('mohsin@peshawer.com');
                 setPassword('user123');
               }}
-              className="text-[11px] text-[#B88628] hover:underline font-semibold"
+              className="text-[#B88628] hover:underline font-semibold"
             >
-              Fill Demo User (Mohsin Ahmad)
+              Demo Client (Mohsin)
             </button>
+            <span className="text-gray-300">•</span>
+            <Link
+              to="/dashboard/login"
+              className="text-[#064E3B] hover:text-[#022C22] hover:underline font-bold inline-flex items-center gap-1"
+            >
+              <ShieldCheck className="w-3.5 h-3.5 text-[#D6A84F]" />
+              <span>Admin Portal Login</span>
+            </Link>
           </div>
 
           {/* Divider */}

@@ -19,6 +19,7 @@ import {
   Settings,
   LogOut,
   User,
+  Shield,
 } from 'lucide-react';
 import { useData } from '../../contexts/DataContext';
 import { useUserAuth } from '../../contexts/UserAuthContext';
@@ -539,6 +540,23 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInquiry, onOpenAppointment
 
                       {/* Menu Items */}
                       <div className="py-2">
+                        {/* Direct Admin Portal link inside User Dropdown */}
+                        <div className="px-3 pb-2 pt-1">
+                          <Link
+                            to="/dashboard"
+                            onClick={() => setUserMenuOpen(false)}
+                            className="flex items-center justify-between px-3 py-2 rounded-xl bg-gradient-to-r from-[#003D25] to-[#002417] text-white hover:from-[#004B2E] hover:to-[#002D1C] transition-all text-xs font-bold border border-[#E6AA27]/40 shadow-sm"
+                          >
+                            <span className="flex items-center gap-2">
+                              <Shield className="w-3.5 h-3.5 text-[#FFC83D]" />
+                              <span>Admin Dashboard</span>
+                            </span>
+                            <span className="px-1.5 py-0.5 rounded text-[9px] bg-[#E6AA27] text-[#002D1C] font-extrabold uppercase">
+                              Admin
+                            </span>
+                          </Link>
+                        </div>
+
                         {[
                           { to: '/user/dashboard', icon: LayoutDashboard, label: 'My Dashboard' },
                           { to: '/user/properties', icon: Building2, label: 'My Properties' },
@@ -584,6 +602,16 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInquiry, onOpenAppointment
                   Login
                 </Link>
               )}
+
+              {/* Direct Admin Portal Button on Desktop */}
+              <Link
+                to="/dashboard"
+                className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold border border-[#E6AA27]/40 text-[#FFC83D] bg-[#003D25]/60 hover:bg-[#003D25] hover:border-[#FFC83D] transition-all shadow-sm"
+                title="Open Admin Dashboard Portal"
+              >
+                <Shield className="w-3.5 h-3.5 text-[#FFC83D]" />
+                <span>Admin</span>
+              </Link>
             </div>
 
             {/* Mobile Hamburger Button */}
@@ -753,6 +781,16 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInquiry, onOpenAppointment
                   </Link>
                 </>
               )}
+
+              {/* Mobile Admin Dashboard Access */}
+              <Link
+                to="/dashboard"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg bg-[#003D25] border border-[#E6AA27]/40 text-[#FFC83D] font-bold text-xs uppercase tracking-wider shadow"
+              >
+                <Shield className="w-3.5 h-3.5 text-[#FFC83D]" />
+                <span>Admin Dashboard</span>
+              </Link>
             </div>
           </div>
         </div>

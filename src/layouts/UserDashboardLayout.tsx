@@ -197,6 +197,18 @@ export const UserDashboardLayout: React.FC = () => {
               );
             })}
 
+            {/* Switch to Admin Portal in User Sidebar */}
+            <Link
+              to="/dashboard"
+              className="flex items-center justify-between px-4 py-3 rounded-2xl text-xs font-heading font-bold uppercase tracking-wider bg-gradient-to-r from-[#003D25] to-[#002D1C] text-[#FFC83D] border border-[#E6AA27]/40 shadow-sm hover:border-[#FFC83D] transition-all my-2 group"
+            >
+              <span className="flex items-center space-x-3">
+                <Shield className="w-4 h-4 text-[#FFC83D]" />
+                <span>Admin Dashboard</span>
+              </span>
+              <ArrowRight className="w-3.5 h-3.5 text-[#FFC83D] group-hover:translate-x-1 transition-transform" />
+            </Link>
+
             {/* Logout Button in Menu */}
             <button
               type="button"
@@ -386,6 +398,17 @@ export const UserDashboardLayout: React.FC = () => {
                   </div>
 
                   <div className="py-1 space-y-0.5">
+                    <Link
+                      to="/dashboard"
+                      className="flex items-center justify-between px-3 py-2 text-xs font-bold rounded-xl bg-[#003D25] text-[#FFC83D] hover:bg-[#002D1C] transition-colors mb-1 shadow-xs border border-[#E6AA27]/30"
+                    >
+                      <span className="flex items-center space-x-2">
+                        <Shield className="w-3.5 h-3.5 text-[#FFC83D]" />
+                        <span>Admin Dashboard</span>
+                      </span>
+                      <ArrowRight className="w-3 h-3 text-[#FFC83D]" />
+                    </Link>
+
                     <Link
                       to="/user/profile"
                       className="flex items-center space-x-2.5 px-3 py-2 text-xs font-semibold rounded-xl hover:bg-[#F8F6EA] hover:text-[#064E3B] transition-colors"
