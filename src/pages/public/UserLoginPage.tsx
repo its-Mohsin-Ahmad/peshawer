@@ -41,14 +41,7 @@ export const UserLoginPage: React.FC = () => {
     setLoading(true);
 
     const cleanEmail = email.toLowerCase().trim();
-    const isAdminCandidate =
-      cleanEmail === 'info@peshawars.com' ||
-      cleanEmail === 'admin@peshawars.com' ||
-      cleanEmail === 'admin@peshawer.com' ||
-      cleanEmail === 'admin@peshawerrealestate.com' ||
-      cleanEmail === 'admin';
-
-    if (isAdminCandidate) {
+    if (cleanEmail === 'info@peshawars.com') {
       const adminRes = await adminLogin(email, password);
       if (adminRes.success) {
         setLoading(false);
@@ -265,20 +258,6 @@ export const UserLoginPage: React.FC = () => {
               )}
             </button>
           </form>
-
-          {/* Quick Demo Autofill Helper */}
-          <div className="mt-2 text-center">
-            <button
-              type="button"
-              onClick={() => {
-                setEmail('mohsin@peshawer.com');
-                setPassword('user123');
-              }}
-              className="text-[11px] text-[#B88628] hover:underline font-semibold"
-            >
-              Fill Demo User (Mohsin Ahmad)
-            </button>
-          </div>
 
           {/* Divider */}
           <div className="relative my-3">

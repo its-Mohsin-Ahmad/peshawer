@@ -36,24 +36,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     await new Promise((res) => setTimeout(res, 600));
 
     const cleanEmail = email.toLowerCase().trim();
-    // Admin authentication verification: requires valid admin email / Gmail and master password
-    const isAuthorizedAdminEmail =
-      cleanEmail.includes('@') &&
-      (cleanEmail === 'info@peshawars.com' ||
-        cleanEmail === 'admin@peshawars.com' ||
-        cleanEmail === 'admin@peshawerrealestate.com' ||
-        cleanEmail === 'admin@peshawer.com' ||
-        cleanEmail.endsWith('@gmail.com') ||
-        cleanEmail.includes('peshawar') ||
-        cleanEmail.includes('peshawer'));
 
-    if (
-      isAuthorizedAdminEmail &&
-      (pass === 'admin123456' || pass === 'admin123')
-    ) {
+    // Strict Admin authentication: only authorized master administrator
+    if (cleanEmail === 'info@peshawars.com' && pass === 'khan1122') {
       const authUser: AdminUser = {
         ...defaultAdminUser,
-        email: cleanEmail,
+        email: 'info@peshawars.com',
       };
       setUser(authUser);
       localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(authUser));
