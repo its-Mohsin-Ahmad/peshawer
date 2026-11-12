@@ -8,10 +8,14 @@ export interface UserProfile {
   avatarUrl?: string;
   city?: string;
   address?: string;
-  role: 'customer' | 'client';
+  role: 'customer' | 'client' | 'investor';
   provider?: 'email' | 'google' | 'github';
   createdAt: string;
   updatedAt?: string;
+  lastLoginAt?: string;
+  savedPropertyIds?: string[];
+  ownedPropertyIds?: string[];
+  status?: 'active' | 'suspended';
 }
 
 export interface UserSession {

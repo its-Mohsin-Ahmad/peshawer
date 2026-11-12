@@ -53,6 +53,7 @@ import { AdminInquiriesPage } from './pages/admin/AdminInquiriesPage';
 import { AdminMediaPage } from './pages/admin/AdminMediaPage';
 import { AdminBlogsPage } from './pages/admin/AdminBlogsPage';
 import { AdminSettingsPage } from './pages/admin/AdminSettingsPage';
+import { AdminUsersPage } from './pages/admin/AdminUsersPage';
 
 const SmoothScrollManager: React.FC = () => {
   const location = useLocation();
@@ -179,6 +180,7 @@ export function App() {
                 <Route path="hero-images" element={<AdminHeroManagerPage />} />
                 <Route path="media" element={<AdminMediaPage />} />
                 <Route path="inquiries" element={<AdminInquiriesPage initialTab="inquiries" />} />
+                <Route path="users" element={<AdminUsersPage />} />
                 <Route path="appointments" element={<AdminInquiriesPage initialTab="appointments" />} />
                 <Route path="messages" element={<AdminInquiriesPage initialTab="messages" />} />
                 <Route path="blogs" element={<AdminBlogsPage />} />

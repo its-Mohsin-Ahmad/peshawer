@@ -70,7 +70,7 @@ export const UserDashboardOverviewPage: React.FC = () => {
         <div className="relative z-10 max-w-xl space-y-3">
           <h1 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight drop-shadow-md">
             Welcome Back, <br className="hidden sm:inline" />
-            <span className="text-[#D6A84F]">{user?.fullName || 'Mohsin Ahmad'}</span>!
+            <span className="text-[#D6A84F]">{user?.fullName || 'Client'}</span>!
           </h1>
           <p className="text-white/85 text-sm sm:text-base font-normal leading-relaxed">
             Your real estate journey continues with Peshawer.
@@ -101,7 +101,7 @@ export const UserDashboardOverviewPage: React.FC = () => {
             </div>
             <div>
               <span className="font-heading text-3xl font-black text-[#022C22] block leading-none mb-1">
-                {userProperties.length || 3}
+                {userProperties.length}
               </span>
               <span className="text-xs text-[#64748B] font-bold">My Properties</span>
             </div>
@@ -122,7 +122,7 @@ export const UserDashboardOverviewPage: React.FC = () => {
             </div>
             <div>
               <span className="font-heading text-3xl font-black text-[#022C22] block leading-none mb-1">
-                {savedProperties.length || 5}
+                {savedProperties.length}
               </span>
               <span className="text-xs text-[#64748B] font-bold">Saved Properties</span>
             </div>
@@ -143,7 +143,7 @@ export const UserDashboardOverviewPage: React.FC = () => {
             </div>
             <div>
               <span className="font-heading text-3xl font-black text-[#022C22] block leading-none mb-1">
-                {appointments.length || 2}
+                {appointments.length}
               </span>
               <span className="text-xs text-[#64748B] font-bold">Appointments</span>
             </div>
@@ -164,7 +164,7 @@ export const UserDashboardOverviewPage: React.FC = () => {
             </div>
             <div>
               <span className="font-heading text-3xl font-black text-[#022C22] block leading-none mb-1">
-                {messages.length || 3}
+                {messages.length}
               </span>
               <span className="text-xs text-[#64748B] font-bold">New Messages</span>
             </div>
@@ -362,78 +362,101 @@ export const UserDashboardOverviewPage: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-          {userProperties.map((prop, idx) => {
-            const isSaved = isPropertySaved(prop.id);
-            const purposeLabel = idx === 1 ? 'For Rent' : 'For Sale';
-            const priceVal = idx === 0 ? 25000000 : idx === 1 ? 18000000 : 15000000;
-
-            return (
-              <div
-                key={prop.id}
-                className="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-premium transition-all duration-300 flex flex-col justify-between group"
-              >
-                <div>
-                  {/* Thumbnail */}
-                  <div className="relative aspect-[16/10] overflow-hidden bg-gray-100">
-                    <img
-                      src={prop.featuredImage}
-                      alt={prop.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-
-                    <div className="absolute top-3 left-3">
-                      <span
-                        className={`px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider ${
-                          purposeLabel === 'For Sale'
-                            ? 'bg-[#064E3B] text-white'
-                            : 'bg-[#D6A84F] text-[#022C22]'
-                        }`}
-                      >
-                        {purposeLabel}
-                      </span>
-                    </div>
-
-                    <button
-                      type="button"
-                      onClick={() => toggleSaveProperty(prop.id)}
-                      className="absolute top-3 right-3 p-1.5 rounded-full bg-white/90 backdrop-blur-md shadow-sm hover:scale-110 transition-transform"
-                    >
-                      <Heart
-                        className={`w-4 h-4 ${
-                          isSaved ? 'fill-red-500 text-red-500' : 'text-gray-400'
-                        }`}
-                      />
-                    </button>
-                  </div>
-
-                  {/* Body */}
-                  <div className="p-4">
-                    <h4 className="font-heading text-sm font-black text-[#102A24] group-hover:text-[#064E3B] transition-colors truncate">
-                      {prop.title.split('-')[0].trim()}
-                    </h4>
-
-                    <div className="flex items-center space-x-1 text-[11px] text-[#64748B] mt-1 mb-2">
-                      <MapPin className="w-3 h-3 text-[#D6A84F]" />
-                      <span className="truncate">{prop.city || prop.location.split(',')[0]}</span>
-                    </div>
-
-                    <p className="font-heading text-sm font-black text-[#047857]">
-                      {formatPKR(priceVal)}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="p-4 pt-0">
-                  <Link
-                    to={`/properties/${prop.slug}`}
-                    className="w-full py-2 rounded-xl bg-[#F8F6EA] hover:bg-[#064E3B] text-[#064E3B] hover:text-white text-xs font-bold uppercase tracking-wider text-center block transition-colors"
-                  >
-                    View Details
-                  </Link>
-                </div>
+          {userProperties.length === 0 ? (
+            <div className="md:col-span-2 lg:col-span-3 bg-white rounded-3xl p-8 sm:p-10 border border-gray-100 shadow-sm flex flex-col justify-center items-center text-center space-y-3">
+              <div className="w-14 h-14 rounded-2xl bg-[#ECFDF5] text-[#064E3B] flex items-center justify-center">
+                <Building2 className="w-7 h-7" />
               </div>
-            );
-          })}
+              <h4 className="font-heading font-black text-base text-[#022C22]">
+                No properties registered in your portfolio yet
+              </h4>
+              <p className="text-xs text-[#64748B] max-w-md mx-auto">
+                Explore signature residential villas, luxury plots, and apartments across Peshawar. Any property you acquire or inquire about will be tracked here.
+              </p>
+              <div className="pt-2">
+                <Link
+                  to="/properties"
+                  className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-full bg-[#064E3B] hover:bg-[#022C22] text-white font-bold text-xs uppercase tracking-wider transition-colors shadow-sm"
+                >
+                  <Building2 className="w-4 h-4" />
+                  <span>Browse Properties</span>
+                </Link>
+              </div>
+            </div>
+          ) : (
+            userProperties.map((prop, idx) => {
+              const isSaved = isPropertySaved(prop.id);
+              const purposeLabel = idx === 1 ? 'For Rent' : 'For Sale';
+              const priceVal = idx === 0 ? 25000000 : idx === 1 ? 18000000 : 15000000;
+
+              return (
+                <div
+                  key={prop.id}
+                  className="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-premium transition-all duration-300 flex flex-col justify-between group"
+                >
+                  <div>
+                    {/* Thumbnail */}
+                    <div className="relative aspect-[16/10] overflow-hidden bg-gray-100">
+                      <img
+                        src={prop.featuredImage}
+                        alt={prop.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+
+                      <div className="absolute top-3 left-3">
+                        <span
+                          className={`px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider ${
+                            purposeLabel === 'For Sale'
+                              ? 'bg-[#064E3B] text-white'
+                              : 'bg-[#D6A84F] text-[#022C22]'
+                          }`}
+                        >
+                          {purposeLabel}
+                        </span>
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => toggleSaveProperty(prop.id)}
+                        className="absolute top-3 right-3 p-1.5 rounded-full bg-white/90 backdrop-blur-md shadow-sm hover:scale-110 transition-transform"
+                      >
+                        <Heart
+                          className={`w-4 h-4 ${
+                            isSaved ? 'fill-red-500 text-red-500' : 'text-gray-400'
+                          }`}
+                        />
+                      </button>
+                    </div>
+
+                    {/* Body */}
+                    <div className="p-4">
+                      <h4 className="font-heading text-sm font-black text-[#102A24] group-hover:text-[#064E3B] transition-colors truncate">
+                        {prop.title.split('-')[0].trim()}
+                      </h4>
+
+                      <div className="flex items-center space-x-1 text-[11px] text-[#64748B] mt-1 mb-2">
+                        <MapPin className="w-3 h-3 text-[#D6A84F]" />
+                        <span className="truncate">{prop.city || prop.location.split(',')[0]}</span>
+                      </div>
+
+                      <p className="font-heading text-sm font-black text-[#047857]">
+                        {formatPKR(priceVal)}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="p-4 pt-0">
+                    <Link
+                      to={`/properties/${prop.slug}`}
+                      className="w-full py-2 rounded-xl bg-[#F8F6EA] hover:bg-[#064E3B] text-[#064E3B] hover:text-white text-xs font-bold uppercase tracking-wider text-center block transition-colors"
+                    >
+                      View Details
+                    </Link>
+                  </div>
+                </div>
+              );
+            })
+          )}
 
           {/* 4th Column: Peshawer Real Estate Contact Card matching reference */}
           <div className="rounded-3xl p-6 bg-gradient-to-br from-[#064E3B] via-[#022C22] to-[#0A1A15] text-white flex flex-col justify-between border border-[#D6A84F]/30 shadow-lg relative overflow-hidden">

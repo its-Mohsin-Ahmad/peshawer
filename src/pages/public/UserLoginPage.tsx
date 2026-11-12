@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Mail, Lock, Eye, EyeOff, Home, ShieldCheck, Zap, Headphones, ArrowRight } from 'lucide-react';
 import { useUserAuth } from '../../contexts/UserAuthContext';
 import { useAuth } from '../../contexts/AuthContext';
+import { OAuthModal } from '../../components/auth/OAuthModal';
 
 export const UserLoginPage: React.FC = () => {
   const navigate = useNavigate();
@@ -16,6 +17,10 @@ export const UserLoginPage: React.FC = () => {
   const [rememberMe, setRememberMe] = useState(true);
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+
+  // OAuth Modal State
+  const [oauthModalOpen, setOauthModalOpen] = useState(false);
+  const [oauthMode, setOauthMode] = useState<'google' | 'github' | null>(null);
 
   // Redirect if already authenticated
   useEffect(() => {
@@ -60,27 +65,31 @@ export const UserLoginPage: React.FC = () => {
     }
   };
 
-  const handleGoogleLogin = async () => {
-    setLoading(true);
-    setErrorMsg('');
-    const res = await loginWithGoogle();
-    setLoading(false);
-    if (res.success) {
-      navigate('/user/dashboard');
-    } else if (res.error) {
-      setErrorMsg(res.error);
-    }
+  const handleGoogleLogin = () => {
+    setOauthMode('google');
+    setOauthModalOpen(true);
   };
 
-  const handleGitHubLogin = async () => {
-    setLoading(true);
-    setErrorMsg('');
-    const res = await loginWithGitHub();
-    setLoading(false);
-    if (res.success) {
-      navigate('/user/dashboard');
-    } else if (res.error) {
-      setErrorMsg(res.error);
+  const handleGitHubLogin = () => {
+    setOauthMode('github');
+    setOauthModalOpen(true);
+  };
+
+  const handleOAuthSuccess = async (profileData: any) => {
+    if (profileData.provider === 'google') {
+      const res = await loginWithGoogle(profileData);
+      if (res.success) {
+        navigate('/user/dashboard');
+      } else if (res.error) {
+        setErrorMsg(res.error);
+      }
+    } else {
+      const res = await loginWithGitHub(profileData);
+      if (res.success) {
+        navigate('/user/dashboard');
+      } else if (res.error) {
+        setErrorMsg(res.error);
+      }
     }
   };
 
@@ -335,6 +344,14 @@ export const UserLoginPage: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* OAuth Interactive Modal */}
+      <OAuthModal
+        isOpen={oauthModalOpen}
+        mode={oauthMode}
+        onClose={() => setOauthModalOpen(false)}
+        onSuccess={handleOAuthSuccess}
+      />
     </div>
   );
 };

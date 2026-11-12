@@ -27,7 +27,9 @@ import {
   Search,
   ChevronRight,
   ExternalLink,
+  Users,
 } from 'lucide-react';
+import { userService } from '../services/userService';
 
 export const AdminLayout: React.FC = () => {
   const { user, isAuthenticated, isLoading, logout } = useAuth();
@@ -52,6 +54,7 @@ export const AdminLayout: React.FC = () => {
   const unreadInquiries = inquiries.filter((i) => i.status === 'New').length;
   const pendingAppointments = appointments.filter((a) => a.status === 'Pending').length;
   const unreadMessages = messages.filter((m) => !m.read).length;
+  const totalUsersCount = userService.getAllUsers().length;
 
   const navItems = [
     { label: 'Overview', path: '/dashboard', icon: LayoutDashboard },
@@ -66,6 +69,12 @@ export const AdminLayout: React.FC = () => {
       path: '/dashboard/inquiries',
       icon: Inbox,
       badge: unreadInquiries > 0 ? unreadInquiries : undefined,
+    },
+    {
+      label: 'Users & Clients',
+      path: '/dashboard/users',
+      icon: Users,
+      badge: totalUsersCount > 0 ? totalUsersCount : undefined,
     },
     {
       label: 'Site Appointments',

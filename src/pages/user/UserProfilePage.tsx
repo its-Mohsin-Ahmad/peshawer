@@ -12,12 +12,27 @@ export const UserProfilePage: React.FC = () => {
     address: user?.address || '',
     avatarUrl: user?.avatarUrl || '',
   });
+
+  React.useEffect(() => {
+    if (user) {
+      setForm({
+        fullName: user.fullName || '',
+        email: user.email || '',
+        phone: user.phone || '',
+        city: user.city || '',
+        address: user.address || '',
+        avatarUrl: user.avatarUrl || '',
+      });
+    }
+  }, [user]);
+
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<{ success: boolean; message: string } | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
-  const initials = form.fullName
+  const initials = (form.fullName || 'User')
     .split(' ')
+    .filter(Boolean)
     .map((n) => n[0])
     .join('')
     .toUpperCase()

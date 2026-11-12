@@ -67,82 +67,103 @@ export const UserMyPropertiesPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filtered.map((property) => (
-          <div
-            key={property.id}
-            className="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-premium transition-all flex flex-col justify-between group"
-          >
-            <div>
-              <div className="relative aspect-[16/10] overflow-hidden bg-gray-100">
-                <img
-                  src={property.featuredImage}
-                  alt={property.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute top-3 left-3 flex items-center space-x-1.5">
-                  <span className="px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-[#064E3B] text-white">
-                    {property.category}
-                  </span>
-                  <span className="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#ECFDF5] text-[#047857]">
-                    Active
-                  </span>
-                </div>
-              </div>
-
-              <div className="p-5 space-y-3">
-                <h3 className="font-heading text-base font-black text-[#102A24] group-hover:text-[#064E3B] transition-colors">
-                  {property.title}
-                </h3>
-
-                <div className="flex items-center space-x-1.5 text-xs text-[#64748B]">
-                  <MapPin className="w-3.5 h-3.5 text-[#D6A84F]" />
-                  <span>{property.location}</span>
-                </div>
-
-                <div className="flex items-center space-x-4 text-xs text-gray-600 pt-1 border-t border-gray-100">
-                  {property.bedrooms !== undefined && (
-                    <div className="flex items-center space-x-1">
-                      <Bed className="w-3.5 h-3.5 text-[#D6A84F]" />
-                      <span>{property.bedrooms} Beds</span>
-                    </div>
-                  )}
-                  {property.bathrooms !== undefined && (
-                    <div className="flex items-center space-x-1">
-                      <Bath className="w-3.5 h-3.5 text-[#D6A84F]" />
-                      <span>{property.bathrooms} Baths</span>
-                    </div>
-                  )}
-                  <div className="flex items-center space-x-1">
-                    <Maximize className="w-3.5 h-3.5 text-[#D6A84F]" />
-                    <span>{formatArea(property.area, property.areaUnit)}</span>
+      {/* Grid or Empty State */}
+      {filtered.length === 0 ? (
+        <div className="bg-white rounded-3xl p-12 text-center border border-gray-100 shadow-sm space-y-4">
+          <div className="w-16 h-16 rounded-2xl bg-[#ECFDF5] text-[#047857] mx-auto flex items-center justify-center">
+            <Building2 className="w-8 h-8 text-[#064E3B]" />
+          </div>
+          <h3 className="font-heading font-black text-lg text-[#022C22]">No Properties in Portfolio</h3>
+          <p className="text-sm text-[#64748B] max-w-md mx-auto">
+            You currently have no acquired or registered properties associated with your account. Explore our premier residential villas, apartments, and plots across Peshawar.
+          </p>
+          <div>
+            <Link
+              to="/properties"
+              className="inline-flex items-center space-x-2 px-6 py-3 rounded-full bg-[#064E3B] hover:bg-[#022C22] text-white font-bold text-xs uppercase tracking-wider transition-colors shadow-sm"
+            >
+              <Plus className="w-4 h-4" />
+              <span>Explore Marketplace</span>
+            </Link>
+          </div>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filtered.map((property) => (
+            <div
+              key={property.id}
+              className="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-premium transition-all flex flex-col justify-between group"
+            >
+              <div>
+                <div className="relative aspect-[16/10] overflow-hidden bg-gray-100">
+                  <img
+                    src={property.featuredImage}
+                    alt={property.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute top-3 left-3 flex items-center space-x-1.5">
+                    <span className="px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-[#064E3B] text-white">
+                      {property.category}
+                    </span>
+                    <span className="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#ECFDF5] text-[#047857]">
+                      Active
+                    </span>
                   </div>
                 </div>
 
-                <div className="pt-2">
-                  <span className="block text-[10px] uppercase font-bold text-gray-400">
-                    Valuation
-                  </span>
-                  <span className="font-heading text-lg font-black text-[#047857]">
-                    {formatPKR(property.pricePKR)}
-                  </span>
+                <div className="p-5 space-y-3">
+                  <h3 className="font-heading text-base font-black text-[#102A24] group-hover:text-[#064E3B] transition-colors">
+                    {property.title}
+                  </h3>
+
+                  <div className="flex items-center space-x-1.5 text-xs text-[#64748B]">
+                    <MapPin className="w-3.5 h-3.5 text-[#D6A84F]" />
+                    <span>{property.location}</span>
+                  </div>
+
+                  <div className="flex items-center space-x-4 text-xs text-gray-600 pt-1 border-t border-gray-100">
+                    {property.bedrooms !== undefined && (
+                      <div className="flex items-center space-x-1">
+                        <Bed className="w-3.5 h-3.5 text-[#D6A84F]" />
+                        <span>{property.bedrooms} Beds</span>
+                      </div>
+                    )}
+                    {property.bathrooms !== undefined && (
+                      <div className="flex items-center space-x-1">
+                        <Bath className="w-3.5 h-3.5 text-[#D6A84F]" />
+                        <span>{property.bathrooms} Baths</span>
+                      </div>
+                    )}
+                    <div className="flex items-center space-x-1">
+                      <Maximize className="w-3.5 h-3.5 text-[#D6A84F]" />
+                      <span>{formatArea(property.area, property.areaUnit)}</span>
+                    </div>
+                  </div>
+
+                  <div className="pt-2">
+                    <span className="block text-[10px] uppercase font-bold text-gray-400">
+                      Valuation
+                    </span>
+                    <span className="font-heading text-lg font-black text-[#047857]">
+                      {formatPKR(property.pricePKR)}
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div className="p-5 pt-0 flex items-center space-x-2">
-              <Link
-                to={`/properties/${property.slug}`}
-                className="flex-1 py-2.5 rounded-xl bg-[#F8F6EA] hover:bg-[#064E3B] text-[#064E3B] hover:text-white text-xs font-bold uppercase tracking-wider text-center transition-colors flex items-center justify-center space-x-1"
-              >
-                <span>View Listing</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </Link>
+              <div className="p-5 pt-0 flex items-center space-x-2">
+                <Link
+                  to={`/properties/${property.slug}`}
+                  className="flex-1 py-2.5 rounded-xl bg-[#F8F6EA] hover:bg-[#064E3B] text-[#064E3B] hover:text-white text-xs font-bold uppercase tracking-wider text-center transition-colors flex items-center justify-center space-x-1"
+                >
+                  <span>View Listing</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </Link>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

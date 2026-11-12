@@ -368,7 +368,7 @@ export const UserDashboardLayout: React.FC = () => {
 
                 <div className="hidden sm:flex flex-col text-left">
                   <span className="text-xs font-bold text-[#102A24] leading-tight">
-                    {user?.fullName || 'Mohsin Ahmad'}
+                    {user?.fullName || 'Client'}
                   </span>
                   <span className="text-[10px] text-[#64748B]">Client Account</span>
                 </div>

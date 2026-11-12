@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { User, Mail, Phone, Lock, Eye, EyeOff, Home, ArrowRight } from 'lucide-react';
+import { User, Mail, Phone, Lock, Eye, EyeOff, Home, ArrowRight, MapPin } from 'lucide-react';
 import { useUserAuth } from '../../contexts/UserAuthContext';
+import { OAuthModal } from '../../components/auth/OAuthModal';
 
 export const UserSignupPage: React.FC = () => {
   const navigate = useNavigate();
@@ -10,6 +11,8 @@ export const UserSignupPage: React.FC = () => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [city, setCity] = useState('Peshawar');
+  const [address, setAddress] = useState('University Town, Peshawar');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -17,6 +20,10 @@ export const UserSignupPage: React.FC = () => {
   const [agreeTerms, setAgreeTerms] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+
+  // OAuth Modal State
+  const [oauthModalOpen, setOauthModalOpen] = useState(false);
+  const [oauthMode, setOauthMode] = useState<'google' | 'github' | null>(null);
 
   // Redirect if already authenticated
   useEffect(() => {
@@ -55,7 +62,7 @@ export const UserSignupPage: React.FC = () => {
     }
 
     setLoading(true);
-    const res = await signup(fullName, email, phone, password);
+    const res = await signup(fullName, email, phone, password, city, address);
     setLoading(false);
 
     if (res.success) {
@@ -65,27 +72,31 @@ export const UserSignupPage: React.FC = () => {
     }
   };
 
-  const handleGoogleSignup = async () => {
-    setLoading(true);
-    setErrorMsg('');
-    const res = await loginWithGoogle();
-    setLoading(false);
-    if (res.success) {
-      navigate('/user/dashboard');
-    } else if (res.error) {
-      setErrorMsg(res.error);
-    }
+  const handleGoogleSignup = () => {
+    setOauthMode('google');
+    setOauthModalOpen(true);
   };
 
-  const handleGitHubSignup = async () => {
-    setLoading(true);
-    setErrorMsg('');
-    const res = await loginWithGitHub();
-    setLoading(false);
-    if (res.success) {
-      navigate('/user/dashboard');
-    } else if (res.error) {
-      setErrorMsg(res.error);
+  const handleGitHubSignup = () => {
+    setOauthMode('github');
+    setOauthModalOpen(true);
+  };
+
+  const handleOAuthSuccess = async (profileData: any) => {
+    if (profileData.provider === 'google') {
+      const res = await loginWithGoogle(profileData);
+      if (res.success) {
+        navigate('/user/dashboard');
+      } else if (res.error) {
+        setErrorMsg(res.error);
+      }
+    } else {
+      const res = await loginWithGitHub(profileData);
+      if (res.success) {
+        navigate('/user/dashboard');
+      } else if (res.error) {
+        setErrorMsg(res.error);
+      }
     }
   };
 
@@ -356,6 +367,14 @@ export const UserSignupPage: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* OAuth Interactive Modal */}
+      <OAuthModal
+        isOpen={oauthModalOpen}
+        mode={oauthMode}
+        onClose={() => setOauthModalOpen(false)}
+        onSuccess={handleOAuthSuccess}
+      />
     </div>
   );
 };

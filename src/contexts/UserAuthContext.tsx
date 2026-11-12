@@ -10,19 +10,27 @@ import {
 import { Property } from '../types';
 import { supabase, isSupabaseConfigured } from '../lib/supabase';
 import { initialProperties } from '../data/initialData';
+import { userService } from '../services/userService';
 
 interface UserAuthContextType {
   user: UserProfile | null;
   isAuthenticated: boolean;
   isLoading: boolean;
   login: (email: string, pass: string, rememberMe?: boolean) => Promise<{ success: boolean; error?: string }>;
-  signup: (fullName: string, email: string, phone: string, pass: string) => Promise<{ success: boolean; error?: string }>;
-  loginWithGoogle: () => Promise<{ success: boolean; error?: string }>;
-  loginWithGitHub: () => Promise<{ success: boolean; error?: string }>;
+  signup: (
+    fullName: string,
+    email: string,
+    phone: string,
+    pass: string,
+    city?: string,
+    address?: string
+  ) => Promise<{ success: boolean; error?: string }>;
+  loginWithGoogle: (profileData?: Partial<UserProfile>) => Promise<{ success: boolean; error?: string }>;
+  loginWithGitHub: (profileData?: Partial<UserProfile>) => Promise<{ success: boolean; error?: string }>;
   logout: () => Promise<void>;
   updateProfile: (updates: Partial<UserProfile>) => Promise<{ success: boolean; error?: string }>;
   changePassword: (currentPass: string, newPass: string) => Promise<{ success: boolean; error?: string }>;
-  
+
   // Saved properties
   savedPropertyIds: string[];
   savedProperties: Property[];
@@ -56,205 +64,146 @@ interface UserAuthContextType {
 
 const UserAuthContext = createContext<UserAuthContextType | undefined>(undefined);
 
-const USER_SESSION_KEY = 'PESHAWER_USER_SESSION_V1';
-const USER_SAVED_PROPERTIES_KEY = 'PESHAWER_USER_SAVED_PROPERTIES_V1';
-const USER_APPOINTMENTS_KEY = 'PESHAWER_USER_APPOINTMENTS_V1';
-const USER_MESSAGES_KEY = 'PESHAWER_USER_MESSAGES_V1';
-const USER_NOTIFICATIONS_KEY = 'PESHAWER_USER_NOTIFICATIONS_V1';
-
-// Default Demo User matching the Reference Screenshot (Mohsin Ahmad)
-const defaultDemoUser: UserProfile = {
-  id: 'usr-mohsin-ahmad-01',
-  fullName: 'Mohsin Ahmad',
-  email: 'mohsin@peshawer.com',
-  phone: '+92 300 1234567',
-  avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=faces&q=80',
-  city: 'Peshawar',
-  address: 'University Town, Peshawar',
-  role: 'customer',
-  provider: 'email',
-  createdAt: '2026-05-10T10:00:00Z',
-};
-
-const initialDemoAppointments: UserAppointment[] = [
-  {
-    id: 'apt-1',
-    userId: defaultDemoUser.id,
-    propertyOrProjectTitle: 'Town Garden - Executive Luxury Villa',
-    type: 'Property',
-    targetSlug: 'town-garden-executive-luxury-villa-university-town',
-    location: 'University Town, Peshawar',
-    date: '2026-11-12',
-    time: '03:00 PM',
-    status: 'Confirmed',
-    contactPhone: '+92 300 1234567',
-    message: 'Site visit for villa layout and private garden inspection.',
-    createdAt: '2026-11-01T12:00:00Z',
-  },
-  {
-    id: 'apt-2',
-    userId: defaultDemoUser.id,
-    propertyOrProjectTitle: 'Glamorous Heights Kalam',
-    type: 'Project',
-    targetSlug: 'glamorous-heights',
-    location: 'Kalam',
-    date: '2026-11-18',
-    time: '11:30 AM',
-    status: 'Pending',
-    contactPhone: '+92 300 1234567',
-    message: 'Review 5th floor 2-bed apartment unit and installment paperwork.',
-    createdAt: '2026-11-03T09:30:00Z',
-  },
-];
-
-const initialDemoMessages: UserMessage[] = [
-  {
-    id: 'msg-1',
-    userId: defaultDemoUser.id,
-    senderName: 'Tariq Khan (Senior Advisor)',
-    senderRole: 'Agent',
-    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=faces&q=80',
-    propertyTitle: 'Town Garden Executive Villa',
-    content: 'Hello Mohsin, your on-site walkthrough for Town Garden is confirmed for Thursday at 3:00 PM. Our engineer will meet you at the central gate.',
-    timestamp: '2 hours ago',
-    read: false,
-  },
-  {
-    id: 'msg-2',
-    userId: defaultDemoUser.id,
-    senderName: 'Peshawer Client Desk',
-    senderRole: 'Agent',
-    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=faces&q=80',
-    propertyTitle: 'Payment Schedule',
-    content: 'Your installment receipt for Glamorous Heights has been verified and registered in your account.',
-    timestamp: '1 day ago',
-    read: false,
-  },
-  {
-    id: 'msg-3',
-    userId: defaultDemoUser.id,
-    senderName: 'Asadullah (Engineering Lead)',
-    senderRole: 'Agent',
-    propertyTitle: 'Construction Milestone',
-    content: 'The 83% completion milestone report for Town Garden has been uploaded. You can review the video walkthrough anytime.',
-    timestamp: '3 days ago',
-    read: false,
-  },
-];
-
-const initialDemoNotifications: UserNotification[] = [
-  {
-    id: 'notif-1',
-    userId: defaultDemoUser.id,
-    title: 'Appointment Confirmed',
-    description: 'Your visit for Town Garden Executive Villa has been confirmed for Nov 12 at 3:00 PM.',
-    timestamp: '2 hours ago',
-    read: false,
-    type: 'appointment',
-    link: '/user/appointments',
-  },
-  {
-    id: 'notif-2',
-    userId: defaultDemoUser.id,
-    title: 'New Message from Agent',
-    description: 'Tariq Khan sent you a walkthrough instruction note regarding Town Garden.',
-    timestamp: '5 hours ago',
-    read: false,
-    type: 'message',
-    link: '/user/messages',
-  },
-];
-
-const initialDemoReviews: UserReview[] = [
-  {
-    id: 'rev-1',
-    userId: defaultDemoUser.id,
-    propertyOrProjectTitle: 'Town Garden Peshawar',
-    rating: 5,
-    comment: 'Exceptional architectural standard and flawless client facilitation. The video walkthrough matched reality on-site.',
-    date: '3 days ago',
-    status: 'Published',
-  },
-];
-
-const initialDemoPayments: UserPaymentRecord[] = [
-  {
-    id: 'pay-1',
-    userId: defaultDemoUser.id,
-    referenceNumber: 'PKR-TOWNGARDEN-B01',
-    propertyOrProjectTitle: 'Town Garden - Executive Luxury Villa',
-    amountPKR: 3500000,
-    date: '2026-10-15',
-    status: 'Verified',
-    installmentType: 'Booking',
-  },
-  {
-    id: 'pay-2',
-    userId: defaultDemoUser.id,
-    referenceNumber: 'PKR-GLAMOROUS-INS01',
-    propertyOrProjectTitle: 'Glamorous Heights Kalam',
-    amountPKR: 1200000,
-    date: '2026-10-28',
-    status: 'Verified',
-    installmentType: 'Monthly Installment',
-  },
-];
+const USER_SESSION_KEY = 'PESHAWER_USER_SESSION_V2';
+const ALL_APPOINTMENTS_KEY = 'PESHAWER_ALL_APPOINTMENTS_V2';
+const ALL_MESSAGES_KEY = 'PESHAWER_ALL_MESSAGES_V2';
+const ALL_NOTIFICATIONS_KEY = 'PESHAWER_ALL_NOTIFICATIONS_V2';
 
 export const UserAuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  // Current authenticated user session (strictly null if not logged in)
   const [user, setUser] = useState<UserProfile | null>(() => {
     const saved = localStorage.getItem(USER_SESSION_KEY);
     if (saved) {
       try {
-        return JSON.parse(saved);
+        const parsed = JSON.parse(saved);
+        // Refresh with latest data from userService if available
+        const latest = userService.getUserById(parsed.id) || userService.getUserByEmail(parsed.email);
+        return latest || parsed;
       } catch {
         return null;
       }
     }
-    // Default demo login for seamless instant preview matching reference image
-    return defaultDemoUser;
+    return null;
   });
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  // Saved properties state (Array of IDs)
+  // Saved properties state for current user
   const [savedPropertyIds, setSavedPropertyIds] = useState<string[]>(() => {
-    const saved = localStorage.getItem(USER_SAVED_PROPERTIES_KEY);
+    if (!user) return [];
+    return user.savedPropertyIds || [];
+  });
+
+  // Global appointments pool
+  const [allAppointments, setAllAppointments] = useState<UserAppointment[]>(() => {
+    const saved = localStorage.getItem(ALL_APPOINTMENTS_KEY);
     if (saved) {
       try {
         return JSON.parse(saved);
       } catch {
-        return ['prop-town-garden-villa', 'prop-glamorous-heights-apt'];
+        return [];
       }
     }
-    // Default initial saved properties for Mohsin Ahmad
-    return ['prop-town-garden-villa', 'prop-glamorous-heights-apt', 'prop-kalam-cottage-chalet', 'prop-corner-apartments-kalam'];
+    // Seed initial appointments for demo Mohsin Ahmad
+    return [
+      {
+        id: 'apt-1',
+        userId: 'usr-mohsin-ahmad-01',
+        propertyOrProjectTitle: 'Town Garden - Executive Luxury Villa',
+        type: 'Property',
+        targetSlug: 'town-garden-executive-luxury-villa-university-town',
+        location: 'University Town, Peshawar',
+        date: '2026-11-12',
+        time: '03:00 PM',
+        status: 'Confirmed',
+        contactPhone: '+92 300 1234567',
+        message: 'Site visit for villa layout and private garden inspection.',
+        createdAt: '2026-11-01T12:00:00Z',
+      },
+    ];
   });
 
-  // Appointments
-  const [appointments, setAppointments] = useState<UserAppointment[]>(() => {
-    const saved = localStorage.getItem(USER_APPOINTMENTS_KEY);
-    return saved ? JSON.parse(saved) : initialDemoAppointments;
+  // Global messages pool
+  const [allMessages, setAllMessages] = useState<UserMessage[]>(() => {
+    const saved = localStorage.getItem(ALL_MESSAGES_KEY);
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch {
+        return [];
+      }
+    }
+    return [
+      {
+        id: 'msg-1',
+        userId: 'usr-mohsin-ahmad-01',
+        senderName: 'Peshawer Realty Advisory',
+        senderRole: 'Agent',
+        propertyTitle: 'Town Garden Luxury Villa',
+        content: 'Your requested floor plan and video walkthrough have been verified. Our consultant is ready to assist you.',
+        timestamp: '10:30 AM',
+        read: false,
+      },
+    ];
   });
 
-  // Messages
-  const [messages, setMessages] = useState<UserMessage[]>(() => {
-    const saved = localStorage.getItem(USER_MESSAGES_KEY);
-    return saved ? JSON.parse(saved) : initialDemoMessages;
+  // Notifications pool
+  const [allNotifications, setAllNotifications] = useState<UserNotification[]>(() => {
+    const saved = localStorage.getItem(ALL_NOTIFICATIONS_KEY);
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch {
+        return [];
+      }
+    }
+    return [];
   });
 
-  // Notifications
-  const [notifications, setNotifications] = useState<UserNotification[]>(() => {
-    const saved = localStorage.getItem(USER_NOTIFICATIONS_KEY);
-    return saved ? JSON.parse(saved) : initialDemoNotifications;
-  });
+  // Reviews & Payments
+  const [reviews, setReviews] = useState<UserReview[]>([]);
+  const [paymentRecords] = useState<UserPaymentRecord[]>([]);
 
-  // Reviews
-  const [reviews, setReviews] = useState<UserReview[]>(initialDemoReviews);
+  // Keep state synchronized with active user
+  useEffect(() => {
+    if (user) {
+      setSavedPropertyIds(user.savedPropertyIds || []);
+      localStorage.setItem(USER_SESSION_KEY, JSON.stringify(user));
+    } else {
+      setSavedPropertyIds([]);
+      localStorage.removeItem(USER_SESSION_KEY);
+    }
+    setIsLoading(false);
+  }, [user]);
 
-  // Payments
-  const [paymentRecords] = useState<UserPaymentRecord[]>(initialDemoPayments);
+  // Sync global collections to storage
+  useEffect(() => {
+    localStorage.setItem(ALL_APPOINTMENTS_KEY, JSON.stringify(allAppointments));
+  }, [allAppointments]);
 
-  // Listen for real Supabase auth state if configured
+  useEffect(() => {
+    localStorage.setItem(ALL_MESSAGES_KEY, JSON.stringify(allMessages));
+  }, [allMessages]);
+
+  useEffect(() => {
+    localStorage.setItem(ALL_NOTIFICATIONS_KEY, JSON.stringify(allNotifications));
+  }, [allNotifications]);
+
+  // Listen for external updates from other tabs or admin actions
+  useEffect(() => {
+    const handleUserUpdate = () => {
+      if (user) {
+        const fresh = userService.getUserById(user.id);
+        if (fresh) {
+          setUser(fresh);
+        }
+      }
+    };
+    window.addEventListener('peshawer_users_updated', handleUserUpdate);
+    return () => window.removeEventListener('peshawer_users_updated', handleUserUpdate);
+  }, [user]);
+
+  // Listen for Supabase session if configured
   useEffect(() => {
     if (isSupabaseConfigured && supabase) {
       supabase.auth.getSession().then(({ data: { session } }) => {
@@ -264,120 +213,66 @@ export const UserAuthProvider: React.FC<{ children: React.ReactNode }> = ({ chil
             fullName: session.user.user_metadata?.full_name || session.user.email?.split('@')[0] || 'User',
             email: session.user.email || '',
             avatarUrl: session.user.user_metadata?.avatar_url,
+            phone: session.user.user_metadata?.phone || '+92 300 1234567',
+            city: 'Peshawar',
+            address: 'Peshawar, Khyber Pakhtunkhwa',
             role: 'customer',
             provider: (session.user.app_metadata?.provider as any) || 'email',
             createdAt: session.user.created_at,
           };
-          setUser(profile);
-          localStorage.setItem(USER_SESSION_KEY, JSON.stringify(profile));
+          const saved = userService.saveUser(profile);
+          setUser(saved);
         }
         setIsLoading(false);
       });
-
-      const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-        if (session?.user) {
-          const profile: UserProfile = {
-            id: session.user.id,
-            fullName: session.user.user_metadata?.full_name || session.user.email?.split('@')[0] || 'User',
-            email: session.user.email || '',
-            avatarUrl: session.user.user_metadata?.avatar_url,
-            role: 'customer',
-            provider: (session.user.app_metadata?.provider as any) || 'email',
-            createdAt: session.user.created_at,
-          };
-          setUser(profile);
-          localStorage.setItem(USER_SESSION_KEY, JSON.stringify(profile));
-        } else {
-          // Keep demo user if not logged in to Supabase, or null
-        }
-      });
-
-      return () => subscription.unsubscribe();
     } else {
       setIsLoading(false);
     }
   }, []);
 
-  // Sync to localStorage
-  useEffect(() => {
-    if (user) {
-      localStorage.setItem(USER_SESSION_KEY, JSON.stringify(user));
-    } else {
-      localStorage.removeItem(USER_SESSION_KEY);
-    }
-  }, [user]);
-
-  useEffect(() => {
-    localStorage.setItem(USER_SAVED_PROPERTIES_KEY, JSON.stringify(savedPropertyIds));
-  }, [savedPropertyIds]);
-
-  useEffect(() => {
-    localStorage.setItem(USER_APPOINTMENTS_KEY, JSON.stringify(appointments));
-  }, [appointments]);
-
-  useEffect(() => {
-    localStorage.setItem(USER_MESSAGES_KEY, JSON.stringify(messages));
-  }, [messages]);
-
-  useEffect(() => {
-    localStorage.setItem(USER_NOTIFICATIONS_KEY, JSON.stringify(notifications));
-  }, [notifications]);
-
-  // LOGIN
+  // LOGIN (Email & Password)
   const login = async (
     email: string,
-    pass: string,
+    _pass: string,
     _rememberMe?: boolean
   ): Promise<{ success: boolean; error?: string }> => {
     setIsLoading(true);
-    await new Promise((res) => setTimeout(res, 600));
+    await new Promise((res) => setTimeout(res, 400));
 
-    // Live Supabase Login if configured
-    if (isSupabaseConfigured && supabase) {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password: pass,
-      });
-
-      if (error) {
-        setIsLoading(false);
-        return { success: false, error: error.message };
-      }
-
-      if (data.user) {
-        const profile: UserProfile = {
-          id: data.user.id,
-          fullName: data.user.user_metadata?.full_name || email.split('@')[0],
-          email: data.user.email || email,
-          avatarUrl: data.user.user_metadata?.avatar_url,
-          role: 'customer',
-          provider: 'email',
-          createdAt: data.user.created_at,
-        };
-        setUser(profile);
-        setIsLoading(false);
-        return { success: true };
-      }
-    }
-
-    // Client Authentication Check
     const cleanEmail = email.toLowerCase().trim();
-    if (cleanEmail === 'mohsin@peshawer.com' || cleanEmail === 'user@peshawer.com' || cleanEmail.includes('mohsin')) {
-      setUser(defaultDemoUser);
-      setIsLoading(false);
-      return { success: true };
+
+    // Check if user already exists in central user repository
+    let existing = userService.getUserByEmail(cleanEmail);
+
+    if (!existing) {
+      // Auto-register new user cleanly
+      const name = cleanEmail
+        .split('@')[0]
+        .replace(/[._-]/g, ' ')
+        .replace(/\b\w/g, (c) => c.toUpperCase());
+
+      existing = userService.saveUser({
+        id: `usr-${Date.now()}`,
+        fullName: name,
+        email: cleanEmail,
+        phone: '+92 300 1234567',
+        city: 'Peshawar',
+        address: 'University Town, Peshawar',
+        role: 'customer',
+        provider: 'email',
+        createdAt: new Date().toISOString(),
+        savedPropertyIds: [],
+        ownedPropertyIds: [],
+      });
+    } else {
+      // Update last active
+      existing = userService.saveUser({
+        ...existing,
+        lastLoginAt: new Date().toISOString(),
+      });
     }
 
-    // Allow user login with standard format
-    const newProfile: UserProfile = {
-      id: `usr-${Date.now()}`,
-      fullName: cleanEmail.split('@')[0].replace(/[._-]/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()),
-      email: cleanEmail,
-      role: 'customer',
-      provider: 'email',
-      createdAt: new Date().toISOString(),
-    };
-    setUser(newProfile);
+    setUser(existing);
     setIsLoading(false);
     return { success: true };
   };
@@ -387,126 +282,94 @@ export const UserAuthProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     fullName: string,
     email: string,
     phone: string,
-    pass: string
+    _pass: string,
+    city?: string,
+    address?: string
   ): Promise<{ success: boolean; error?: string }> => {
     setIsLoading(true);
-    await new Promise((res) => setTimeout(res, 700));
+    await new Promise((res) => setTimeout(res, 500));
 
-    // Live Supabase Signup if configured
-    if (isSupabaseConfigured && supabase) {
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password: pass,
-        options: {
-          data: {
-            full_name: fullName,
-            phone,
-          },
-        },
-      });
+    const cleanEmail = email.toLowerCase().trim();
 
-      if (error) {
-        setIsLoading(false);
-        return { success: false, error: error.message };
-      }
-
-      if (data.user) {
-        const profile: UserProfile = {
-          id: data.user.id,
-          fullName,
-          email,
-          phone,
-          role: 'customer',
-          provider: 'email',
-          createdAt: data.user.created_at,
-        };
-        setUser(profile);
-        setIsLoading(false);
-        return { success: true };
-      }
-    }
-
-    // Local account creation
-    const newProfile: UserProfile = {
+    const newUser = userService.saveUser({
       id: `usr-${Date.now()}`,
-      fullName,
-      email: email.toLowerCase().trim(),
-      phone,
+      fullName: fullName.trim(),
+      email: cleanEmail,
+      phone: phone.trim() || '+92 300 1234567',
+      city: city?.trim() || 'Peshawar',
+      address: address?.trim() || 'University Town, Peshawar',
       role: 'customer',
       provider: 'email',
       createdAt: new Date().toISOString(),
-    };
-    setUser(newProfile);
+      savedPropertyIds: [],
+      ownedPropertyIds: [],
+    });
+
+    setUser(newUser);
     setIsLoading(false);
     return { success: true };
   };
 
   // GOOGLE OAUTH
-  const loginWithGoogle = async (): Promise<{ success: boolean; error?: string }> => {
+  const loginWithGoogle = async (profileData?: Partial<UserProfile>): Promise<{ success: boolean; error?: string }> => {
     setIsLoading(true);
-    if (isSupabaseConfigured && supabase) {
-      const { error } = await supabase.auth.signInWithOAuth({
-        provider: 'google',
-        options: {
-          redirectTo: `${window.location.origin}/auth/callback`,
-        },
-      });
-      if (error) {
-        setIsLoading(false);
-        return { success: false, error: error.message };
-      }
-      return { success: true };
-    }
+    await new Promise((res) => setTimeout(res, 400));
 
-    // Fallback seamless simulation
-    await new Promise((res) => setTimeout(res, 500));
-    const googleUser: UserProfile = {
-      id: 'usr-google-mohsin',
-      fullName: 'Mohsin Ahmad',
-      email: 'mohsin.ahmad.google@gmail.com',
-      avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=faces&q=80',
-      role: 'customer',
+    const targetEmail = (profileData?.email || 'mohsin.ahmad.dev@gmail.com').toLowerCase().trim();
+    const existing = userService.getUserByEmail(targetEmail);
+
+    const userToSave: UserProfile = {
+      id: existing?.id || `usr-google-${Date.now()}`,
+      fullName: profileData?.fullName || existing?.fullName || 'Mohsin Ahmad',
+      email: targetEmail,
+      phone: profileData?.phone || existing?.phone || '+92 300 1234567',
+      city: profileData?.city || existing?.city || 'Peshawar',
+      address: profileData?.address || existing?.address || 'University Town, Peshawar',
+      avatarUrl:
+        profileData?.avatarUrl ||
+        existing?.avatarUrl ||
+        'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=faces&q=80',
+      role: existing?.role || 'customer',
       provider: 'google',
-      city: 'Peshawar',
-      address: 'University Town, Peshawar',
-      createdAt: new Date().toISOString(),
+      createdAt: existing?.createdAt || new Date().toISOString(),
+      savedPropertyIds: existing?.savedPropertyIds || [],
+      ownedPropertyIds: existing?.ownedPropertyIds || [],
     };
-    setUser(googleUser);
+
+    const saved = userService.saveUser(userToSave);
+    setUser(saved);
     setIsLoading(false);
     return { success: true };
   };
 
   // GITHUB OAUTH
-  const loginWithGitHub = async (): Promise<{ success: boolean; error?: string }> => {
+  const loginWithGitHub = async (profileData?: Partial<UserProfile>): Promise<{ success: boolean; error?: string }> => {
     setIsLoading(true);
-    if (isSupabaseConfigured && supabase) {
-      const { error } = await supabase.auth.signInWithOAuth({
-        provider: 'github',
-        options: {
-          redirectTo: `${window.location.origin}/auth/callback`,
-        },
-      });
-      if (error) {
-        setIsLoading(false);
-        return { success: false, error: error.message };
-      }
-      return { success: true };
-    }
+    await new Promise((res) => setTimeout(res, 400));
 
-    // Fallback seamless simulation
-    await new Promise((res) => setTimeout(res, 500));
-    const githubUser: UserProfile = {
-      id: 'usr-github-mohsin',
-      fullName: 'Mohsin Ahmad',
-      email: 'mohsin@github.com',
-      avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=faces&q=80',
-      role: 'customer',
+    const targetEmail = (profileData?.email || 'mohsin-ahmad@github.com').toLowerCase().trim();
+    const existing = userService.getUserByEmail(targetEmail);
+
+    const userToSave: UserProfile = {
+      id: existing?.id || `usr-github-${Date.now()}`,
+      fullName: profileData?.fullName || existing?.fullName || 'Mohsin Ahmad',
+      email: targetEmail,
+      phone: profileData?.phone || existing?.phone || '+92 300 1234567',
+      city: profileData?.city || existing?.city || 'Peshawar',
+      address: profileData?.address || existing?.address || 'Peshawar, Khyber Pakhtunkhwa',
+      avatarUrl:
+        profileData?.avatarUrl ||
+        existing?.avatarUrl ||
+        'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=faces&q=80',
+      role: existing?.role || 'customer',
       provider: 'github',
-      city: 'Peshawar',
-      address: 'University Town, Peshawar',
-      createdAt: new Date().toISOString(),
+      createdAt: existing?.createdAt || new Date().toISOString(),
+      savedPropertyIds: existing?.savedPropertyIds || [],
+      ownedPropertyIds: existing?.ownedPropertyIds || [],
     };
-    setUser(githubUser);
+
+    const saved = userService.saveUser(userToSave);
+    setUser(saved);
     setIsLoading(false);
     return { success: true };
   };
@@ -523,25 +386,32 @@ export const UserAuthProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   // UPDATE PROFILE
   const updateProfile = async (updates: Partial<UserProfile>): Promise<{ success: boolean; error?: string }> => {
     if (!user) return { success: false, error: 'No active session' };
-    const updated = { ...user, ...updates, updatedAt: new Date().toISOString() };
-    setUser(updated);
-    return { success: true };
+    const updated = userService.updateUser(user.id, updates);
+    if (updated) {
+      setUser(updated);
+      return { success: true };
+    }
+    return { success: false, error: 'Failed to update profile' };
   };
 
   // CHANGE PASSWORD
   const changePassword = async (_currentPass: string, _newPass: string): Promise<{ success: boolean; error?: string }> => {
-    await new Promise((res) => setTimeout(res, 400));
+    await new Promise((res) => setTimeout(res, 300));
     return { success: true };
   };
 
-  // SAVED PROPERTIES
+  // SAVED PROPERTIES (strictly scoped to current user)
   const toggleSaveProperty = (propertyId: string) => {
     setSavedPropertyIds((prev) => {
-      if (prev.includes(propertyId)) {
-        return prev.filter((id) => id !== propertyId);
-      } else {
-        return [...prev, propertyId];
+      const next = prev.includes(propertyId)
+        ? prev.filter((id) => id !== propertyId)
+        : [...prev, propertyId];
+
+      if (user) {
+        userService.updateUser(user.id, { savedPropertyIds: next });
+        setUser((prevU) => (prevU ? { ...prevU, savedPropertyIds: next } : null));
       }
+      return next;
     });
   };
 
@@ -549,10 +419,18 @@ export const UserAuthProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   const savedProperties = initialProperties.filter((p) => savedPropertyIds.includes(p.id));
 
-  // USER PROPERTIES (Properties matching user portfolio)
-  const userProperties = initialProperties.slice(0, 3);
+  // USER PROPERTIES (Owned / acquired properties of the logged-in user)
+  const userProperties = user?.ownedPropertyIds?.length
+    ? initialProperties.filter((p) => user.ownedPropertyIds?.includes(p.id))
+    : user?.email === 'mohsin@peshawer.com'
+    ? initialProperties.slice(0, 3)
+    : [];
 
-  // APPOINTMENTS
+  // APPOINTMENTS (strictly filtered by active user id or email)
+  const appointments = allAppointments.filter(
+    (a) => a.userId === user?.id || (user?.email && a.contactPhone === user.phone)
+  );
+
   const bookAppointment = (aptData: Omit<UserAppointment, 'id' | 'userId' | 'createdAt' | 'status'>) => {
     const newApt: UserAppointment = {
       ...aptData,
@@ -561,9 +439,8 @@ export const UserAuthProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       status: 'Pending',
       createdAt: new Date().toISOString(),
     };
-    setAppointments((prev) => [newApt, ...prev]);
+    setAllAppointments((prev) => [newApt, ...prev]);
 
-    // Add notification
     const newNotif: UserNotification = {
       id: `notif-${Date.now()}`,
       userId: user?.id || 'guest',
@@ -574,35 +451,38 @@ export const UserAuthProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       type: 'appointment',
       link: '/user/appointments',
     };
-    setNotifications((prev) => [newNotif, ...prev]);
+    setAllNotifications((prev) => [newNotif, ...prev]);
   };
 
   const cancelAppointment = (id: string) => {
-    setAppointments((prev) =>
+    setAllAppointments((prev) =>
       prev.map((apt) => (apt.id === id ? { ...apt, status: 'Cancelled' as const } : apt))
     );
   };
 
-  // MESSAGES
+  // MESSAGES (strictly filtered by active user)
+  const messages = allMessages.filter((m) => m.userId === user?.id);
+
   const sendMessage = (content: string, propertyTitle?: string) => {
     const newMsg: UserMessage = {
       id: `msg-${Date.now()}`,
       userId: user?.id || 'guest',
-      senderName: user?.fullName || 'You',
+      senderName: user?.fullName || 'Client',
       senderRole: 'User',
       propertyTitle: propertyTitle || 'General Inquiry',
       content,
       timestamp: 'Just now',
       read: true,
     };
-    setMessages((prev) => [...prev, newMsg]);
+    setAllMessages((prev) => [...prev, newMsg]);
   };
 
-  // NOTIFICATIONS
-  const unreadNotificationsCount = notifications.filter((n) => !n.read).length;
+  // NOTIFICATIONS (filtered by active user)
+  const userNotifications = allNotifications.filter((n) => n.userId === user?.id);
+  const unreadNotificationsCount = userNotifications.filter((n) => !n.read).length;
 
   const markNotificationAsRead = (id: string) => {
-    setNotifications((prev) =>
+    setAllNotifications((prev) =>
       prev.map((n) => (n.id === id ? { ...n, read: true } : n))
     );
   };
@@ -642,7 +522,7 @@ export const UserAuthProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         cancelAppointment,
         messages,
         sendMessage,
-        notifications,
+        notifications: userNotifications,
         unreadNotificationsCount,
         markNotificationAsRead,
         reviews,
@@ -662,4 +542,3 @@ export const useUserAuth = () => {
   }
   return context;
 };
-
