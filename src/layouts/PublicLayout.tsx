@@ -10,8 +10,8 @@ import { WhatsAppFloatingButton } from '../components/common/WhatsAppFloatingBut
 export const PublicLayout: React.FC = () => {
   const location = useLocation();
   const [initialLoading, setInitialLoading] = useState(() => {
-    // Only show loading screen on very first load of the session
-    return !sessionStorage.getItem('PESHAWER_LOADED');
+    // Show cinematic video loading screen on first session visit
+    return !sessionStorage.getItem('PESHAWER_VIDEO_LOADED_V1');
   });
   const [inquiryModalOpen, setInquiryModalOpen] = useState(false);
   const [appointmentModalOpen, setAppointmentModalOpen] = useState(false);
@@ -22,7 +22,7 @@ export const PublicLayout: React.FC = () => {
   }, [location.pathname]);
 
   const handleLoaded = () => {
-    sessionStorage.setItem('PESHAWER_LOADED', 'true');
+    sessionStorage.setItem('PESHAWER_VIDEO_LOADED_V1', 'true');
     setInitialLoading(false);
   };
 
