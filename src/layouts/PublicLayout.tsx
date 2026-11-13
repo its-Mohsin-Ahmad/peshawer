@@ -11,7 +11,7 @@ export const PublicLayout: React.FC = () => {
   const location = useLocation();
   const [initialLoading, setInitialLoading] = useState(() => {
     // Show cinematic video loading screen on first session visit
-    return !sessionStorage.getItem('PESHAWER_VIDEO_LOADED_V5');
+    return !sessionStorage.getItem('PESHAWER_VIDEO_LOADED_V6');
   });
   const [inquiryModalOpen, setInquiryModalOpen] = useState(false);
   const [appointmentModalOpen, setAppointmentModalOpen] = useState(false);
@@ -22,7 +22,7 @@ export const PublicLayout: React.FC = () => {
   }, [location.pathname]);
 
   const handleLoaded = () => {
-    sessionStorage.setItem('PESHAWER_VIDEO_LOADED_V5', 'true');
+    sessionStorage.setItem('PESHAWER_VIDEO_LOADED_V6', 'true');
     setInitialLoading(false);
   };
 
