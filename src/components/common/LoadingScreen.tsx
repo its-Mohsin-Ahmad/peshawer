@@ -11,9 +11,6 @@ interface Particle {
   speedY: number;
   speedX: number;
   opacity: number;
-  maxOpacity: number;
-  fadeSpeed: number;
-  isFadingIn: boolean;
   pulsePhase: number;
   pulseSpeed: number;
   color: string;
@@ -25,8 +22,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoaded }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const completedRef = useRef(false);
 
-  const logoSrc = `${import.meta.env.BASE_URL}assets/peshawars-logo-transparent.png`;
-  const bgSrc = `${import.meta.env.BASE_URL}assets/peshawars-loader-bg.jpg`;
+  const loaderImageSrc = `${import.meta.env.BASE_URL}assets/peshawars-loader-bg.jpg`;
 
   const handleFinish = () => {
     if (completedRef.current) return;
@@ -35,13 +31,13 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoaded }) => {
     setIsFadingOut(true);
     setTimeout(() => {
       if (onLoaded) onLoaded();
-    }, 650);
+    }, 600);
   };
 
-  // Real-time progress animation
+  // 2.5s real-time progress sequence
   useEffect(() => {
     const startTime = Date.now();
-    const duration = 2800; // 2.8s smooth luxury transition
+    const duration = 2500;
 
     const interval = setInterval(() => {
       const elapsed = Date.now() - startTime;
@@ -52,12 +48,12 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoaded }) => {
         clearInterval(interval);
         handleFinish();
       }
-    }, 25);
+    }, 20);
 
     return () => clearInterval(interval);
   }, []);
 
-  // HTML5 Canvas Golden Particle Engine
+  // Real-time Canvas Golden Particle Engine
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -76,55 +72,52 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoaded }) => {
     };
     window.addEventListener('resize', handleResize);
 
-    // Particle palette: rich gold, champagne, amber, sparkling white-gold
-    const goldColors = [
+    // Warm luxury golden palette matching the emerald background
+    const goldTones = [
       '255, 215, 80',
-      '255, 200, 60',
-      '245, 180, 40',
-      '255, 235, 140',
-      '220, 165, 30',
+      '255, 200, 50',
+      '245, 185, 40',
+      '255, 240, 150',
+      '230, 175, 35',
     ];
 
-    const particleCount = width < 640 ? 55 : 90;
+    const count = width < 640 ? 55 : 85;
     const particles: Particle[] = [];
 
-    for (let i = 0; i < particleCount; i++) {
+    for (let i = 0; i < count; i++) {
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        size: Math.random() < 0.2 ? Math.random() * 4 + 3 : Math.random() * 2.2 + 0.8,
-        speedY: -(Math.random() * 0.55 + 0.2),
-        speedX: (Math.random() - 0.5) * 0.35,
+        size: Math.random() < 0.25 ? Math.random() * 3.5 + 2.5 : Math.random() * 2 + 0.8,
+        speedY: -(Math.random() * 0.6 + 0.25),
+        speedX: (Math.random() - 0.5) * 0.4,
         opacity: Math.random() * 0.7 + 0.2,
-        maxOpacity: Math.random() * 0.6 + 0.4,
-        fadeSpeed: Math.random() * 0.012 + 0.005,
-        isFadingIn: Math.random() > 0.5,
         pulsePhase: Math.random() * Math.PI * 2,
-        pulseSpeed: Math.random() * 0.04 + 0.02,
-        color: goldColors[Math.floor(Math.random() * goldColors.length)],
+        pulseSpeed: Math.random() * 0.05 + 0.02,
+        color: goldTones[Math.floor(Math.random() * goldTones.length)],
       });
     }
 
     let time = 0;
     const render = () => {
-      time += 0.02;
+      time += 0.025;
       ctx.clearRect(0, 0, width, height);
 
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
 
-        // Motion update: gentle upward drift with sinusoidal horizontal float
+        // Physics: upward floating drift + sine wave sway
         p.y += p.speedY;
-        p.x += p.speedX + Math.sin(time + p.pulsePhase) * 0.25;
+        p.x += p.speedX + Math.sin(time + p.pulsePhase) * 0.3;
 
-        // Twinkle / Opacity pulsation
+        // Twinkle
         p.pulsePhase += p.pulseSpeed;
         const currentOpacity = Math.max(
           0.1,
           Math.min(1, p.opacity + Math.sin(p.pulsePhase) * 0.35)
         );
 
-        // Respawn when particle floats out of view
+        // Respawn wrap-around
         if (p.y < -20) {
           p.y = height + 10;
           p.x = Math.random() * width;
@@ -132,28 +125,28 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoaded }) => {
         if (p.x < -20) p.x = width + 10;
         if (p.x > width + 20) p.x = -10;
 
-        // Render soft glowing halo around medium/large particles
+        // Glowing bokeh halo for larger particles
         if (p.size > 2) {
-          const glowRadius = p.size * 3.5;
+          const glow = p.size * 3.2;
           const gradient = ctx.createRadialGradient(
             p.x,
             p.y,
             0,
             p.x,
             p.y,
-            glowRadius
+            glow
           );
-          gradient.addColorStop(0, `rgba(${p.color}, ${currentOpacity * 0.7})`);
+          gradient.addColorStop(0, `rgba(${p.color}, ${currentOpacity * 0.75})`);
           gradient.addColorStop(0.5, `rgba(${p.color}, ${currentOpacity * 0.2})`);
           gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
 
           ctx.fillStyle = gradient;
           ctx.beginPath();
-          ctx.arc(p.x, p.y, glowRadius, 0, Math.PI * 2);
+          ctx.arc(p.x, p.y, glow, 0, Math.PI * 2);
           ctx.fill();
         }
 
-        // Render solid particle core
+        // Particle Core
         ctx.fillStyle = `rgba(${p.color}, ${currentOpacity})`;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
@@ -178,66 +171,52 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoaded }) => {
         isFadingOut ? 'opacity-0 scale-105 pointer-events-none' : 'opacity-100 scale-100'
       }`}
       style={{
-        background: '#011C12',
+        background: 'radial-gradient(ellipse at center, #01371C 0%, #002211 60%, #001208 100%)',
       }}
     >
-      {/* 1. EMERALD SILK BASE BACKGROUND */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <img
-          src={bgSrc}
-          alt=""
-          className="w-full h-full object-cover object-center filter brightness-[0.9] contrast-[1.05]"
-        />
-
-        {/* Deep luxury vignette & emerald overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#01140C] via-transparent to-[#01140C]/90 pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,rgba(0,18,12,0.75)_100%)] pointer-events-none" />
-
-        {/* Soft breathing golden glow behind the logo */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] sm:w-[520px] h-[340px] sm:h-[520px] rounded-full bg-[#FFC83D]/12 blur-[90px] pointer-events-none animate-pulse [animation-duration:3.2s]" />
+      {/* 1. EMERALD BASE & AMBIENT VIGNETTE */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#FFC83D]/10 blur-[100px] animate-pulse [animation-duration:3s]" />
       </div>
 
-      {/* 2. REAL-TIME INTERACTIVE GOLDEN PARTICLE CANVAS */}
+      {/* 2. REAL-TIME CANVAS GOLDEN PARTICLE LAYER (Front of background, surrounding artwork) */}
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 z-10 pointer-events-none w-full h-full"
+        className="absolute inset-0 z-20 pointer-events-none w-full h-full"
       />
 
-      {/* 3. SPACER */}
-      <div className="relative z-20 w-full pt-8 sm:pt-10 flex justify-center" />
+      {/* TOP SPACER */}
+      <div className="relative z-10 w-full pt-6 flex justify-center" />
 
-      {/* 4. CENTER: THE EXACT LOGO PNG WITH LUXURY GLOW & SUBTLE FLOAT */}
-      <div className="relative z-20 flex flex-col items-center justify-center px-4 my-auto">
-        <div className="relative group flex items-center justify-center animate-[float_3.6s_ease-in-out_infinite]">
-          {/* Subtle light sweep reflection across the logo */}
-          <div className="relative overflow-hidden rounded-2xl">
-            <img
-              src={logoSrc}
-              alt="Peshawars.com - Buy, Sell, Invest"
-              className="w-full max-w-[82vw] sm:max-w-[420px] md:max-w-[500px] h-auto object-contain drop-shadow-[0_15px_45px_rgba(0,0,0,0.85)] filter contrast-[1.08] brightness-[1.02]"
-            />
+      {/* 3. CENTER: EXACT LOADER ARTWORK WITH FLOATING PARTICLES & LIGHT SHEEN */}
+      <div className="relative z-10 flex flex-col items-center justify-center my-auto px-4 max-w-full">
+        <div className="relative flex items-center justify-center animate-[subtleFloat_3.2s_ease-in-out_infinite]">
+          {/* Base artwork image */}
+          <img
+            src={loaderImageSrc}
+            alt="Peshawars.com - Buy, Sell, Invest"
+            className="w-full max-w-[94vw] sm:max-w-xl md:max-w-2xl lg:max-w-3xl h-auto object-contain rounded-2xl drop-shadow-[0_20px_50px_rgba(0,0,0,0.85)] filter contrast-[1.04] brightness-[1.02]"
+          />
 
-            {/* Dynamic golden shine sweep */}
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full animate-[shimmer_2.8s_infinite] pointer-events-none" />
+          {/* Golden shine sweep that sweeps across the logo */}
+          <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
+            <div className="w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full animate-[shimmer_2.6s_infinite]" />
           </div>
-
-          {/* Central golden flare highlight behind the home icon */}
-          <div className="absolute top-[18%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full bg-[#FFD778]/25 blur-2xl pointer-events-none animate-pulse [animation-duration:2s]" />
         </div>
       </div>
 
-      {/* 5. BOTTOM: SLEEK GOLDEN LOADING PROGRESS LINE */}
-      <div className="relative z-20 w-full pb-8 sm:pb-12 px-6 flex flex-col items-center text-center">
+      {/* 4. BOTTOM: SLEEK GOLDEN PROGRESS BAR WITH LIVE PERCENT */}
+      <div className="relative z-30 w-full pb-8 sm:pb-12 px-6 flex flex-col items-center text-center">
         <div className="w-full max-w-xs sm:max-w-sm flex flex-col items-center gap-2">
-          {/* Progress track */}
-          <div className="relative w-full h-1 sm:h-1.5 bg-black/40 rounded-full overflow-hidden p-[1px] border border-[#FFC83D]/30 backdrop-blur-md shadow-[0_4px_15px_rgba(0,0,0,0.6)]">
+          {/* Golden Progress Track */}
+          <div className="w-full h-1.5 bg-black/50 rounded-full overflow-hidden p-[1px] border border-[#FFC83D]/35 backdrop-blur-md shadow-[0_4px_15px_rgba(0,0,0,0.7)]">
             <div
               className="h-full bg-gradient-to-r from-[#9E6805] via-[#FFE28A] to-[#FFC83D] rounded-full transition-all duration-100 ease-out shadow-[0_0_14px_rgba(255,200,61,0.95)]"
-              style={{ width: `${Math.max(4, progress)}%` }}
+              style={{ width: `${Math.max(5, progress)}%` }}
             />
           </div>
 
-          {/* Live Progress Percentage */}
+          {/* Percentage */}
           <div className="flex items-center justify-between w-full px-1 text-[11px] font-mono font-bold tracking-widest text-[#FFC83D]/90">
             <span className="text-[10px] uppercase font-heading text-white/50 tracking-wider">
               Loading
@@ -247,14 +226,14 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoaded }) => {
         </div>
       </div>
 
-      {/* Keyframe animations for floating & shimmer */}
+      {/* Embedded Animations */}
       <style>{`
-        @keyframes float {
+        @keyframes subtleFloat {
           0%, 100% {
-            transform: translateY(0px);
+            transform: translateY(0px) scale(1);
           }
           50% {
-            transform: translateY(-8px);
+            transform: translateY(-5px) scale(1.015);
           }
         }
         @keyframes shimmer {
