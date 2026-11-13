@@ -4,16 +4,31 @@ interface LoadingScreenProps {
   onLoaded?: () => void;
 }
 
+interface Particle {
+  x: number;
+  y: number;
+  size: number;
+  speedY: number;
+  speedX: number;
+  opacity: number;
+  maxOpacity: number;
+  fadeSpeed: number;
+  isFadingIn: boolean;
+  pulsePhase: number;
+  pulseSpeed: number;
+  color: string;
+}
+
 export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoaded }) => {
-  const [isFadingOut, setIsFadingOut] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isFadingOut, setIsFadingOut] = useState(false);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const completedRef = useRef(false);
 
-  const videoSrc = `${import.meta.env.BASE_URL}assets/loading-video.mp4`;
+  const logoSrc = `${import.meta.env.BASE_URL}assets/peshawars-logo-transparent.png`;
+  const bgSrc = `${import.meta.env.BASE_URL}assets/peshawars-loader-bg.jpg`;
 
-  const handleComplete = () => {
+  const handleFinish = () => {
     if (completedRef.current) return;
     completedRef.current = true;
     setProgress(100);
@@ -23,144 +38,234 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoaded }) => {
     }, 650);
   };
 
+  // Real-time progress animation
   useEffect(() => {
-    const video = videoRef.current;
-    if (video) {
-      video.muted = true;
-      video.playsInline = true;
+    const startTime = Date.now();
+    const duration = 2800; // 2.8s smooth luxury transition
 
-      const attemptPlay = () => {
-        const playPromise = video.play();
-        if (playPromise !== undefined) {
-          playPromise
-            .then(() => {
-              // Video is actively playing
-            })
-            .catch(() => {
-              video.muted = true;
-              video.play().catch(() => {});
-            });
-        }
-      };
+    const interval = setInterval(() => {
+      const elapsed = Date.now() - startTime;
+      const rawPct = Math.min(100, Math.floor((elapsed / duration) * 100));
+      setProgress(rawPct);
 
-      attemptPlay();
-    }
+      if (elapsed >= duration) {
+        clearInterval(interval);
+        handleFinish();
+      }
+    }, 25);
 
-    // Safety timeout to ensure user is never blocked
-    const safetyTimer = setTimeout(() => {
-      handleComplete();
-    }, 10000);
-
-    return () => clearTimeout(safetyTimer);
+    return () => clearInterval(interval);
   }, []);
 
-  const handleTimeUpdate = () => {
-    const video = videoRef.current;
-    if (video && video.duration) {
-      if (!isPlaying && video.currentTime > 0.05) {
-        setIsPlaying(true);
-      }
-      const pct = Math.min(100, Math.round((video.currentTime / video.duration) * 100));
-      setProgress(pct);
+  // HTML5 Canvas Golden Particle Engine
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let animationFrameId: number;
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
+
+    const handleResize = () => {
+      if (!canvas) return;
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    };
+    window.addEventListener('resize', handleResize);
+
+    // Particle palette: rich gold, champagne, amber, sparkling white-gold
+    const goldColors = [
+      '255, 215, 80',
+      '255, 200, 60',
+      '245, 180, 40',
+      '255, 235, 140',
+      '220, 165, 30',
+    ];
+
+    const particleCount = width < 640 ? 55 : 90;
+    const particles: Particle[] = [];
+
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        size: Math.random() < 0.2 ? Math.random() * 4 + 3 : Math.random() * 2.2 + 0.8,
+        speedY: -(Math.random() * 0.55 + 0.2),
+        speedX: (Math.random() - 0.5) * 0.35,
+        opacity: Math.random() * 0.7 + 0.2,
+        maxOpacity: Math.random() * 0.6 + 0.4,
+        fadeSpeed: Math.random() * 0.012 + 0.005,
+        isFadingIn: Math.random() > 0.5,
+        pulsePhase: Math.random() * Math.PI * 2,
+        pulseSpeed: Math.random() * 0.04 + 0.02,
+        color: goldColors[Math.floor(Math.random() * goldColors.length)],
+      });
     }
-  };
+
+    let time = 0;
+    const render = () => {
+      time += 0.02;
+      ctx.clearRect(0, 0, width, height);
+
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+
+        // Motion update: gentle upward drift with sinusoidal horizontal float
+        p.y += p.speedY;
+        p.x += p.speedX + Math.sin(time + p.pulsePhase) * 0.25;
+
+        // Twinkle / Opacity pulsation
+        p.pulsePhase += p.pulseSpeed;
+        const currentOpacity = Math.max(
+          0.1,
+          Math.min(1, p.opacity + Math.sin(p.pulsePhase) * 0.35)
+        );
+
+        // Respawn when particle floats out of view
+        if (p.y < -20) {
+          p.y = height + 10;
+          p.x = Math.random() * width;
+        }
+        if (p.x < -20) p.x = width + 10;
+        if (p.x > width + 20) p.x = -10;
+
+        // Render soft glowing halo around medium/large particles
+        if (p.size > 2) {
+          const glowRadius = p.size * 3.5;
+          const gradient = ctx.createRadialGradient(
+            p.x,
+            p.y,
+            0,
+            p.x,
+            p.y,
+            glowRadius
+          );
+          gradient.addColorStop(0, `rgba(${p.color}, ${currentOpacity * 0.7})`);
+          gradient.addColorStop(0.5, `rgba(${p.color}, ${currentOpacity * 0.2})`);
+          gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+
+          ctx.fillStyle = gradient;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, glowRadius, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // Render solid particle core
+        ctx.fillStyle = `rgba(${p.color}, ${currentOpacity})`;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      animationFrameId = requestAnimationFrame(render);
+    };
+
+    render();
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
 
   return (
     <div
-      className={`fixed inset-0 z-[99999] w-screen h-screen flex flex-col justify-between items-center overflow-hidden select-none transition-all duration-700 ease-in-out ${
+      onClick={handleFinish}
+      className={`fixed inset-0 z-[99999] w-screen h-screen flex flex-col justify-between items-center overflow-hidden select-none cursor-pointer transition-all duration-700 ease-out ${
         isFadingOut ? 'opacity-0 scale-105 pointer-events-none' : 'opacity-100 scale-100'
       }`}
       style={{
-        background: 'radial-gradient(circle at 50% 50%, #073828 0%, #032016 55%, #01120C 100%)',
+        background: '#011C12',
       }}
     >
-      {/* Dynamic Ambient Background Orbs */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] rounded-full bg-[#FFC83D]/10 blur-[100px] pointer-events-none animate-pulse [animation-duration:3s]" />
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full bg-[#047857]/20 blur-[90px] pointer-events-none" />
+      {/* 1. EMERALD SILK BASE BACKGROUND */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <img
+          src={bgSrc}
+          alt=""
+          className="w-full h-full object-cover object-center filter brightness-[0.9] contrast-[1.05]"
+        />
 
-      {/* TOP BRAND HEADER: ONLY "peshawars.com" */}
-      <div className="relative z-20 w-full pt-6 sm:pt-8 px-6 flex flex-col items-center">
-        <h1
-          className="font-heading font-black tracking-tight uppercase text-2xl sm:text-3xl md:text-4xl text-[#FFC83D] drop-shadow-[0_2px_15px_rgba(255,200,61,0.6)] animate-in fade-in slide-in-from-top-4 duration-700"
-          style={{
-            textShadow:
-              '1px 1px 0 #C48714, 2px 2px 0 #9E6805, 4px 4px 12px rgba(0,0,0,0.6)',
-          }}
-        >
-          peshawars.com
-        </h1>
+        {/* Deep luxury vignette & emerald overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#01140C] via-transparent to-[#01140C]/90 pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,rgba(0,18,12,0.75)_100%)] pointer-events-none" />
+
+        {/* Soft breathing golden glow behind the logo */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] sm:w-[520px] h-[340px] sm:h-[520px] rounded-full bg-[#FFC83D]/12 blur-[90px] pointer-events-none animate-pulse [animation-duration:3.2s]" />
       </div>
 
-      {/* CENTER: THE VIDEO IN A LUXURY FLOATING CINEMATIC STAGE */}
-      <div className="relative z-10 w-full flex-1 flex items-center justify-center px-4 sm:px-8 my-auto overflow-hidden">
-        {/* Glowing video frame */}
-        <div className="relative w-full max-w-[560px] sm:max-w-3xl aspect-[16/9] rounded-2xl sm:rounded-3xl overflow-hidden p-[2px] bg-gradient-to-b from-[#FFC83D]/60 via-[#064E3B]/40 to-[#FFC83D]/30 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9),0_0_50px_rgba(255,200,61,0.2)]">
-          {/* Inner video container */}
-          <div className="relative w-full h-full rounded-[14px] sm:rounded-[22px] overflow-hidden bg-[#021A12] flex items-center justify-center">
-            
-            {/* Instant Zero-Black-Screen Placeholder (fades smoothly when video frames begin) */}
-            <div
-              className={`absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-[#063324] via-[#032016] to-[#01140D] transition-opacity duration-500 z-10 ${
-                isPlaying ? 'opacity-0 pointer-events-none' : 'opacity-100'
-              }`}
-            >
-              <div className="relative flex items-center justify-center">
-                <div className="w-16 h-16 rounded-full border-2 border-[#FFC83D]/40 border-t-[#FFC83D] animate-spin" />
-                <span className="absolute w-3 h-3 rounded-full bg-[#FFC83D] animate-ping" />
-              </div>
-            </div>
+      {/* 2. REAL-TIME INTERACTIVE GOLDEN PARTICLE CANVAS */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 z-10 pointer-events-none w-full h-full"
+      />
 
-            {/* Video Element */}
-            <video
-              ref={videoRef}
-              src={videoSrc}
-              autoPlay
-              muted
-              playsInline
-              preload="auto"
-              onPlaying={() => setIsPlaying(true)}
-              onTimeUpdate={handleTimeUpdate}
-              onEnded={handleComplete}
-              onError={handleComplete}
-              className={`w-full h-full object-cover transition-opacity duration-600 ease-out ${
-                isPlaying ? 'opacity-100' : 'opacity-0'
-              }`}
+      {/* 3. SPACER */}
+      <div className="relative z-20 w-full pt-8 sm:pt-10 flex justify-center" />
+
+      {/* 4. CENTER: THE EXACT LOGO PNG WITH LUXURY GLOW & SUBTLE FLOAT */}
+      <div className="relative z-20 flex flex-col items-center justify-center px-4 my-auto">
+        <div className="relative group flex items-center justify-center animate-[float_3.6s_ease-in-out_infinite]">
+          {/* Subtle light sweep reflection across the logo */}
+          <div className="relative overflow-hidden rounded-2xl">
+            <img
+              src={logoSrc}
+              alt="Peshawars.com - Buy, Sell, Invest"
+              className="w-full max-w-[82vw] sm:max-w-[420px] md:max-w-[500px] h-auto object-contain drop-shadow-[0_15px_45px_rgba(0,0,0,0.85)] filter contrast-[1.08] brightness-[1.02]"
             />
 
-            {/* Golden corner accents */}
-            <div className="absolute top-2.5 left-2.5 w-3 h-3 border-t-2 border-l-2 border-[#FFC83D]/70 pointer-events-none" />
-            <div className="absolute top-2.5 right-2.5 w-3 h-3 border-t-2 border-r-2 border-[#FFC83D]/70 pointer-events-none" />
-            <div className="absolute bottom-2.5 left-2.5 w-3 h-3 border-b-2 border-l-2 border-[#FFC83D]/70 pointer-events-none" />
-            <div className="absolute bottom-2.5 right-2.5 w-3 h-3 border-b-2 border-r-2 border-[#FFC83D]/70 pointer-events-none" />
+            {/* Dynamic golden shine sweep */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full animate-[shimmer_2.8s_infinite] pointer-events-none" />
           </div>
+
+          {/* Central golden flare highlight behind the home icon */}
+          <div className="absolute top-[18%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full bg-[#FFD778]/25 blur-2xl pointer-events-none animate-pulse [animation-duration:2s]" />
         </div>
       </div>
 
-      {/* BOTTOM SECTION: ONLY "Buy, Sell, Invest" + Sleek Golden Loading Line */}
-      <div className="relative z-20 w-full pb-8 sm:pb-10 px-6 flex flex-col items-center text-center">
-        {/* Only "Buy, Sell, Invest" */}
-        <h2
-          className="font-heading font-black text-lg sm:text-2xl text-[#FFC83D] tracking-wide mb-3 drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]"
-          style={{
-            textShadow: '1px 1px 0 #9E6805, 2px 2px 8px rgba(0,0,0,0.7)',
-          }}
-        >
-          Buy, Sell, Invest
-        </h2>
-
-        {/* Elegant Golden Progress Bar with live percentage */}
-        <div className="w-full max-w-xs sm:max-w-md flex flex-col items-center gap-1.5">
-          <div className="w-full h-1.5 sm:h-2 bg-white/15 rounded-full overflow-hidden p-[1px] border border-white/20 backdrop-blur-md">
+      {/* 5. BOTTOM: SLEEK GOLDEN LOADING PROGRESS LINE */}
+      <div className="relative z-20 w-full pb-8 sm:pb-12 px-6 flex flex-col items-center text-center">
+        <div className="w-full max-w-xs sm:max-w-sm flex flex-col items-center gap-2">
+          {/* Progress track */}
+          <div className="relative w-full h-1 sm:h-1.5 bg-black/40 rounded-full overflow-hidden p-[1px] border border-[#FFC83D]/30 backdrop-blur-md shadow-[0_4px_15px_rgba(0,0,0,0.6)]">
             <div
-              className="h-full bg-gradient-to-r from-[#9E6805] via-[#FFD778] to-[#FFC83D] rounded-full transition-all duration-150 ease-out shadow-[0_0_14px_rgba(255,200,61,0.9)]"
+              className="h-full bg-gradient-to-r from-[#9E6805] via-[#FFE28A] to-[#FFC83D] rounded-full transition-all duration-100 ease-out shadow-[0_0_14px_rgba(255,200,61,0.95)]"
               style={{ width: `${Math.max(4, progress)}%` }}
             />
           </div>
-          <span className="text-[11px] font-mono font-bold text-[#FFC83D]/90 tracking-widest drop-shadow">
-            {progress}%
-          </span>
+
+          {/* Live Progress Percentage */}
+          <div className="flex items-center justify-between w-full px-1 text-[11px] font-mono font-bold tracking-widest text-[#FFC83D]/90">
+            <span className="text-[10px] uppercase font-heading text-white/50 tracking-wider">
+              Loading
+            </span>
+            <span>{progress}%</span>
+          </div>
         </div>
       </div>
+
+      {/* Keyframe animations for floating & shimmer */}
+      <style>{`
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-8px);
+          }
+        }
+        @keyframes shimmer {
+          0% {
+            transform: translateX(-150%);
+          }
+          100% {
+            transform: translateX(150%);
+          }
+        }
+      `}</style>
     </div>
   );
 };
