@@ -711,9 +711,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           ) : (
             <Link
               to="/login"
-              className="px-6 py-2 rounded-full bg-white/15 hover:bg-white/25 active:bg-white/30 backdrop-blur-md border border-white/35 text-white text-xs font-medium tracking-wide shadow-sm transition-all duration-200 hover:scale-105"
+              className="px-6 py-2 rounded-full bg-white text-[#003D25] hover:bg-[#FFC83D] hover:text-[#002D1C] text-xs font-heading font-black uppercase tracking-wider shadow-lg transition-all duration-200 hover:scale-105 flex items-center gap-1.5"
             >
-              Login
+              <User className="w-3.5 h-3.5 text-[#003D25]" />
+              <span>Login</span>
             </Link>
           )}
         </div>
@@ -797,9 +798,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 <Link
                   to="/login"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full inline-block text-center py-2.5 rounded-full bg-white/20 text-white font-medium text-sm hover:bg-white/30 transition-colors"
+                  className="w-full inline-block text-center py-3 rounded-full bg-white text-[#003D25] hover:bg-[#FFC83D] hover:text-[#002D1C] font-heading font-black text-xs uppercase tracking-wider shadow-lg transition-colors border border-white"
                 >
-                  Login
+                  Login / Sign Up
                 </Link>
               )}
             </div>

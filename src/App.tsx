@@ -55,6 +55,44 @@ import { AdminBlogsPage } from './pages/admin/AdminBlogsPage';
 import { AdminSettingsPage } from './pages/admin/AdminSettingsPage';
 import { AdminUsersPage } from './pages/admin/AdminUsersPage';
 
+const DocumentTitleAndFaviconManager: React.FC = () => {
+  useEffect(() => {
+    // Strictly enforce browser window title as requested
+    document.title = 'Peshawars.com';
+
+    // Dynamically inject/refresh favicon with cache-busting version so all browser windows reflect the 3D gold emblem
+    try {
+      const v = '7';
+      const existingIcons = document.querySelectorAll("link[rel*='icon'], link[rel='apple-touch-icon']");
+      existingIcons.forEach((el) => el.remove());
+
+      const head = document.head || document.getElementsByTagName('head')[0];
+
+      const pngIcon = document.createElement('link');
+      pngIcon.rel = 'icon';
+      pngIcon.type = 'image/png';
+      pngIcon.setAttribute('sizes', '32x32');
+      pngIcon.href = `./favicon.png?v=${v}`;
+      head.appendChild(pngIcon);
+
+      const shortcut = document.createElement('link');
+      shortcut.rel = 'shortcut icon';
+      shortcut.type = 'image/png';
+      shortcut.href = `./favicon.png?v=${v}`;
+      head.appendChild(shortcut);
+
+      const apple = document.createElement('link');
+      apple.rel = 'apple-touch-icon';
+      apple.href = `./apple-touch-icon.png?v=${v}`;
+      head.appendChild(apple);
+    } catch {
+      // fallback safe
+    }
+  }, []);
+
+  return null;
+};
+
 const SmoothScrollManager: React.FC = () => {
   const location = useLocation();
 
@@ -103,6 +141,7 @@ const SmoothScrollManager: React.FC = () => {
 export function App() {
   return (
     <HashRouter>
+      <DocumentTitleAndFaviconManager />
       <SmoothScrollManager />
       <DataProvider>
         <AuthProvider>
@@ -166,8 +205,8 @@ export function App() {
               <Route path="/dashboard/login" element={<AdminLoginPage />} />
               <Route path="/admin/login" element={<AdminLoginPage />} />
               <Route path="/admin-login" element={<AdminLoginPage />} />
-              <Route path="/admin" element={<Navigate to="/dashboard" replace />} />
-              <Route path="/admin/*" element={<Navigate to="/dashboard" replace />} />
+              <Route path="/admin" element={<AdminLoginPage />} />
+              <Route path="/admin/*" element={<AdminLoginPage />} />
 
               {/* ─── SINGLE ADMIN DASHBOARD at /dashboard ─── */}
               <Route path="/dashboard" element={<AdminLayout />}>

@@ -575,14 +575,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInquiry, onOpenAppointment
               ) : (
                 <Link
                   to="/login"
-                  className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold border transition-all ${
-                    isHomepage && !isScrolled
-                      ? 'border-white/30 text-white hover:bg-white/10'
-                      : 'border-[#064E3B]/30 text-[#064E3B] hover:bg-[#ECFDF5]'
-                  }`}
+                  className="flex items-center gap-1.5 px-5 py-2 rounded-full bg-white text-[#003D25] hover:bg-[#FFC83D] hover:text-[#002D1C] text-xs font-heading font-black uppercase tracking-wider shadow-md hover:shadow-xl transition-all duration-200 hover:scale-105 border border-white"
                 >
-                  <User className="w-3.5 h-3.5" />
-                  Login
+                  <User className="w-3.5 h-3.5 text-[#003D25]" />
+                  <span>Login</span>
                 </Link>
               )}
             </div>
@@ -748,7 +744,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInquiry, onOpenAppointment
                   <Link
                     to="/login"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block text-center w-full py-3 rounded-lg bg-gradient-to-r from-[#D6A84F] to-[#B88628] text-[#022C22] font-heading font-extrabold text-xs uppercase tracking-wider shadow"
+                    className="block text-center w-full py-3 rounded-xl bg-white text-[#003D25] hover:bg-[#FFC83D] hover:text-[#002D1C] font-heading font-black text-xs uppercase tracking-wider shadow-md border border-white"
                   >
                     Login / Sign Up
                   </Link>
