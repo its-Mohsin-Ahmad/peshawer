@@ -22,7 +22,8 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoaded }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const completedRef = useRef(false);
 
-  const loaderImageSrc = `${import.meta.env.BASE_URL}assets/peshawars-loader-bg.jpg`;
+  // The ONLY image used is the user's logo.png
+  const logoSrc = `${import.meta.env.BASE_URL}assets/peshawars-logo-transparent.png`;
 
   const handleFinish = () => {
     if (completedRef.current) return;
@@ -34,7 +35,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoaded }) => {
     }, 600);
   };
 
-  // 2.5s real-time progress sequence
+  // 2.5s smooth loading sequence
   useEffect(() => {
     const startTime = Date.now();
     const duration = 2500;
@@ -53,7 +54,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoaded }) => {
     return () => clearInterval(interval);
   }, []);
 
-  // Real-time Canvas Golden Particle Engine
+  // Real-time Canvas Golden Particle Engine (Moving tiny sparkles and bokeh)
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -72,7 +73,6 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoaded }) => {
     };
     window.addEventListener('resize', handleResize);
 
-    // Warm luxury golden palette matching the emerald background
     const goldTones = [
       '255, 215, 80',
       '255, 200, 50',
@@ -81,7 +81,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoaded }) => {
       '230, 175, 35',
     ];
 
-    const count = width < 640 ? 55 : 85;
+    const count = width < 640 ? 60 : 100;
     const particles: Particle[] = [];
 
     for (let i = 0; i < count; i++) {
@@ -89,8 +89,8 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoaded }) => {
         x: Math.random() * width,
         y: Math.random() * height,
         size: Math.random() < 0.25 ? Math.random() * 3.5 + 2.5 : Math.random() * 2 + 0.8,
-        speedY: -(Math.random() * 0.6 + 0.25),
-        speedX: (Math.random() - 0.5) * 0.4,
+        speedY: -(Math.random() * 0.55 + 0.2),
+        speedX: (Math.random() - 0.5) * 0.35,
         opacity: Math.random() * 0.7 + 0.2,
         pulsePhase: Math.random() * Math.PI * 2,
         pulseSpeed: Math.random() * 0.05 + 0.02,
@@ -106,11 +106,11 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoaded }) => {
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
 
-        // Physics: upward floating drift + sine wave sway
+        // Motion: upward drift + gentle sine wave sway
         p.y += p.speedY;
         p.x += p.speedX + Math.sin(time + p.pulsePhase) * 0.3;
 
-        // Twinkle
+        // Twinkle effect
         p.pulsePhase += p.pulseSpeed;
         const currentOpacity = Math.max(
           0.1,
@@ -136,7 +136,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoaded }) => {
             p.y,
             glow
           );
-          gradient.addColorStop(0, `rgba(${p.color}, ${currentOpacity * 0.75})`);
+          gradient.addColorStop(0, `rgba(${p.color}, ${currentOpacity * 0.8})`);
           gradient.addColorStop(0.5, `rgba(${p.color}, ${currentOpacity * 0.2})`);
           gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
 
@@ -146,7 +146,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoaded }) => {
           ctx.fill();
         }
 
-        // Particle Core
+        // Particle core
         ctx.fillStyle = `rgba(${p.color}, ${currentOpacity})`;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
@@ -171,45 +171,72 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoaded }) => {
         isFadingOut ? 'opacity-0 scale-105 pointer-events-none' : 'opacity-100 scale-100'
       }`}
       style={{
-        background: 'radial-gradient(ellipse at center, #01371C 0%, #002211 60%, #001208 100%)',
+        background: 'radial-gradient(ellipse at 50% 45%, #02361B 0%, #012210 45%, #001208 85%, #000A04 100%)',
       }}
     >
-      {/* 1. EMERALD BASE & AMBIENT VIGNETTE */}
-      <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#FFC83D]/10 blur-[100px] animate-pulse [animation-duration:3s]" />
+      {/* 1. EMERALD SILK LUXURY WAVES (Pure CSS layered ribbons matching reference) */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        {/* Diagonal silk ribbon 1 */}
+        <div
+          className="absolute -top-1/4 -left-1/4 w-[150%] h-[90%] opacity-40 blur-3xl pointer-events-none"
+          style={{
+            background: 'radial-gradient(ellipse at top left, #055C32 0%, #02321A 50%, transparent 80%)',
+            transform: 'rotate(-18deg)',
+          }}
+        />
+
+        {/* Diagonal silk ribbon 2 */}
+        <div
+          className="absolute -bottom-1/4 -right-1/4 w-[140%] h-[80%] opacity-45 blur-3xl pointer-events-none"
+          style={{
+            background: 'radial-gradient(ellipse at bottom right, #044D29 0%, #012513 55%, transparent 80%)',
+            transform: 'rotate(-22deg)',
+          }}
+        />
+
+        {/* Central golden glow halo behind logo */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] sm:w-[500px] h-[340px] sm:h-[500px] rounded-full bg-[#FFC83D]/12 blur-[100px] pointer-events-none animate-pulse [animation-duration:3s]" />
+
+        {/* Deep perimeter vignette */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,10,4,0.75)_100%)] pointer-events-none" />
       </div>
 
-      {/* 2. REAL-TIME CANVAS GOLDEN PARTICLE LAYER (Front of background, surrounding artwork) */}
+      {/* 2. REAL-TIME CANVAS GOLDEN PARTICLE LAYER (Tiny moving sparkles) */}
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 z-20 pointer-events-none w-full h-full"
+        className="absolute inset-0 z-10 pointer-events-none w-full h-full"
       />
 
       {/* TOP SPACER */}
-      <div className="relative z-10 w-full pt-6 flex justify-center" />
+      <div className="relative z-20 w-full pt-8 flex justify-center" />
 
-      {/* 3. CENTER: EXACT LOADER ARTWORK WITH FLOATING PARTICLES & LIGHT SHEEN */}
-      <div className="relative z-10 flex flex-col items-center justify-center my-auto px-4 max-w-full">
+      {/* 3. CENTER: THE USER'S LOGO.PNG (Crisp, with subtle float and golden light sweep) */}
+      <div className="relative z-20 flex flex-col items-center justify-center my-auto px-6 max-w-full">
         <div className="relative flex items-center justify-center animate-[subtleFloat_3.2s_ease-in-out_infinite]">
-          {/* Base artwork image */}
-          <img
-            src={loaderImageSrc}
-            alt="Peshawars.com - Buy, Sell, Invest"
-            className="w-full max-w-[94vw] sm:max-w-xl md:max-w-2xl lg:max-w-3xl h-auto object-contain rounded-2xl drop-shadow-[0_20px_50px_rgba(0,0,0,0.85)] filter contrast-[1.04] brightness-[1.02]"
-          />
+          {/* Subtle light sweep across logo */}
+          <div className="relative overflow-hidden">
+            <img
+              src={logoSrc}
+              alt="Peshawars.com - Buy, Sell, Invest"
+              className="w-full max-w-[85vw] sm:max-w-[440px] md:max-w-[520px] h-auto object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.9)] filter contrast-[1.08] brightness-[1.03]"
+            />
 
-          {/* Golden shine sweep that sweeps across the logo */}
-          <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
-            <div className="w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full animate-[shimmer_2.6s_infinite]" />
+            {/* Moving light sheen */}
+            <div className="absolute inset-0 pointer-events-none overflow-hidden">
+              <div className="w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full animate-[shimmer_2.8s_infinite]" />
+            </div>
           </div>
+
+          {/* Central gold flare highlight on the home emblem */}
+          <div className="absolute top-[22%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-28 h-28 rounded-full bg-[#FFD778]/25 blur-2xl pointer-events-none animate-pulse [animation-duration:2s]" />
         </div>
       </div>
 
-      {/* 4. BOTTOM: SLEEK GOLDEN PROGRESS BAR WITH LIVE PERCENT */}
-      <div className="relative z-30 w-full pb-8 sm:pb-12 px-6 flex flex-col items-center text-center">
+      {/* 4. BOTTOM: SLEEK GOLDEN LOADING PROGRESS LINE */}
+      <div className="relative z-20 w-full pb-8 sm:pb-12 px-6 flex flex-col items-center text-center">
         <div className="w-full max-w-xs sm:max-w-sm flex flex-col items-center gap-2">
-          {/* Golden Progress Track */}
-          <div className="w-full h-1.5 bg-black/50 rounded-full overflow-hidden p-[1px] border border-[#FFC83D]/35 backdrop-blur-md shadow-[0_4px_15px_rgba(0,0,0,0.7)]">
+          {/* Progress Track */}
+          <div className="w-full h-1 sm:h-1.5 bg-black/45 rounded-full overflow-hidden p-[1px] border border-[#FFC83D]/35 backdrop-blur-md shadow-[0_4px_15px_rgba(0,0,0,0.7)]">
             <div
               className="h-full bg-gradient-to-r from-[#9E6805] via-[#FFE28A] to-[#FFC83D] rounded-full transition-all duration-100 ease-out shadow-[0_0_14px_rgba(255,200,61,0.95)]"
               style={{ width: `${Math.max(5, progress)}%` }}
@@ -233,7 +260,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoaded }) => {
             transform: translateY(0px) scale(1);
           }
           50% {
-            transform: translateY(-5px) scale(1.015);
+            transform: translateY(-6px) scale(1.015);
           }
         }
         @keyframes shimmer {
