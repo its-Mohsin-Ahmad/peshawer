@@ -60,13 +60,10 @@ export const AdminLoginPage: React.FC = () => {
       <div className="relative z-10 w-full max-w-md bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden animate-in zoom-in-95 duration-300">
         {/* Top Header */}
         <div className="bg-[#022C22] p-8 text-center text-white border-b-2 border-[#D6A84F] relative">
-          <div className="w-16 h-16 rounded-2xl bg-[#064E3B] p-2 border border-[#D6A84F]/40 mx-auto mb-3 shadow-md flex items-center justify-center">
-            <img src="/assets/logo.png" alt="Logo" className="w-full h-full object-contain" />
+          <div className="flex justify-center mb-3">
+            <img src="/assets/navbar-logo.png" alt="Peshawars.com Admin" className="h-16 w-auto object-contain drop-shadow" />
           </div>
 
-          <h1 className="font-heading text-xl font-extrabold tracking-wider uppercase">
-            PESHAWER <span className="text-[#D6A84F]">REAL ESTATE</span>
-          </h1>
           <p className="text-xs text-[#ECFDF5]/70 uppercase tracking-widest mt-1 font-semibold">
             Central Administrative Portal
           </p>

@@ -109,20 +109,13 @@ export const AdminLayout: React.FC = () => {
       {/* Sidebar Desktop Fixed (Internal Scroll Only) */}
       <aside className="hidden lg:flex lg:flex-col w-72 h-screen h-[100dvh] bg-[#022C22] text-white shrink-0 border-r border-[#064E3B] select-none overflow-hidden">
         {/* Brand header */}
-        <div className="p-6 border-b border-[#064E3B] flex items-center justify-between">
-          <Link to="/dashboard" className="flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-lg bg-[#064E3B] p-1 border border-[#D6A84F]/40 flex items-center justify-center shrink-0">
-              <img src="/assets/logo.png" alt="Logo" className="w-full h-full object-contain" />
-            </div>
-            <div>
-              <div className="font-heading font-extrabold text-sm tracking-wider uppercase text-white leading-tight">
-                PESHAWER <span className="text-[#D6A84F]">REALTY</span>
-              </div>
-              <div className="text-[10px] text-[#ECFDF5]/60 uppercase tracking-widest font-mono">
-                Administrator
-              </div>
-            </div>
+        <div className="p-5 border-b border-[#064E3B] flex items-center justify-between">
+          <Link to="/dashboard" className="flex items-center space-x-2">
+            <img src="/assets/navbar-logo.png" alt="Peshawars.com Admin" className="h-9 w-auto object-contain" />
           </Link>
+          <span className="text-[10px] text-[#D6A84F] bg-[#064E3B] px-2 py-0.5 rounded-full uppercase tracking-wider font-semibold border border-[#D6A84F]/30">
+            Admin
+          </span>
         </div>
 
         {/* Navigation list */}
@@ -258,9 +251,7 @@ export const AdminLayout: React.FC = () => {
           <div className="fixed inset-0 bg-black/60" onClick={() => setSidebarOpen(false)} />
           <div className="fixed inset-y-0 left-0 w-72 bg-[#022C22] text-white shadow-2xl flex flex-col justify-between z-10 animate-in slide-in-from-left duration-200">
             <div className="p-5 border-b border-[#064E3B] flex items-center justify-between">
-              <span className="font-heading font-extrabold text-sm uppercase text-white">
-                ADMIN CONSOLE
-              </span>
+              <img src="/assets/navbar-logo.png" alt="Peshawars.com Admin" className="h-8 w-auto object-contain" />
               <button onClick={() => setSidebarOpen(false)} className="text-gray-300">
                 <X className="w-6 h-6" />
               </button>

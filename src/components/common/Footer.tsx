@@ -21,7 +21,7 @@ export const Footer: React.FC = () => {
               <img
                 src="/assets/navbar-logo.png"
                 alt="PESHAWARS REAL ESTATE"
-                className="h-24 sm:h-28 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-[0_2px_12px_rgba(230,170,39,0.35)]"
+                className="h-20 sm:h-24 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-[0_2px_12px_rgba(230,170,39,0.35)]"
               />
             </Link>
 
