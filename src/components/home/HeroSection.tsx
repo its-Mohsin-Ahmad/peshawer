@@ -849,78 +849,93 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               onSubmit={handleSearchSubmit}
               className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 sm:gap-2.5"
             >
-              {/* Location Field - Water Fluid Like Button */}
-              <div className="flex-1 relative group px-4 py-3 sm:px-5 sm:py-2.5 rounded-2xl sm:rounded-full bg-white/60 hover:bg-white/80 active:bg-white/90 backdrop-blur-xl border border-white/80 hover:border-white shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.95),0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[inset_0_2px_3px_rgba(255,255,255,1),0_8px_24px_rgba(0,0,0,0.12)] transition-all duration-300 hover:scale-[1.01] overflow-hidden cursor-pointer">
+              {/* Location Field - Green Fluid Dropdown with Liquid Hover */}
+              <div className="flex-1 relative group px-4 py-3 sm:px-5 sm:py-2.5 rounded-2xl sm:rounded-full bg-gradient-to-b from-[#003D25]/90 via-[#022C22]/95 to-[#001D13] hover:from-[#004D30] hover:via-[#033B2E] hover:to-[#002417] active:from-[#002B1A] active:to-[#00180F] backdrop-blur-xl border border-emerald-500/35 hover:border-[#FFC83D]/80 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.35),0_6px_20px_rgba(0,40,25,0.45)] hover:shadow-[inset_0_2px_3px_rgba(255,255,255,0.55),0_10px_28px_rgba(4,120,87,0.55)] transition-all duration-300 hover:scale-[1.015] active:scale-[0.99] overflow-hidden cursor-pointer">
                 {/* Specular Liquid Water Highlight on Upper Rim */}
-                <div className="absolute inset-x-3 sm:inset-x-4 top-0.5 h-[38%] bg-gradient-to-b from-white/80 via-white/40 to-transparent rounded-full pointer-events-none" />
+                <div className="absolute inset-x-3 sm:inset-x-4 top-0.5 h-[38%] bg-gradient-to-b from-white/40 via-white/10 to-transparent rounded-full pointer-events-none" />
 
-                <label className="block text-[10px] sm:text-[11px] font-heading font-black text-[#002D1C] uppercase tracking-wider mb-0.5 pointer-events-none">
+                {/* Fluid Water Ripple Light Sweep on Hover */}
+                <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
+                </div>
+
+                <label className="block text-[10px] sm:text-[11px] font-heading font-black text-[#FFC83D] uppercase tracking-wider mb-0.5 pointer-events-none drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
                   Location
                 </label>
                 <div className="relative flex items-center">
                   <select
                     value={locationVal}
                     onChange={(e) => setLocationVal(e.target.value)}
-                    className="w-full appearance-none bg-transparent text-xs sm:text-[13px] font-bold text-[#002D1C] focus:outline-none cursor-pointer pr-6"
+                    className="w-full appearance-none bg-transparent text-xs sm:text-[13px] font-bold text-white focus:outline-none cursor-pointer pr-6"
                   >
-                    <option value="" className="bg-white text-[#102A24]">Select Your City</option>
+                    <option value="" className="bg-[#002417] text-white">Select Your City</option>
                     {locationOptions.map((loc) => (
-                      <option key={loc} value={loc} className="bg-white text-[#102A24]">
+                      <option key={loc} value={loc} className="bg-[#002417] text-white">
                         {loc}
                       </option>
                     ))}
                   </select>
-                  <MapPin className="absolute right-0 w-3.5 h-3.5 text-[#002D1C]/80 pointer-events-none group-hover:text-[#D6A84F] transition-colors" />
+                  <MapPin className="absolute right-0 w-3.5 h-3.5 text-[#FFC83D] pointer-events-none group-hover:scale-110 transition-transform drop-shadow" />
                 </div>
               </div>
 
-              {/* Property Type Field - Water Fluid Like Button */}
-              <div className="flex-1 relative group px-4 py-3 sm:px-5 sm:py-2.5 rounded-2xl sm:rounded-full bg-white/60 hover:bg-white/80 active:bg-white/90 backdrop-blur-xl border border-white/80 hover:border-white shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.95),0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[inset_0_2px_3px_rgba(255,255,255,1),0_8px_24px_rgba(0,0,0,0.12)] transition-all duration-300 hover:scale-[1.01] overflow-hidden cursor-pointer">
+              {/* Property Type Field - Green Fluid Dropdown with Liquid Hover */}
+              <div className="flex-1 relative group px-4 py-3 sm:px-5 sm:py-2.5 rounded-2xl sm:rounded-full bg-gradient-to-b from-[#003D25]/90 via-[#022C22]/95 to-[#001D13] hover:from-[#004D30] hover:via-[#033B2E] hover:to-[#002417] active:from-[#002B1A] active:to-[#00180F] backdrop-blur-xl border border-emerald-500/35 hover:border-[#FFC83D]/80 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.35),0_6px_20px_rgba(0,40,25,0.45)] hover:shadow-[inset_0_2px_3px_rgba(255,255,255,0.55),0_10px_28px_rgba(4,120,87,0.55)] transition-all duration-300 hover:scale-[1.015] active:scale-[0.99] overflow-hidden cursor-pointer">
                 {/* Specular Liquid Water Highlight on Upper Rim */}
-                <div className="absolute inset-x-3 sm:inset-x-4 top-0.5 h-[38%] bg-gradient-to-b from-white/80 via-white/40 to-transparent rounded-full pointer-events-none" />
+                <div className="absolute inset-x-3 sm:inset-x-4 top-0.5 h-[38%] bg-gradient-to-b from-white/40 via-white/10 to-transparent rounded-full pointer-events-none" />
 
-                <label className="block text-[10px] sm:text-[11px] font-heading font-black text-[#002D1C] uppercase tracking-wider mb-0.5 pointer-events-none">
+                {/* Fluid Water Ripple Light Sweep on Hover */}
+                <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
+                </div>
+
+                <label className="block text-[10px] sm:text-[11px] font-heading font-black text-[#FFC83D] uppercase tracking-wider mb-0.5 pointer-events-none drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
                   Property Type
                 </label>
                 <div className="relative flex items-center">
                   <select
                     value={propertyTypeVal}
                     onChange={(e) => setPropertyTypeVal(e.target.value)}
-                    className="w-full appearance-none bg-transparent text-xs sm:text-[13px] font-bold text-[#002D1C] focus:outline-none cursor-pointer pr-6"
+                    className="w-full appearance-none bg-transparent text-xs sm:text-[13px] font-bold text-white focus:outline-none cursor-pointer pr-6"
                   >
-                    <option value="" className="bg-white text-[#102A24]">Choose Property Type</option>
+                    <option value="" className="bg-[#002417] text-white">Choose Property Type</option>
                     {propertyTypeOptions.map((type) => (
-                      <option key={type} value={type} className="bg-white text-[#102A24]">
+                      <option key={type} value={type} className="bg-[#002417] text-white">
                         {type}
                       </option>
                     ))}
                   </select>
-                  <ChevronDown className="absolute right-0 w-3.5 h-3.5 text-[#002D1C]/80 pointer-events-none group-hover:text-[#D6A84F] transition-colors" />
+                  <ChevronDown className="absolute right-0 w-3.5 h-3.5 text-[#FFC83D] pointer-events-none group-hover:scale-110 transition-transform drop-shadow" />
                 </div>
               </div>
 
-              {/* Price Range Field - Water Fluid Like Button */}
-              <div className="flex-1 relative group px-4 py-3 sm:px-5 sm:py-2.5 rounded-2xl sm:rounded-full bg-white/60 hover:bg-white/80 active:bg-white/90 backdrop-blur-xl border border-white/80 hover:border-white shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.95),0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[inset_0_2px_3px_rgba(255,255,255,1),0_8px_24px_rgba(0,0,0,0.12)] transition-all duration-300 hover:scale-[1.01] overflow-hidden cursor-pointer">
+              {/* Price Range Field - Green Fluid Dropdown with Liquid Hover */}
+              <div className="flex-1 relative group px-4 py-3 sm:px-5 sm:py-2.5 rounded-2xl sm:rounded-full bg-gradient-to-b from-[#003D25]/90 via-[#022C22]/95 to-[#001D13] hover:from-[#004D30] hover:via-[#033B2E] hover:to-[#002417] active:from-[#002B1A] active:to-[#00180F] backdrop-blur-xl border border-emerald-500/35 hover:border-[#FFC83D]/80 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.35),0_6px_20px_rgba(0,40,25,0.45)] hover:shadow-[inset_0_2px_3px_rgba(255,255,255,0.55),0_10px_28px_rgba(4,120,87,0.55)] transition-all duration-300 hover:scale-[1.015] active:scale-[0.99] overflow-hidden cursor-pointer">
                 {/* Specular Liquid Water Highlight on Upper Rim */}
-                <div className="absolute inset-x-3 sm:inset-x-4 top-0.5 h-[38%] bg-gradient-to-b from-white/80 via-white/40 to-transparent rounded-full pointer-events-none" />
+                <div className="absolute inset-x-3 sm:inset-x-4 top-0.5 h-[38%] bg-gradient-to-b from-white/40 via-white/10 to-transparent rounded-full pointer-events-none" />
 
-                <label className="block text-[10px] sm:text-[11px] font-heading font-black text-[#002D1C] uppercase tracking-wider mb-0.5 pointer-events-none">
+                {/* Fluid Water Ripple Light Sweep on Hover */}
+                <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
+                </div>
+
+                <label className="block text-[10px] sm:text-[11px] font-heading font-black text-[#FFC83D] uppercase tracking-wider mb-0.5 pointer-events-none drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
                   Price Range
                 </label>
                 <div className="relative flex items-center">
                   <select
                     value={priceRangeVal}
                     onChange={(e) => setPriceRangeVal(e.target.value)}
-                    className="w-full appearance-none bg-transparent text-xs sm:text-[13px] font-bold text-[#002D1C] focus:outline-none cursor-pointer pr-6"
+                    className="w-full appearance-none bg-transparent text-xs sm:text-[13px] font-bold text-white focus:outline-none cursor-pointer pr-6"
                   >
-                    <option value="" className="bg-white text-[#102A24]">Choose Price Range</option>
+                    <option value="" className="bg-[#002417] text-white">Choose Price Range</option>
                     {priceRangeOptions.map((p) => (
-                      <option key={p.label} value={p.label} className="bg-white text-[#102A24]">
+                      <option key={p.label} value={p.label} className="bg-[#002417] text-white">
                         {p.label}
                       </option>
                     ))}
                   </select>
-                  <ChevronDown className="absolute right-0 w-3.5 h-3.5 text-[#002D1C]/80 pointer-events-none group-hover:text-[#D6A84F] transition-colors" />
+                  <ChevronDown className="absolute right-0 w-3.5 h-3.5 text-[#FFC83D] pointer-events-none group-hover:scale-110 transition-transform drop-shadow" />
                 </div>
               </div>
 
