@@ -6,7 +6,6 @@ interface Particle {
   vx: number;
   vy: number;
   size: number;
-  maxSize: number;
   alpha: number;
   decay: number;
   rotation: number;
@@ -18,19 +17,21 @@ interface Particle {
 }
 
 const GOLD_PALETTES = [
-  { color: '#FFEFA6', glow: '#FFD700' }, // Pale bright gold
-  { color: '#FFD700', glow: '#FFA500' }, // Classic golden shine
-  { color: '#FFC83D', glow: '#E6AA27' }, // Rich warm amber gold
-  { color: '#FFF8DB', glow: '#FFDF70' }, // Diamond white-gold
-  { color: '#FADB14', glow: '#D48806' }, // Vivid imperial gold
+  { color: '#FFEFA6', glow: '#FFD700' },
+  { color: '#FFD700', glow: '#FFA500' },
+  { color: '#FFC83D', glow: '#E6AA27' },
+  { color: '#FFF8DB', glow: '#FFDF70' },
+  { color: '#FADB14', glow: '#D48806' },
 ];
 
 export const SparkleTrail: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const particlesRef = useRef<Particle[]>([]);
-  const lastPosRef = useRef<{ x: number; y: number } | null>(null);
+  const lastEmitTimeRef = useRef<number>(0);
   const animFrameRef = useRef<number | null>(null);
   const isRunningRef = useRef<boolean>(false);
+  const isScrollingRef = useRef<boolean>(false);
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -41,12 +42,11 @@ export const SparkleTrail: React.FC = () => {
 
     let width = window.innerWidth;
     let height = window.innerHeight;
-    let dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5); // 1.5x is optimal for high visual crispness & high fps
 
     const handleResize = () => {
       width = window.innerWidth;
       height = window.innerHeight;
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = width * dpr;
       canvas.height = height * dpr;
       canvas.style.width = `${width}px`;
@@ -57,7 +57,17 @@ export const SparkleTrail: React.FC = () => {
     handleResize();
     window.addEventListener('resize', handleResize, { passive: true });
 
-    // Draw a 4-point cross star / sparkle
+    // Detect active scrolling to throttle effects during momentum scroll
+    const handleScroll = () => {
+      isScrollingRef.current = true;
+      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+      scrollTimeoutRef.current = setTimeout(() => {
+        isScrollingRef.current = false;
+      }, 100);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    // Draw 4-point cross star
     const drawCrossSparkle = (
       c: CanvasRenderingContext2D,
       x: number,
@@ -88,18 +98,18 @@ export const SparkleTrail: React.FC = () => {
       }
       c.closePath();
 
-      c.shadowColor = glow;
-      c.shadowBlur = size * 1.5;
+      if (alpha > 0.4) {
+        c.shadowColor = glow;
+        c.shadowBlur = 6;
+      }
       c.fillStyle = color;
       c.globalAlpha = Math.max(0, Math.min(1, alpha));
       c.fill();
 
-      // Core high-intensity white spark center
+      // Core white sparkle
       c.beginPath();
       c.arc(0, 0, inner * 0.8, 0, Math.PI * 2);
       c.fillStyle = '#FFFFFF';
-      c.shadowBlur = size * 2;
-      c.shadowColor = '#FFFFFF';
       c.fill();
 
       c.restore();
@@ -119,13 +129,15 @@ export const SparkleTrail: React.FC = () => {
       c.beginPath();
       c.arc(x, y, size, 0, Math.PI * 2);
 
-      c.shadowColor = glow;
-      c.shadowBlur = size * 2.5;
+      if (alpha > 0.4) {
+        c.shadowColor = glow;
+        c.shadowBlur = 5;
+      }
       c.fillStyle = color;
       c.globalAlpha = Math.max(0, Math.min(1, alpha));
       c.fill();
 
-      // Subtle bright core
+      // Subtle center dot
       c.beginPath();
       c.arc(x, y, Math.max(0.5, size * 0.4), 0, Math.PI * 2);
       c.fillStyle = '#FFFFFF';
@@ -144,24 +156,20 @@ export const SparkleTrail: React.FC = () => {
       }
 
       ctx.clearRect(0, 0, width, height);
-
-      // Composite operation for vivid radiant glow
       ctx.globalCompositeOperation = 'lighter';
 
       for (let i = particles.length - 1; i >= 0; i--) {
         const p = particles[i];
 
-        // Update physics
         p.x += p.vx;
         p.y += p.vy;
         p.alpha -= p.decay;
         p.rotation += p.rotationSpeed;
 
-        // Shimmer twinkle
-        const shimmer = 0.85 + 0.15 * Math.sin(timestamp * 0.015 + p.shimmerOffset);
+        const shimmer = 0.88 + 0.12 * Math.sin(timestamp * 0.015 + p.shimmerOffset);
         const currentAlpha = p.alpha * shimmer;
 
-        if (p.alpha <= 0.02) {
+        if (p.alpha <= 0.03) {
           particles.splice(i, 1);
           continue;
         }
@@ -190,9 +198,7 @@ export const SparkleTrail: React.FC = () => {
         }
       }
 
-      // Reset composite operation
       ctx.globalCompositeOperation = 'source-over';
-
       animFrameRef.current = requestAnimationFrame(loop);
     };
 
@@ -206,33 +212,32 @@ export const SparkleTrail: React.FC = () => {
     const spawnParticles = (x: number, y: number, count = 2) => {
       const particles = particlesRef.current;
 
-      // Cap maximum active particles for top 60+ FPS performance
-      if (particles.length > 120) {
-        particles.splice(0, particles.length - 120);
+      // Cap active particle count strictly for guaranteed 60+ FPS on all devices
+      if (particles.length > 70) {
+        particles.splice(0, particles.length - 70);
       }
 
       for (let i = 0; i < count; i++) {
         const palette = GOLD_PALETTES[Math.floor(Math.random() * GOLD_PALETTES.length)];
-        const isCross = Math.random() < 0.45; // 45% cross sparkles, 55% fairy dust
+        const isCross = Math.random() < 0.45;
 
         const angle = Math.random() * Math.PI * 2;
-        const speed = 0.4 + Math.random() * 1.6;
+        const speed = 0.5 + Math.random() * 1.5;
         const vx = Math.cos(angle) * speed;
-        const vy = Math.sin(angle) * speed - 0.35; // Gentle upward drift
+        const vy = Math.sin(angle) * speed - 0.3;
 
-        const maxSize = isCross ? 6 + Math.random() * 7 : 2 + Math.random() * 3.5;
+        const size = isCross ? 5.5 + Math.random() * 5.5 : 1.8 + Math.random() * 2.8;
 
         particles.push({
           x: x + (Math.random() - 0.5) * 6,
           y: y + (Math.random() - 0.5) * 6,
           vx,
           vy,
-          size: maxSize,
-          maxSize,
-          alpha: 0.95 + Math.random() * 0.05,
-          decay: isCross ? 0.022 + Math.random() * 0.015 : 0.018 + Math.random() * 0.015,
+          size,
+          alpha: 0.95,
+          decay: isCross ? 0.026 + Math.random() * 0.015 : 0.022 + Math.random() * 0.015,
           rotation: Math.random() * Math.PI * 2,
-          rotationSpeed: (Math.random() - 0.5) * 0.1,
+          rotationSpeed: (Math.random() - 0.5) * 0.08,
           color: palette.color,
           glowColor: palette.glow,
           isCrossSparkle: isCross,
@@ -243,73 +248,41 @@ export const SparkleTrail: React.FC = () => {
       startAnimation();
     };
 
-    const handlePointerMove = (e: MouseEvent | PointerEvent) => {
-      const clientX = e.clientX;
-      const clientY = e.clientY;
+    // Desktop Mouse Pointer Move (Throttled to 30ms to maintain smooth scroll & cursor performance)
+    const handlePointerMove = (e: PointerEvent) => {
+      // Ignore touch here because touch has its own dedicated handler
+      if (e.pointerType === 'touch') return;
 
-      if (!lastPosRef.current) {
-        lastPosRef.current = { x: clientX, y: clientY };
-        spawnParticles(clientX, clientY, 2);
-        return;
-      }
+      const now = performance.now();
+      if (now - lastEmitTimeRef.current < (isScrollingRef.current ? 45 : 28)) return;
+      lastEmitTimeRef.current = now;
 
-      const dx = clientX - lastPosRef.current.x;
-      const dy = clientY - lastPosRef.current.y;
-      const dist = Math.hypot(dx, dy);
-
-      // Interpolate if cursor moved quickly so trail is seamless
-      if (dist > 6) {
-        const steps = Math.min(Math.floor(dist / 8), 4);
-        for (let s = 1; s <= steps; s++) {
-          const ix = lastPosRef.current.x + (dx * s) / steps;
-          const iy = lastPosRef.current.y + (dy * s) / steps;
-          spawnParticles(ix, iy, 1);
-        }
-        spawnParticles(clientX, clientY, 2);
-        lastPosRef.current = { x: clientX, y: clientY };
-      }
+      spawnParticles(e.clientX, e.clientY, 2);
     };
 
+    const handlePointerDown = (e: PointerEvent) => {
+      if (e.pointerType === 'touch') return;
+      spawnParticles(e.clientX, e.clientY, 4);
+    };
+
+    // Mobile / Tablet Touch (lightweight, non-blocking)
     const handleTouchMove = (e: TouchEvent) => {
       if (e.touches.length > 0) {
+        const now = performance.now();
+        // Light emission during swipe so momentum scrolling stays 100% butter smooth
+        if (now - lastEmitTimeRef.current < 45) return;
+        lastEmitTimeRef.current = now;
+
         const touch = e.touches[0];
-        const clientX = touch.clientX;
-        const clientY = touch.clientY;
-
-        if (!lastPosRef.current) {
-          lastPosRef.current = { x: clientX, y: clientY };
-          spawnParticles(clientX, clientY, 3);
-          return;
-        }
-
-        const dx = clientX - lastPosRef.current.x;
-        const dy = clientY - lastPosRef.current.y;
-        const dist = Math.hypot(dx, dy);
-
-        if (dist > 5) {
-          const steps = Math.min(Math.floor(dist / 7), 4);
-          for (let s = 1; s <= steps; s++) {
-            const ix = lastPosRef.current.x + (dx * s) / steps;
-            const iy = lastPosRef.current.y + (dy * s) / steps;
-            spawnParticles(ix, iy, 1);
-          }
-          spawnParticles(clientX, clientY, 2);
-          lastPosRef.current = { x: clientX, y: clientY };
-        }
+        spawnParticles(touch.clientX, touch.clientY, 1);
       }
     };
 
     const handleTouchStart = (e: TouchEvent) => {
       if (e.touches.length > 0) {
         const touch = e.touches[0];
-        lastPosRef.current = { x: touch.clientX, y: touch.clientY };
-        spawnParticles(touch.clientX, touch.clientY, 4);
+        spawnParticles(touch.clientX, touch.clientY, 3);
       }
-    };
-
-    const handlePointerDown = (e: MouseEvent | PointerEvent) => {
-      lastPosRef.current = { x: e.clientX, y: e.clientY };
-      spawnParticles(e.clientX, e.clientY, 5);
     };
 
     window.addEventListener('pointermove', handlePointerMove, { passive: true });
@@ -319,10 +292,12 @@ export const SparkleTrail: React.FC = () => {
 
     return () => {
       window.removeEventListener('resize', handleResize);
+      window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('pointermove', handlePointerMove);
       window.removeEventListener('pointerdown', handlePointerDown);
       window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('touchstart', handleTouchStart);
+      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
       if (animFrameRef.current) {
         cancelAnimationFrame(animFrameRef.current);
       }

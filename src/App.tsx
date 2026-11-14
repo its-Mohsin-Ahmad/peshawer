@@ -11,6 +11,7 @@ import { AdminLayout } from './layouts/AdminLayout';
 import { UserDashboardLayout } from './layouts/UserDashboardLayout';
 import { UserProtectedRoute } from './components/auth/UserProtectedRoute';
 import { SparkleTrail } from './components/common/SparkleTrail';
+import { ScrollEnhancements } from './components/common/ScrollEnhancements';
 
 // Public Pages
 import { HomePage } from './pages/public/HomePage';
@@ -111,15 +112,18 @@ const SmoothScrollManager: React.FC = () => {
     }
 
     const lenis = new Lenis({
-      duration: 1.0,
+      duration: 1.25, // Creamy luxurious inertia momentum glide
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 1.5,
+      wheelMultiplier: 1.15, // Responsive authoritative wheel control
+      touchMultiplier: 1.0, // 1:1 responsive native touch handling
+      syncTouch: true,
       infinite: false,
     });
+
+    (window as unknown as { __lenis?: typeof lenis }).__lenis = lenis;
 
     let animationFrameId: number;
 
@@ -133,6 +137,7 @@ const SmoothScrollManager: React.FC = () => {
     return () => {
       cancelAnimationFrame(animationFrameId);
       lenis.destroy();
+      delete (window as unknown as { __lenis?: typeof lenis }).__lenis;
     };
   }, [location.pathname]);
 
@@ -145,6 +150,7 @@ export function App() {
       <DocumentTitleAndFaviconManager />
       <SmoothScrollManager />
       <SparkleTrail />
+      <ScrollEnhancements />
       <DataProvider>
         <AuthProvider>
           <UserAuthProvider>
