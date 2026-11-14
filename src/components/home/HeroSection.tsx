@@ -840,25 +840,28 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             </h2>
           </div>
 
-          {/* Property Search Panel — Glassy on mobile, clean solid on desktop */}
+          {/* Property Search Panel — Ultra-Glassy with Liquid Water Fluid Buttons */}
           <div
             ref={searchPanelRef}
-            className="w-full max-w-5xl bg-white/45 sm:bg-white backdrop-blur-2xl sm:backdrop-blur-none rounded-3xl sm:rounded-full shadow-[0_16px_40px_rgba(0,0,0,0.35),inset_0_1px_1px_rgba(255,255,255,0.7)] sm:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.4)] p-3 sm:p-2 sm:pl-7 border border-white/60 text-[#102A24] transition-all"
+            className="w-full max-w-5xl bg-white/25 sm:bg-white/35 backdrop-blur-2xl rounded-3xl sm:rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.45),inset_0_1.5px_2px_rgba(255,255,255,0.75)] sm:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.45),inset_0_2px_3px_rgba(255,255,255,0.9)] p-3 sm:p-2.5 sm:pl-3.5 sm:pr-2.5 border border-white/50 sm:border-white/70 text-[#102A24] transition-all"
           >
             <form
               onSubmit={handleSearchSubmit}
-              className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 sm:gap-2"
+              className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 sm:gap-2.5"
             >
-              {/* Location Field */}
-              <div className="flex-1 px-3 sm:px-2 py-2 sm:py-0 relative group bg-white/45 sm:bg-transparent rounded-2xl sm:rounded-none border border-white/50 sm:border-none shadow-xs sm:shadow-none backdrop-blur-sm sm:backdrop-blur-none">
-                <label className="block text-[11px] font-extrabold text-[#002D1C] tracking-wide mb-0.5">
+              {/* Location Field - Water Fluid Like Button */}
+              <div className="flex-1 relative group px-4 py-3 sm:px-5 sm:py-2.5 rounded-2xl sm:rounded-full bg-white/60 hover:bg-white/80 active:bg-white/90 backdrop-blur-xl border border-white/80 hover:border-white shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.95),0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[inset_0_2px_3px_rgba(255,255,255,1),0_8px_24px_rgba(0,0,0,0.12)] transition-all duration-300 hover:scale-[1.01] overflow-hidden cursor-pointer">
+                {/* Specular Liquid Water Highlight on Upper Rim */}
+                <div className="absolute inset-x-3 sm:inset-x-4 top-0.5 h-[38%] bg-gradient-to-b from-white/80 via-white/40 to-transparent rounded-full pointer-events-none" />
+
+                <label className="block text-[10px] sm:text-[11px] font-heading font-black text-[#002D1C] uppercase tracking-wider mb-0.5 pointer-events-none">
                   Location
                 </label>
                 <div className="relative flex items-center">
                   <select
                     value={locationVal}
                     onChange={(e) => setLocationVal(e.target.value)}
-                    className="w-full appearance-none bg-transparent text-xs sm:text-[13px] font-semibold text-[#002D1C] focus:text-[#002D1C] focus:outline-none cursor-pointer pr-6"
+                    className="w-full appearance-none bg-transparent text-xs sm:text-[13px] font-bold text-[#002D1C] focus:outline-none cursor-pointer pr-6"
                   >
                     <option value="" className="bg-white text-[#102A24]">Select Your City</option>
                     {locationOptions.map((loc) => (
@@ -867,23 +870,23 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                       </option>
                     ))}
                   </select>
-                  <MapPin className="absolute right-1 w-3.5 h-3.5 text-[#002D1C]/70 pointer-events-none group-hover:text-[#002D1C] transition-colors" />
+                  <MapPin className="absolute right-0 w-3.5 h-3.5 text-[#002D1C]/80 pointer-events-none group-hover:text-[#D6A84F] transition-colors" />
                 </div>
               </div>
 
-              {/* Vertical Divider */}
-              <div className="hidden sm:block w-px h-9 bg-gray-200" />
+              {/* Property Type Field - Water Fluid Like Button */}
+              <div className="flex-1 relative group px-4 py-3 sm:px-5 sm:py-2.5 rounded-2xl sm:rounded-full bg-white/60 hover:bg-white/80 active:bg-white/90 backdrop-blur-xl border border-white/80 hover:border-white shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.95),0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[inset_0_2px_3px_rgba(255,255,255,1),0_8px_24px_rgba(0,0,0,0.12)] transition-all duration-300 hover:scale-[1.01] overflow-hidden cursor-pointer">
+                {/* Specular Liquid Water Highlight on Upper Rim */}
+                <div className="absolute inset-x-3 sm:inset-x-4 top-0.5 h-[38%] bg-gradient-to-b from-white/80 via-white/40 to-transparent rounded-full pointer-events-none" />
 
-              {/* Property Type Field */}
-              <div className="flex-1 px-3 sm:px-2 py-2 sm:py-0 relative group bg-white/45 sm:bg-transparent rounded-2xl sm:rounded-none border border-white/50 sm:border-none shadow-xs sm:shadow-none backdrop-blur-sm sm:backdrop-blur-none">
-                <label className="block text-[11px] font-extrabold text-[#002D1C] tracking-wide mb-0.5">
+                <label className="block text-[10px] sm:text-[11px] font-heading font-black text-[#002D1C] uppercase tracking-wider mb-0.5 pointer-events-none">
                   Property Type
                 </label>
                 <div className="relative flex items-center">
                   <select
                     value={propertyTypeVal}
                     onChange={(e) => setPropertyTypeVal(e.target.value)}
-                    className="w-full appearance-none bg-transparent text-xs sm:text-[13px] font-semibold text-[#002D1C] focus:text-[#002D1C] focus:outline-none cursor-pointer pr-6"
+                    className="w-full appearance-none bg-transparent text-xs sm:text-[13px] font-bold text-[#002D1C] focus:outline-none cursor-pointer pr-6"
                   >
                     <option value="" className="bg-white text-[#102A24]">Choose Property Type</option>
                     {propertyTypeOptions.map((type) => (
@@ -892,23 +895,23 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                       </option>
                     ))}
                   </select>
-                  <ChevronDown className="absolute right-1 w-3.5 h-3.5 text-[#002D1C]/70 pointer-events-none group-hover:text-[#002D1C] transition-colors" />
+                  <ChevronDown className="absolute right-0 w-3.5 h-3.5 text-[#002D1C]/80 pointer-events-none group-hover:text-[#D6A84F] transition-colors" />
                 </div>
               </div>
 
-              {/* Vertical Divider */}
-              <div className="hidden sm:block w-px h-9 bg-gray-200" />
+              {/* Price Range Field - Water Fluid Like Button */}
+              <div className="flex-1 relative group px-4 py-3 sm:px-5 sm:py-2.5 rounded-2xl sm:rounded-full bg-white/60 hover:bg-white/80 active:bg-white/90 backdrop-blur-xl border border-white/80 hover:border-white shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.95),0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[inset_0_2px_3px_rgba(255,255,255,1),0_8px_24px_rgba(0,0,0,0.12)] transition-all duration-300 hover:scale-[1.01] overflow-hidden cursor-pointer">
+                {/* Specular Liquid Water Highlight on Upper Rim */}
+                <div className="absolute inset-x-3 sm:inset-x-4 top-0.5 h-[38%] bg-gradient-to-b from-white/80 via-white/40 to-transparent rounded-full pointer-events-none" />
 
-              {/* Price Range Field */}
-              <div className="flex-1 px-3 sm:px-2 py-2 sm:py-0 relative group bg-white/45 sm:bg-transparent rounded-2xl sm:rounded-none border border-white/50 sm:border-none shadow-xs sm:shadow-none backdrop-blur-sm sm:backdrop-blur-none">
-                <label className="block text-[11px] font-extrabold text-[#002D1C] tracking-wide mb-0.5">
+                <label className="block text-[10px] sm:text-[11px] font-heading font-black text-[#002D1C] uppercase tracking-wider mb-0.5 pointer-events-none">
                   Price Range
                 </label>
                 <div className="relative flex items-center">
                   <select
                     value={priceRangeVal}
                     onChange={(e) => setPriceRangeVal(e.target.value)}
-                    className="w-full appearance-none bg-transparent text-xs sm:text-[13px] font-semibold text-[#002D1C] focus:text-[#002D1C] focus:outline-none cursor-pointer pr-6"
+                    className="w-full appearance-none bg-transparent text-xs sm:text-[13px] font-bold text-[#002D1C] focus:outline-none cursor-pointer pr-6"
                   >
                     <option value="" className="bg-white text-[#102A24]">Choose Price Range</option>
                     {priceRangeOptions.map((p) => (
@@ -917,18 +920,26 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                       </option>
                     ))}
                   </select>
-                  <ChevronDown className="absolute right-1 w-3.5 h-3.5 text-[#002D1C]/70 pointer-events-none group-hover:text-[#002D1C] transition-colors" />
+                  <ChevronDown className="absolute right-0 w-3.5 h-3.5 text-[#002D1C]/80 pointer-events-none group-hover:text-[#D6A84F] transition-colors" />
                 </div>
               </div>
 
-              {/* Browse Properties Button */}
-              <div className="pt-1 sm:pt-0">
+              {/* Browse Properties Button — Green Fluid Button with White Text */}
+              <div className="pt-1 sm:pt-0 shrink-0">
                 <button
                   type="submit"
-                  className="w-full sm:w-auto px-7 py-3.5 sm:py-3 rounded-2xl sm:rounded-full bg-gradient-to-r from-[#003D25] to-[#002417] sm:from-[#162C22] sm:to-[#162C22] hover:bg-[#064E3B] text-white text-xs sm:text-[13px] font-heading font-extrabold tracking-wide flex items-center justify-center space-x-2 transition-all duration-200 shadow-lg hover:shadow-xl group border border-[#E6AA27]/30 sm:border-none"
+                  className="w-full sm:w-auto px-7 sm:px-8 py-3.5 sm:py-3.5 rounded-2xl sm:rounded-full bg-gradient-to-r from-[#003D25] via-[#05603E] to-[#002417] hover:from-[#004D2F] hover:via-[#077049] hover:to-[#00301F] active:scale-[0.98] sm:hover:scale-105 text-white text-xs sm:text-[13px] font-heading font-black tracking-wider uppercase flex items-center justify-center space-x-2.5 transition-all duration-300 shadow-[0_12px_28px_rgba(0,61,37,0.55),inset_0_1.5px_2px_rgba(255,255,255,0.5)] hover:shadow-[0_16px_36px_rgba(0,61,37,0.7),inset_0_2px_3px_rgba(255,255,255,0.7)] group border border-[#FFC83D]/40 relative overflow-hidden"
                 >
-                  <span>Browse Properties</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform text-[#FFC83D]" />
+                  {/* Liquid Specular Shine on Button */}
+                  <div className="absolute inset-x-4 top-0.5 h-[40%] bg-gradient-to-b from-white/45 to-transparent rounded-full pointer-events-none" />
+
+                  <span className="relative z-10 text-white drop-shadow-sm">Browse Properties</span>
+                  <ArrowRight className="relative z-10 w-3.5 h-3.5 group-hover:translate-x-1 transition-transform text-[#FFC83D]" />
+
+                  {/* Subtle Shimmer Sweep on Hover */}
+                  <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
+                  </div>
                 </button>
               </div>
             </form>
