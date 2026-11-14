@@ -39,17 +39,28 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoaded }) => {
   const handleFinish = () => {
     if (completedRef.current) return;
     completedRef.current = true;
+    try {
+      sessionStorage.setItem('peshawars_initial_loaded', 'true');
+    } catch {
+      // safe
+    }
     setProgress(100);
     setIsFadingOut(true);
     setTimeout(() => {
       if (onLoaded) onLoaded();
-    }, 600);
+    }, 350);
   };
 
-  // 2.6s real-time progress sequence
+  // Snappy, fast 900ms progress sequence (instant if already loaded in this session)
   useEffect(() => {
+    const hasLoaded = sessionStorage.getItem('peshawars_initial_loaded');
+    if (hasLoaded) {
+      handleFinish();
+      return;
+    }
+
     const startTime = Date.now();
-    const duration = 2600;
+    const duration = 950; // Ultra fast & smooth reveal
 
     const interval = setInterval(() => {
       const elapsed = Date.now() - startTime;
@@ -60,7 +71,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoaded }) => {
         clearInterval(interval);
         handleFinish();
       }
-    }, 20);
+    }, 16);
 
     return () => clearInterval(interval);
   }, []);

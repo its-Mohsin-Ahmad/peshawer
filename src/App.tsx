@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
 import { HashRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Lenis from 'lenis';
 
@@ -13,49 +13,51 @@ import { UserProtectedRoute } from './components/auth/UserProtectedRoute';
 import { SparkleTrail } from './components/common/SparkleTrail';
 import { ScrollEnhancements } from './components/common/ScrollEnhancements';
 
-// Public Pages
+// Synchronous Homepage for Instant First-Paint
 import { HomePage } from './pages/public/HomePage';
-import { PropertiesPage } from './pages/public/PropertiesPage';
-import { PropertyDetailPage } from './pages/public/PropertyDetailPage';
-import { ProjectsPage } from './pages/public/ProjectsPage';
-import { ProjectDetailPage } from './pages/public/ProjectDetailPage';
-import { AboutPage } from './pages/public/AboutPage';
-import { ContactPage } from './pages/public/ContactPage';
-import { BlogsPage } from './pages/public/BlogsPage';
-import { BlogDetailPage } from './pages/public/BlogDetailPage';
-import { PrivacyPolicyPage } from './pages/public/PrivacyPolicyPage';
-import { TermsPage } from './pages/public/TermsPage';
 
-// User Auth Pages
-import { UserLoginPage } from './pages/public/UserLoginPage';
-import { UserSignupPage } from './pages/public/UserSignupPage';
-import { UserForgotPasswordPage } from './pages/public/UserForgotPasswordPage';
-import { AuthCallbackPage } from './pages/public/AuthCallbackPage';
+// Code-split Public Pages (loaded on demand)
+const PropertiesPage = lazy(() => import('./pages/public/PropertiesPage').then(m => ({ default: m.PropertiesPage })));
+const PropertyDetailPage = lazy(() => import('./pages/public/PropertyDetailPage').then(m => ({ default: m.PropertyDetailPage })));
+const ProjectsPage = lazy(() => import('./pages/public/ProjectsPage').then(m => ({ default: m.ProjectsPage })));
+const ProjectDetailPage = lazy(() => import('./pages/public/ProjectDetailPage').then(m => ({ default: m.ProjectDetailPage })));
+const AboutPage = lazy(() => import('./pages/public/AboutPage').then(m => ({ default: m.AboutPage })));
+const ContactPage = lazy(() => import('./pages/public/ContactPage').then(m => ({ default: m.ContactPage })));
+const BlogsPage = lazy(() => import('./pages/public/BlogsPage').then(m => ({ default: m.BlogsPage })));
+const BlogDetailPage = lazy(() => import('./pages/public/BlogDetailPage').then(m => ({ default: m.BlogDetailPage })));
+const PrivacyPolicyPage = lazy(() => import('./pages/public/PrivacyPolicyPage').then(m => ({ default: m.PrivacyPolicyPage })));
+const TermsPage = lazy(() => import('./pages/public/TermsPage').then(m => ({ default: m.TermsPage })));
 
-// User Dashboard Pages
-import { UserDashboardOverviewPage } from './pages/user/UserDashboardOverviewPage';
-import { UserMyPropertiesPage } from './pages/user/UserMyPropertiesPage';
-import { UserSavedPropertiesPage } from './pages/user/UserSavedPropertiesPage';
-import { UserAppointmentsPage } from './pages/user/UserAppointmentsPage';
-import { UserMessagesPage } from './pages/user/UserMessagesPage';
-import { UserReviewsPage } from './pages/user/UserReviewsPage';
-import { UserProfilePage } from './pages/user/UserProfilePage';
-import { UserSettingsPage } from './pages/user/UserSettingsPage';
-import { UserPaymentsPage } from './pages/user/UserPaymentsPage';
-import { UserSupportPage } from './pages/user/UserSupportPage';
+// Code-split User Auth Pages
+const UserLoginPage = lazy(() => import('./pages/public/UserLoginPage').then(m => ({ default: m.UserLoginPage })));
+const UserSignupPage = lazy(() => import('./pages/public/UserSignupPage').then(m => ({ default: m.UserSignupPage })));
+const UserForgotPasswordPage = lazy(() => import('./pages/public/UserForgotPasswordPage').then(m => ({ default: m.UserForgotPasswordPage })));
+const AuthCallbackPage = lazy(() => import('./pages/public/AuthCallbackPage').then(m => ({ default: m.AuthCallbackPage })));
 
-// Admin Pages
-import { AdminLoginPage } from './pages/admin/AdminLoginPage';
-import { AdminOverviewPage } from './pages/admin/AdminOverviewPage';
-import { AdminPropertiesPage } from './pages/admin/AdminPropertiesPage';
-import { AdminProjectsPage } from './pages/admin/AdminProjectsPage';
-import { AdminPaymentPlansPage } from './pages/admin/AdminPaymentPlansPage';
-import { AdminHeroManagerPage } from './pages/admin/AdminHeroManagerPage';
-import { AdminInquiriesPage } from './pages/admin/AdminInquiriesPage';
-import { AdminMediaPage } from './pages/admin/AdminMediaPage';
-import { AdminBlogsPage } from './pages/admin/AdminBlogsPage';
-import { AdminSettingsPage } from './pages/admin/AdminSettingsPage';
-import { AdminUsersPage } from './pages/admin/AdminUsersPage';
+// Code-split User Dashboard Pages
+const UserDashboardOverviewPage = lazy(() => import('./pages/user/UserDashboardOverviewPage').then(m => ({ default: m.UserDashboardOverviewPage })));
+const UserMyPropertiesPage = lazy(() => import('./pages/user/UserMyPropertiesPage').then(m => ({ default: m.UserMyPropertiesPage })));
+const UserSavedPropertiesPage = lazy(() => import('./pages/user/UserSavedPropertiesPage').then(m => ({ default: m.UserSavedPropertiesPage })));
+const UserAppointmentsPage = lazy(() => import('./pages/user/UserAppointmentsPage').then(m => ({ default: m.UserAppointmentsPage })));
+const UserMessagesPage = lazy(() => import('./pages/user/UserMessagesPage').then(m => ({ default: m.UserMessagesPage })));
+const UserReviewsPage = lazy(() => import('./pages/user/UserReviewsPage').then(m => ({ default: m.UserReviewsPage })));
+const UserProfilePage = lazy(() => import('./pages/user/UserProfilePage').then(m => ({ default: m.UserProfilePage })));
+const UserSettingsPage = lazy(() => import('./pages/user/UserSettingsPage').then(m => ({ default: m.UserSettingsPage })));
+const UserPaymentsPage = lazy(() => import('./pages/user/UserPaymentsPage').then(m => ({ default: m.UserPaymentsPage })));
+const UserSupportPage = lazy(() => import('./pages/user/UserSupportPage').then(m => ({ default: m.UserSupportPage })));
+
+// Code-split Heavy Admin Pages & Charts
+const AdminLoginPage = lazy(() => import('./pages/admin/AdminLoginPage').then(m => ({ default: m.AdminLoginPage })));
+const AdminOverviewPage = lazy(() => import('./pages/admin/AdminOverviewPage').then(m => ({ default: m.AdminOverviewPage })));
+const AdminPropertiesPage = lazy(() => import('./pages/admin/AdminPropertiesPage').then(m => ({ default: m.AdminPropertiesPage })));
+const AdminProjectsPage = lazy(() => import('./pages/admin/AdminProjectsPage').then(m => ({ default: m.AdminProjectsPage })));
+const AdminPaymentPlansPage = lazy(() => import('./pages/admin/AdminPaymentPlansPage').then(m => ({ default: m.AdminPaymentPlansPage })));
+const AdminHeroManagerPage = lazy(() => import('./pages/admin/AdminHeroManagerPage').then(m => ({ default: m.AdminHeroManagerPage })));
+const AdminInquiriesPage = lazy(() => import('./pages/admin/AdminInquiriesPage').then(m => ({ default: m.AdminInquiriesPage })));
+const AdminMediaPage = lazy(() => import('./pages/admin/AdminMediaPage').then(m => ({ default: m.AdminMediaPage })));
+const AdminBlogsPage = lazy(() => import('./pages/admin/AdminBlogsPage').then(m => ({ default: m.AdminBlogsPage })));
+const AdminSettingsPage = lazy(() => import('./pages/admin/AdminSettingsPage').then(m => ({ default: m.AdminSettingsPage })));
+const AdminUsersPage = lazy(() => import('./pages/admin/AdminUsersPage').then(m => ({ default: m.AdminUsersPage })));
 
 const DocumentTitleAndFaviconManager: React.FC = () => {
   useEffect(() => {
@@ -154,7 +156,8 @@ export function App() {
       <DataProvider>
         <AuthProvider>
           <UserAuthProvider>
-            <Routes>
+            <Suspense fallback={<div className="min-h-screen bg-[#003D25]" />}>
+              <Routes>
               {/* ─── User Auth Routes (standalone, no PublicLayout) ─── */}
               <Route path="/login" element={<UserLoginPage />} />
               <Route path="/signup" element={<UserSignupPage />} />
@@ -242,7 +245,8 @@ export function App() {
               {/* ─── Catch-all Redirect ─── */}
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
-          </UserAuthProvider>
+          </Suspense>
+        </UserAuthProvider>
         </AuthProvider>
       </DataProvider>
     </HashRouter>

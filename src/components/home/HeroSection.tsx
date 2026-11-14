@@ -294,8 +294,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         <img
           ref={bgImageRef}
           src="/assets/hero/home-clean.png"
-          alt="PESHAWER REAL ESTATE Luxury Modern Villas"
-          className="w-full h-full object-cover object-bottom sm:object-center"
+          alt="PESHAWARS REAL ESTATE Luxury Modern Villas"
+          loading="eager"
+          decoding="async"
+          className="w-full h-full object-cover object-bottom sm:object-center will-change-transform"
         />
 
         {/* Top gradient for navbar clarity */}
@@ -355,8 +357,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         <img
           ref={fgCutoutRef}
           src="/assets/hero/home-clean-cutout.png"
-          alt="PESHAWER REAL ESTATE Villas Foreground Architecture"
-          className="w-full h-full object-cover object-bottom sm:object-center"
+          alt="PESHAWARS REAL ESTATE Villas Foreground Architecture"
+          loading="eager"
+          decoding="async"
+          className="w-full h-full object-cover object-bottom sm:object-center will-change-transform"
         />
 
         {/* Soft natural lawn shading to anchor the description and search bar */}
