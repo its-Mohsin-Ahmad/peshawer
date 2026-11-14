@@ -19,37 +19,31 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const session = sessionStorage.getItem(AUTH_STORAGE_KEY) || localStorage.getItem(AUTH_STORAGE_KEY);
-    if (session) {
-      try {
-        const parsed = JSON.parse(session);
-        setUser(parsed);
-      } catch (e) {
-        localStorage.removeItem(AUTH_STORAGE_KEY);
-        sessionStorage.removeItem(AUTH_STORAGE_KEY);
-      }
+    // Enforce: Always require login when entering admin dashboard
+    // Purge any stored sessions so login is mandatory every time
+    try {
+      localStorage.removeItem(AUTH_STORAGE_KEY);
+      sessionStorage.removeItem(AUTH_STORAGE_KEY);
+    } catch {
+      // safe
     }
+    setUser(null);
     setIsLoading(false);
   }, []);
 
-  const login = async (email: string, pass: string, rememberMe: boolean = true): Promise<{ success: boolean; error?: string }> => {
-    // Simulate network authentication delay for realism
-    await new Promise((res) => setTimeout(res, 600));
+  const login = async (email: string, pass: string, _rememberMe: boolean = false): Promise<{ success: boolean; error?: string }> => {
+    // Quick authentication check
+    await new Promise((res) => setTimeout(res, 300));
 
     const cleanEmail = email.toLowerCase().trim();
 
-    // Strict Admin authentication: only authorized master administrator
+    // Strict Admin credentials
     if (cleanEmail === 'info@peshawars.com' && pass === 'khan1122') {
       const authUser: AdminUser = {
         ...defaultAdminUser,
         email: 'info@peshawars.com',
       };
       setUser(authUser);
-      if (rememberMe) {
-        localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(authUser));
-      } else {
-        sessionStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(authUser));
-      }
       return { success: true };
     }
 
@@ -61,8 +55,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem(AUTH_STORAGE_KEY);
-    sessionStorage.removeItem(AUTH_STORAGE_KEY);
+    try {
+      localStorage.removeItem(AUTH_STORAGE_KEY);
+      sessionStorage.removeItem(AUTH_STORAGE_KEY);
+    } catch {
+      // safe
+    }
   };
 
   return (
@@ -87,4 +85,3 @@ export const useAuth = () => {
   }
   return context;
 };
-

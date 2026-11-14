@@ -43,7 +43,7 @@ export const PublicLayout: React.FC = () => {
         />
       </main>
 
-      <Footer />
+      <Footer key={location.pathname} />
 
       {/* Global Inquiries & Appointments */}
       <InquiryModal

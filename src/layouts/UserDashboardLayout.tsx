@@ -434,6 +434,18 @@ export const UserDashboardLayout: React.FC = () => {
         <main className="flex-1 p-5 sm:p-8 lg:p-10 max-w-7xl mx-auto w-full">
           <Outlet />
         </main>
+
+        {/* Dashboard Footer */}
+        <footer className="mt-auto border-t border-emerald-900/40 bg-[#002417] py-6 px-6 sm:px-8 text-center text-xs text-emerald-100/70">
+          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+            <p>© {new Date().getFullYear()} <strong className="text-white font-semibold">Peshawars.com</strong> User Portal. All Rights Reserved.</p>
+            <div className="flex items-center space-x-5 text-emerald-200/80">
+              <Link to="/" className="hover:text-[#FFC83D] transition-colors">Public Portal</Link>
+              <Link to="/privacy-policy" className="hover:text-[#FFC83D] transition-colors">Privacy</Link>
+              <Link to="/terms-and-conditions" className="hover:text-[#FFC83D] transition-colors">Terms</Link>
+            </div>
+          </div>
+        </footer>
       </div>
     </div>
   );

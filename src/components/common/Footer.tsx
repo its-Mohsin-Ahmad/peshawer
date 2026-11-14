@@ -8,13 +8,13 @@ export const Footer: React.FC = () => {
   const { settings, projects } = useData();
 
   return (
-    <footer className="bg-[#002417] text-white pt-16 pb-10 border-t-2 border-[#E6AA27]/30 relative overflow-hidden">
+    <footer className="bg-[#002417] text-white pt-16 pb-10 border-t-2 border-[#E6AA27]/30 relative overflow-hidden w-full">
       {/* Background architectural glow */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-[#004B2E]/30 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#006B40]/20 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <AnimatedSection stagger={0.1} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-white/10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-white/10">
           {/* Brand info (2 cols wide on desktop) */}
           <div className="lg:col-span-2 space-y-5">
             <Link to="/" className="flex items-center group">
@@ -188,12 +188,12 @@ export const Footer: React.FC = () => {
               </a>
             </div>
           </div>
-        </AnimatedSection>
+        </div>
 
         {/* Bottom copyright and legal */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-[#E8F3EC]/60 space-y-4 sm:space-y-0">
           <div>
-            © {new Date().getFullYear()} <strong className="text-white">PESHAWER REAL ESTATE</strong>. All Rights Reserved.
+            © {new Date().getFullYear()} <strong className="text-white">Peshawars.com</strong>. All Rights Reserved.
           </div>
           <div className="flex items-center space-x-6">
             <Link to="/privacy-policy" className="hover:text-[#FFC83D] transition-colors">
