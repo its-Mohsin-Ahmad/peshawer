@@ -10,6 +10,7 @@ import { PublicLayout } from './layouts/PublicLayout';
 import { AdminLayout } from './layouts/AdminLayout';
 import { UserDashboardLayout } from './layouts/UserDashboardLayout';
 import { UserProtectedRoute } from './components/auth/UserProtectedRoute';
+import { SparkleTrail } from './components/common/SparkleTrail';
 
 // Public Pages
 import { HomePage } from './pages/public/HomePage';
@@ -143,6 +144,7 @@ export function App() {
     <HashRouter>
       <DocumentTitleAndFaviconManager />
       <SmoothScrollManager />
+      <SparkleTrail />
       <DataProvider>
         <AuthProvider>
           <UserAuthProvider>
