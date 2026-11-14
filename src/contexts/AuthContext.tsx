@@ -6,7 +6,7 @@ interface AuthContextType {
   user: AdminUser | null;
   isAuthenticated: boolean;
   isLoading: boolean;
-  login: (email: string, pass: string) => Promise<{ success: boolean; error?: string }>;
+  login: (email: string, pass: string, rememberMe?: boolean) => Promise<{ success: boolean; error?: string }>;
   logout: () => void;
 }
 
@@ -19,19 +19,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const session = localStorage.getItem(AUTH_STORAGE_KEY);
+    const session = sessionStorage.getItem(AUTH_STORAGE_KEY) || localStorage.getItem(AUTH_STORAGE_KEY);
     if (session) {
       try {
         const parsed = JSON.parse(session);
         setUser(parsed);
       } catch (e) {
         localStorage.removeItem(AUTH_STORAGE_KEY);
+        sessionStorage.removeItem(AUTH_STORAGE_KEY);
       }
     }
     setIsLoading(false);
   }, []);
 
-  const login = async (email: string, pass: string): Promise<{ success: boolean; error?: string }> => {
+  const login = async (email: string, pass: string, rememberMe: boolean = true): Promise<{ success: boolean; error?: string }> => {
     // Simulate network authentication delay for realism
     await new Promise((res) => setTimeout(res, 600));
 
@@ -44,7 +45,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         email: 'info@peshawars.com',
       };
       setUser(authUser);
-      localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(authUser));
+      if (rememberMe) {
+        localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(authUser));
+      } else {
+        sessionStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(authUser));
+      }
       return { success: true };
     }
 
@@ -57,6 +62,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const logout = () => {
     setUser(null);
     localStorage.removeItem(AUTH_STORAGE_KEY);
+    sessionStorage.removeItem(AUTH_STORAGE_KEY);
   };
 
   return (

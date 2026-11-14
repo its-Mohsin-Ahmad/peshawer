@@ -61,7 +61,7 @@ export const AdminLoginPage: React.FC = () => {
     setLoading(true);
 
     try {
-      const result = await login(email, password);
+      const result = await login(email, password, rememberMe);
       if (result.success) {
         const from = (location.state as any)?.from?.pathname || '/dashboard';
         navigate(from, { replace: true });
@@ -99,19 +99,6 @@ export const AdminLoginPage: React.FC = () => {
           <p className="text-xs text-[#ECFDF5]/70 uppercase tracking-widest mt-1 font-semibold">
             Central Administrative Portal
           </p>
-
-          {/* Portal Switcher */}
-          <div className="flex items-center justify-center gap-1.5 mt-4 p-1 bg-white/10 rounded-xl max-w-[280px] mx-auto text-xs backdrop-blur-sm">
-            <Link
-              to="/login"
-              className="flex-1 py-1.5 text-center font-bold text-white/70 hover:text-white transition-colors"
-            >
-              ← Client Portal
-            </Link>
-            <span className="flex-1 py-1.5 text-center font-bold bg-[#FFC83D] text-[#002D1C] rounded-lg shadow-xs">
-              Admin Portal
-            </span>
-          </div>
         </div>
 
         {/* Form Body */}

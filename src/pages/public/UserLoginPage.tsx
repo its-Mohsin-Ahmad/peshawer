@@ -179,19 +179,6 @@ export const UserLoginPage: React.FC = () => {
             <p className="text-xs text-[#64748B] mt-0.5 font-medium">
               Welcome back! Please sign in to continue.
             </p>
-
-            {/* Portal Switcher Pill */}
-            <div className="flex items-center justify-center gap-1.5 mt-3 p-1 bg-gray-100 rounded-xl max-w-[280px] mx-auto text-xs">
-              <span className="flex-1 py-1.5 text-center font-bold bg-white text-[#022C22] rounded-lg shadow-xs">
-                Client Portal
-              </span>
-              <Link
-                to="/dashboard/login"
-                className="flex-1 py-1.5 text-center font-bold text-gray-500 hover:text-[#064E3B] transition-colors"
-              >
-                Admin Portal →
-              </Link>
-            </div>
           </div>
 
           {/* Error Alert */}
@@ -354,16 +341,6 @@ export const UserLoginPage: React.FC = () => {
                 Create Account
               </Link>
             </p>
-
-            <div className="pt-2">
-              <Link
-                to="/dashboard/login"
-                className="inline-flex items-center gap-1.5 font-bold text-[#064E3B] hover:text-[#D6A84F] transition-colors"
-              >
-                <ShieldCheck className="w-3.5 h-3.5 text-[#D6A84F]" />
-                <span>Admin & Staff Portal Login →</span>
-              </Link>
-            </div>
           </div>
         </div>
       </div>

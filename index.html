@@ -16,13 +16,15 @@
     <!-- Path to HashRouter redirect script for direct URL navigation on GitHub Pages / Vercel -->
     <script>
       (function() {
+        var host = window.location.hostname;
         var path = window.location.pathname;
         var search = window.location.search || '';
         var hash = window.location.hash;
-        var base = path.startsWith('/peshawer') ? '/peshawer' : '';
+        var isGh = host.indexOf('github.io') !== -1;
+        var base = isGh ? ('/' + (path.split('/')[1] || 'peshawer')) : '';
         var route = path.slice(base.length).replace(/\/+$/, '') || '/';
         if (route && route !== '/' && route !== '/index.html' && !hash) {
-          window.location.replace((base ? base : '') + '/#' + route + search);
+          window.location.replace((base || '') + '/#' + route + search);
         }
       })();
     </script>
