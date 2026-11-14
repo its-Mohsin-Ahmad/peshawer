@@ -3,17 +3,20 @@
   <head>
     <meta charset="utf-8" />
     <title>Peshawars.com</title>
-    <link rel="icon" type="image/png" href="./favicon.png?v=3" />
+    <link rel="icon" type="image/png" href="./favicon.png?v=7" />
     <script>
       (function() {
+        var host = window.location.hostname;
         var path = window.location.pathname;
         var search = window.location.search || '';
         var hash = window.location.hash || '';
-        var base = path.startsWith('/peshawer') ? '/peshawer' : '';
+        var isGh = host.indexOf('github.io') !== -1;
+        var base = isGh ? ('/' + (path.split('/')[1] || 'peshawer')) : '';
         var route = path.slice(base.length).replace(/\/+$/, '') || '/';
-        window.location.replace((base ? base : '') + '/#' + route + search + hash);
+        window.location.replace((base || '') + '/#' + route + search + hash);
       })();
     </script>
   </head>
   <body></body>
 </html>
+
