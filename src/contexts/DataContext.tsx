@@ -94,13 +94,14 @@ interface DataContextType {
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
 
-const STORAGE_KEY = 'PESHAWER_REAL_ESTATE_V5_STORE';
+const STORAGE_KEY = 'PESHAWER_REAL_ESTATE_V6_STORE';
 
 export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [properties, setProperties] = useState<Property[]>(() => {
-    // Clean out legacy V4 store which contained old leftover mock cards
+    // Clean out legacy stores
     try {
       localStorage.removeItem('PESHAWER_REAL_ESTATE_V4_STORE_PROPERTIES');
+      localStorage.removeItem('PESHAWER_REAL_ESTATE_V5_STORE_PROPERTIES');
     } catch {
       // ignore
     }
@@ -135,32 +136,29 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   });
 
   const [projects, setProjects] = useState<Project[]>(() => {
-    const sanitizeKalam = (str?: string) => {
-      if (!str) return str;
-      return str
-        .replace(/Kalam,\s*S?wat/gi, 'Kalam')
-        .replace(/Kalam\s+S?wat/gi, 'Kalam')
-        .replace(/,\s*S?wat/gi, '')
-        .trim();
-    };
+    try {
+      localStorage.removeItem('PESHAWER_REAL_ESTATE_V4_STORE_PROJECTS');
+      localStorage.removeItem('PESHAWER_REAL_ESTATE_V5_STORE_PROJECTS');
+    } catch {
+      // ignore
+    }
 
     const saved = localStorage.getItem(`${STORAGE_KEY}_PROJECTS`);
     if (saved) {
       try {
         const list: Project[] = JSON.parse(saved);
         return list.map((p) => {
-          const updated = {
-            ...p,
-            city: sanitizeKalam(p.city) || p.city,
-            location: sanitizeKalam(p.location) || p.location,
-          };
+          if (p.id === 'proj-4' || p.slug === 'glamorous-heights') {
+            const initialGH = initialProjects.find((ip) => ip.id === 'proj-4');
+            return initialGH ? { ...p, ...initialGH } : p;
+          }
           if (p.slug === 'kalam-cottages' || p.id === 'proj-2') {
             return {
-              ...updated,
+              ...p,
               renderBuildingImage: '/assets/buildings/kalam-cottage.png',
             };
           }
-          return updated;
+          return p;
         });
       } catch {
         return initialProjects;

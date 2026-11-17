@@ -491,11 +491,11 @@ export const initialProjects: Project[] = [
     id: 'proj-4',
     name: 'Glamorous Heights',
     slug: 'glamorous-heights',
-    location: 'Kalam, Khyber Pakhtunkhwa, Pakistan',
-    city: 'Kalam',
-    tagline: 'Premium apartment living in the scenic surroundings of Kalam.',
+    location: 'Kalam Swat, Khyber Pakhtunkhwa, Pakistan',
+    city: 'Kalam Swat',
+    tagline: 'Premium apartment living in the scenic surroundings of Kalam Swat.',
     description:
-      'Glamorous Heights is an iconic mixed-use architectural masterpiece positioned amidst the breathtaking valley landscapes of Kalam. Crafted for discerning investors and vacation home seekers, it blends alpine grandeur with modern luxury apartments and flexible 5-year installment plans.',
+      'Glamorous Heights is an iconic mixed-use architectural masterpiece positioned amidst the breathtaking valley landscapes of Kalam Swat. Crafted for discerning investors and vacation home seekers, it blends alpine grandeur with modern luxury apartments and flexible 5-year installment plans.',
     coverImage: '/assets/projects/glamorous-heights/hero.png',
     heroImage: '/assets/projects/glamorous-heights/hero.png',
     renderBuildingImage: '/assets/buildings/building-4.png',
@@ -552,11 +552,11 @@ export const initialProjects: Project[] = [
       },
     ],
     amenities: [
-      'TMA Approved Project',
       '5-Year Easy Installments',
+      'TMA Approved Project',
+      'Prime Kalam Swat Location',
+      'Great for Tourism & Rental',
       'Panoramic Alpine Valley Views',
-      'Prime Kalam Location',
-      'High Rental Yield for Tourism',
       'High-Speed Elevators',
       '24/7 Security & CCTV',
       'Standby Generator Backup',
@@ -624,8 +624,8 @@ export const initialProjects: Project[] = [
         benefits: [
           '5-Year Easy Installments',
           'TMA Approved Project',
-          'Prime Kalam Location',
-          'Great for Tourism & Rental Income',
+          'Prime Kalam Swat Location',
+          'Great for Tourism & Rental',
         ],
         exteriorGallery: [
           '/assets/projects/glamorous-heights/exterior/exterior-1.jpg',
@@ -660,8 +660,8 @@ export const initialProjects: Project[] = [
         benefits: [
           '5-Year Easy Installments',
           'TMA Approved Project',
-          'Prime Kalam Location',
-          'Great for Tourism & Rental Income',
+          'Prime Kalam Swat Location',
+          'Great for Tourism & Rental',
         ],
         exteriorGallery: [
           '/assets/projects/glamorous-heights/exterior/exterior-3.jpg',
@@ -696,8 +696,8 @@ export const initialProjects: Project[] = [
         benefits: [
           '5-Year Easy Installments',
           'TMA Approved Project',
-          'Prime Kalam Location',
-          'Great for Tourism & Rental Income',
+          'Prime Kalam Swat Location',
+          'Great for Tourism & Rental',
         ],
         exteriorGallery: [
           '/assets/projects/glamorous-heights/exterior/exterior-5.jpg',
