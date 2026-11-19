@@ -151,12 +151,12 @@ export const ProjectDetailPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 3. Town Garden EXCLUSIVE Dedicated Primary Project Video */}
-      {project.slug === 'town-garden' && project.hasVideo && (
+      {/* 3. Dedicated Primary Project Video Walkthrough */}
+      {project.hasVideo && project.videoUrl && (
         <TownGardenVideoPlayer
           videoUrl={project.videoUrl}
-          posterImage={project.videoPoster}
-          title={project.videoTitle}
+          posterImage={project.videoPoster || project.heroImage}
+          title={project.videoTitle || `Experience ${project.name}`}
           description={project.videoDescription}
         />
       )}

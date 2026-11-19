@@ -15,6 +15,7 @@ interface TownGardenVideoPlayerProps {
   posterImage?: string;
   title?: string;
   description?: string;
+  subtitle?: string;
 }
 
 export const TownGardenVideoPlayer: React.FC<TownGardenVideoPlayerProps> = ({
@@ -22,6 +23,7 @@ export const TownGardenVideoPlayer: React.FC<TownGardenVideoPlayerProps> = ({
   posterImage = '/assets/projects/town-garden/hero.png',
   title = 'Experience Town Garden',
   description = 'Take a closer look at the architecture, surroundings, and vision of Town Garden, located in University Town, Peshawar.',
+  subtitle,
 }) => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -117,6 +119,8 @@ export const TownGardenVideoPlayer: React.FC<TownGardenVideoPlayerProps> = ({
           <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white uppercase tracking-tight mb-3 drop-shadow-sm">
             {title.includes('Town Garden') ? (
               <>Experience <span className="text-[#FFC83D]">Town Garden</span></>
+            ) : title.includes('Glamorous Heights') ? (
+              <>Experience <span className="text-[#FFC83D]">Glamorous Heights</span></>
             ) : (
               title
             )}
@@ -161,10 +165,13 @@ export const TownGardenVideoPlayer: React.FC<TownGardenVideoPlayerProps> = ({
               </div>
 
               <span className="font-heading font-extrabold text-sm sm:text-base uppercase tracking-wider text-white">
-                Play Town Garden Project Video
+                Play {title.replace(/^Experience\s+/i, '')} Project Video
               </span>
               <span className="text-xs text-[#ECFDF5]/80 mt-1">
-                University Town, Peshawar • 1080p HD
+                {subtitle ||
+                  (title.includes('Glamorous Heights')
+                    ? 'Kalam Swat, KPK • 1080p HD Walkthrough'
+                    : 'University Town, Peshawar • 1080p HD')}
               </span>
             </div>
           )}

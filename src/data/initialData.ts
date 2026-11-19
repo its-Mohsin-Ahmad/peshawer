@@ -499,7 +499,12 @@ export const initialProjects: Project[] = [
     coverImage: '/assets/projects/glamorous-heights/hero.png',
     heroImage: '/assets/projects/glamorous-heights/hero.png',
     renderBuildingImage: '/assets/buildings/building-4.png',
-    hasVideo: false,
+    hasVideo: true,
+    videoUrl: '/assets/projects/glamorous-heights/glamorous-heights-video.mp4',
+    videoPoster: '/assets/projects/glamorous-heights/hero.png',
+    videoTitle: 'Experience Glamorous Heights',
+    videoDescription:
+      'Immerse yourself in an exclusive architectural walkthrough of Glamorous Heights, Kalam Swat. Discover luxurious alpine living, panoramic valley vistas, and state-of-the-art facilities crafted for vacation retreats and high-yield tourism investments.',
     status: 'Booking Open',
     verifiedApproval: 'TMA Approved Project',
     featured: true,

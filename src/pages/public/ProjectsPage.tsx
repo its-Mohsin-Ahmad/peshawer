@@ -100,7 +100,7 @@ export const ProjectsPage: React.FC = () => {
                     />
                   </div>
 
-                  {project.slug === 'town-garden' && (
+                  {project.hasVideo && (
                     <div className="absolute top-4 left-4 z-30 bg-[#002D1C]/90 border border-[#FFC83D]/50 text-[#FFC83D] text-xs font-bold px-3 py-1 rounded-full flex items-center space-x-1 shadow-lg backdrop-blur-sm">
                       <Video className="w-3.5 h-3.5 text-[#FFC83D]" />
                       <span>Dedicated Video Walkthrough</span>
@@ -108,7 +108,7 @@ export const ProjectsPage: React.FC = () => {
                   )}
 
                   {project.slug === 'glamorous-heights' && (
-                    <div className="absolute top-4 left-4 z-30 bg-[#002D1C]/90 border border-[#FFC83D]/50 text-[#FFC83D] text-xs font-bold px-3 py-1 rounded-full flex items-center space-x-1 shadow-lg backdrop-blur-sm">
+                    <div className="absolute top-4 right-4 z-30 bg-[#002D1C]/90 border border-[#FFC83D]/50 text-[#FFC83D] text-xs font-bold px-3 py-1 rounded-full flex items-center space-x-1 shadow-lg backdrop-blur-sm">
                       <Calendar className="w-3.5 h-3.5 text-[#FFC83D]" />
                       <span>5-Year Easy Installments</span>
                     </div>

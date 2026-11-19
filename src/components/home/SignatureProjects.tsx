@@ -81,14 +81,14 @@ export const SignatureProjects: React.FC = () => {
                   </div>
 
                   {/* Project Specific Badges */}
-                  {project.slug === 'town-garden' && (
+                  {project.hasVideo && (
                     <div className="absolute top-2 right-2 z-20 bg-[#002D1C] text-[#FFC83D] text-[10px] font-bold px-3 py-1 rounded-full flex items-center space-x-1.5 shadow-md border border-[#E6AA27]/60 backdrop-blur-sm">
                       <Video className="w-3 h-3 text-[#FFC83D]" />
                       <span>Exclusive Video</span>
                     </div>
                   )}
                   {project.slug === 'glamorous-heights' && (
-                    <div className="absolute top-2 right-2 z-20 bg-[#004B2E] text-white text-[10px] font-bold px-3 py-1 rounded-full flex items-center space-x-1.5 shadow-md border border-[#E6AA27]/60 backdrop-blur-sm">
+                    <div className="absolute top-2 left-2 z-20 bg-[#004B2E] text-white text-[10px] font-bold px-3 py-1 rounded-full flex items-center space-x-1.5 shadow-md border border-[#E6AA27]/60 backdrop-blur-sm">
                       <Calendar className="w-3 h-3 text-[#FFC83D]" />
                       <span>5-Yr Plan</span>
                     </div>

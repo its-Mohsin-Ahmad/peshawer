@@ -94,7 +94,7 @@ interface DataContextType {
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
 
-const STORAGE_KEY = 'PESHAWER_REAL_ESTATE_V6_STORE';
+const STORAGE_KEY = 'PESHAWER_REAL_ESTATE_V7_STORE';
 
 export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [properties, setProperties] = useState<Property[]>(() => {
@@ -102,6 +102,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       localStorage.removeItem('PESHAWER_REAL_ESTATE_V4_STORE_PROPERTIES');
       localStorage.removeItem('PESHAWER_REAL_ESTATE_V5_STORE_PROPERTIES');
+      localStorage.removeItem('PESHAWER_REAL_ESTATE_V6_STORE_PROPERTIES');
     } catch {
       // ignore
     }
@@ -139,6 +140,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       localStorage.removeItem('PESHAWER_REAL_ESTATE_V4_STORE_PROJECTS');
       localStorage.removeItem('PESHAWER_REAL_ESTATE_V5_STORE_PROJECTS');
+      localStorage.removeItem('PESHAWER_REAL_ESTATE_V6_STORE_PROJECTS');
     } catch {
       // ignore
     }
