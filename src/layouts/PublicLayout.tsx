@@ -6,11 +6,13 @@ import { InquiryModal } from '../components/common/InquiryModal';
 import { AppointmentModal } from '../components/common/AppointmentModal';
 import { LoadingScreen } from '../components/common/LoadingScreen';
 import { WhatsAppFloatingButton } from '../components/common/WhatsAppFloatingButton';
+import { LaunchPosterModal } from '../components/common/LaunchPosterModal';
 
 export const PublicLayout: React.FC = () => {
   const location = useLocation();
   // Always trigger the luxury loader on initial entry / refresh
   const [initialLoading, setInitialLoading] = useState(true);
+  const [showPoster, setShowPoster] = useState(false);
   const [inquiryModalOpen, setInquiryModalOpen] = useState(false);
   const [appointmentModalOpen, setAppointmentModalOpen] = useState(false);
 
@@ -21,6 +23,10 @@ export const PublicLayout: React.FC = () => {
 
   const handleLoaded = () => {
     setInitialLoading(false);
+    // When loader ends, the announcement poster comes above the website
+    setTimeout(() => {
+      setShowPoster(true);
+    }, 200);
   };
 
   return (
@@ -28,6 +34,12 @@ export const PublicLayout: React.FC = () => {
       {initialLoading && (
         <LoadingScreen onLoaded={handleLoaded} />
       )}
+
+      {/* Launch / Special Announcement Poster Overlay (Comes right after loader ends) */}
+      <LaunchPosterModal
+        isOpen={showPoster}
+        onClose={() => setShowPoster(false)}
+      />
 
       <Navbar
         onOpenInquiry={() => setInquiryModalOpen(true)}
