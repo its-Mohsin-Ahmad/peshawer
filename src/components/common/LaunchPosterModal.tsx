@@ -56,25 +56,13 @@ export const LaunchPosterModal: React.FC<LaunchPosterModalProps> = ({ isOpen, on
         </button>
 
         {/* Poster Image Card */}
-        <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border-2 border-[#FFC83D]/60 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9),0_0_40px_rgba(255,200,61,0.3)] bg-[#021B13]">
+        <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border-2 border-[#FFC83D]/60 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9),0_0_40px_rgba(255,200,61,0.3)] bg-transparent">
           <img
             src={posterSrc}
             alt="Something Big is Coming in Islamabad - Peshawars.com Real Estate"
-            className="w-full h-auto max-h-[82vh] object-contain block select-none pointer-events-auto"
+            className="w-full h-auto max-h-[85vh] object-contain block select-none pointer-events-auto"
             loading="eager"
           />
-
-          {/* Bottom subtle dismiss bar */}
-          <div
-            onClick={onClose}
-            className="w-full py-2.5 bg-gradient-to-t from-[#001D13] via-[#002D1C] to-transparent text-center cursor-pointer border-t border-[#FFC83D]/20 hover:bg-[#003D25] transition-colors"
-          >
-            <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#FFC83D]/90 flex items-center justify-center space-x-1.5">
-              <span>Click to Enter Website</span>
-              <span className="text-white/60">•</span>
-              <span className="text-white/80">Tap ✕ to Close</span>
-            </span>
-          </div>
         </div>
       </div>
     </div>
