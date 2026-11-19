@@ -34,7 +34,7 @@ export const LaunchPosterModal: React.FC<LaunchPosterModalProps> = ({ isOpen, on
 
   return (
     <div
-      className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md transition-opacity duration-300 animate-in fade-in"
+      className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-6 bg-black/20 transition-opacity duration-300 animate-in fade-in"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
