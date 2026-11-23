@@ -156,7 +156,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     { label: 'PKR 10 Crore+', min: '100000000', max: '' },
   ];
 
-  const headlineWord = 'PESHAWAR';
+  const headlineWord = 'PESHAWARS';
   const letters = headlineWord.split('');
 
   // 3D GSAP Orchestrated Animation
