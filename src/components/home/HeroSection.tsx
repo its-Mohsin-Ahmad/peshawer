@@ -286,7 +286,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   return (
     <div
       ref={heroRef}
-      className="relative w-full h-[75vh] sm:h-[82vh] lg:h-[88vh] min-h-[520px] sm:min-h-[600px] lg:min-h-[640px] max-h-[960px] flex flex-col justify-between overflow-hidden bg-[#0A1210] select-none text-white"
+      className="relative w-full h-[90vh] sm:h-[82vh] lg:h-[88vh] min-h-[600px] sm:min-h-[600px] lg:min-h-[640px] max-h-[960px] flex flex-col justify-between overflow-hidden bg-[#0A1210] select-none text-white"
       style={{ perspective: '1200px' }}
     >
       {/* LAYER 0: BASE HIGH-RES HERO BACKGROUND (Sky + Villas + Lawn) */}
@@ -831,7 +831,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       </div>
 
       {/* FLEX-1 SPACER (LETS 3D HEADLINE REMAIN VISIBLE BEHIND THE ROOFLINE) */}
-      <div className="relative z-30 flex-1 min-h-[90px] sm:min-h-[160px] lg:min-h-[200px]" />
+      <div className="relative z-30 flex-1 min-h-[140px] sm:min-h-[160px] lg:min-h-[200px]" />
 
       {/* LOWER SECTION: DESCRIPTION & SEARCH PANEL */}
       <div className="relative z-30 w-full pb-5 sm:pb-8 lg:pb-10 px-3 sm:px-6 lg:px-8">
