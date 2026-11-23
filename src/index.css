@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Orbitron';
+  src: url('/fonts/Orbitron.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-kover {
+  font-family: 'Orbitron', 'Plus Jakarta Sans', sans-serif;
+  letter-spacing: 0.05em;
+  font-weight: 900;
+}
+
 @layer base {
   *, ::before, ::after {
     box-sizing: border-box;
