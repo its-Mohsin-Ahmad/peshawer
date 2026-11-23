@@ -316,8 +316,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           <h1
             className="font-heading font-black uppercase select-none text-center max-w-full"
             style={{
-              fontSize: 'clamp(2.5rem, 13.5vw, 17rem)',
-              letterSpacing: '-0.04em',
+              fontSize: 'clamp(2.5rem, 16vw, 17rem)',
+              letterSpacing: '-0.045em',
               lineHeight: 0.88,
               color: '#FFC83D',
               textShadow:
@@ -347,7 +347,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       {/* LAYER 1.5: MOBILE-ONLY TAGLINE – sits just below PESHAWAR on small screens, z-25 above the cutout */}
       <div
         className="sm:hidden absolute inset-x-0 z-[25] flex justify-center px-4 pointer-events-none"
-        style={{ top: 'calc(22vh + clamp(2.5rem, 13.5vw, 10rem) + 1rem)' }}
+        style={{ top: 'calc(22vh + clamp(2.5rem, 16vw, 10rem) + 1rem)' }}
       >
         <p className="font-heading text-sm sm:text-base font-black tracking-normal drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] leading-snug bg-black/60 backdrop-blur-md rounded-full px-5 py-1.5 text-center border border-[#E6AA27]/40 text-[#FFC83D]">
           Buy, Sell, Invest
