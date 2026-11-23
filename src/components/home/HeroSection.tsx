@@ -305,16 +305,18 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       </div>
 
       {/* LAYER 1: 3D ANIMATED "PESHAWAR" HEADLINE (PHYSICALLY BEHIND THE HOMES) */}
+      {/* On mobile: positioned at ~22vh so the text straddles the roofline (which starts at ~27% of hero height)
+          giving the same "letters peeking behind the building" 3D depth as on desktop */}
       <div
         ref={headlineContainerRef}
-        className="absolute inset-x-0 top-[11vh] sm:top-[13vh] lg:top-[15vh] z-10 pointer-events-none flex justify-center px-2 sm:px-4 max-w-full overflow-hidden"
+        className="absolute inset-x-0 top-[22vh] sm:top-[13vh] lg:top-[15vh] z-10 pointer-events-none flex justify-center px-1 sm:px-4 max-w-full"
         style={{ transformStyle: 'preserve-3d' }}
       >
         <div className="w-full max-w-7xl mx-auto flex items-center justify-center overflow-hidden">
           <h1
             className="font-heading font-black uppercase select-none text-center max-w-full"
             style={{
-              fontSize: 'clamp(2.5rem, 15vw, 17rem)',
+              fontSize: 'clamp(2.5rem, 13.5vw, 17rem)',
               letterSpacing: '-0.04em',
               lineHeight: 0.88,
               color: '#FFC83D',
@@ -345,7 +347,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       {/* LAYER 1.5: MOBILE-ONLY TAGLINE – sits just below PESHAWAR on small screens, z-25 above the cutout */}
       <div
         className="sm:hidden absolute inset-x-0 z-[25] flex justify-center px-4 pointer-events-none"
-        style={{ top: 'calc(11vh + clamp(2.5rem, 16vw, 10rem) + 0.75rem)' }}
+        style={{ top: 'calc(22vh + clamp(2.5rem, 13.5vw, 10rem) + 1rem)' }}
       >
         <p className="font-heading text-sm sm:text-base font-black tracking-normal drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] leading-snug bg-black/60 backdrop-blur-md rounded-full px-5 py-1.5 text-center border border-[#E6AA27]/40 text-[#FFC83D]">
           Buy, Sell, Invest
