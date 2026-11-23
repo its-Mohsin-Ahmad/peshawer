@@ -156,7 +156,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     { label: 'PKR 10 Crore+', min: '100000000', max: '' },
   ];
 
-  const headlineWord = 'PESHAWARS';
+  const headlineWord = 'PESHAWAR';
   const letters = headlineWord.split('');
 
   // 3D GSAP Orchestrated Animation
@@ -304,7 +304,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         <div className="absolute inset-x-0 top-0 h-28 sm:h-36 bg-gradient-to-b from-black/55 via-black/20 to-transparent pointer-events-none" />
       </div>
 
-      {/* LAYER 1: 3D ANIMATED "PESHAWER" HEADLINE (PHYSICALLY BEHIND THE HOMES) */}
+      {/* LAYER 1: 3D ANIMATED "PESHAWAR" HEADLINE (PHYSICALLY BEHIND THE HOMES) */}
       <div
         ref={headlineContainerRef}
         className="absolute inset-x-0 top-[11vh] sm:top-[13vh] lg:top-[15vh] z-10 pointer-events-none flex justify-center px-2 sm:px-4 max-w-full overflow-hidden"
@@ -314,8 +314,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           <h1
             className="font-heading font-black uppercase select-none text-center max-w-full"
             style={{
-              fontSize: 'clamp(2.2rem, 14vw, 16rem)',
-              letterSpacing: '-0.045em',
+              fontSize: 'clamp(2.5rem, 15vw, 17rem)',
+              letterSpacing: '-0.04em',
               lineHeight: 0.88,
               color: '#FFC83D',
               textShadow:
@@ -342,7 +342,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         </div>
       </div>
 
-      {/* LAYER 1.5: MOBILE-ONLY TAGLINE – sits just below PESHAWARS on small screens, z-25 above the cutout */}
+      {/* LAYER 1.5: MOBILE-ONLY TAGLINE – sits just below PESHAWAR on small screens, z-25 above the cutout */}
       <div
         className="sm:hidden absolute inset-x-0 z-[25] flex justify-center px-4 pointer-events-none"
         style={{ top: 'calc(11vh + clamp(2.5rem, 16vw, 10rem) + 0.75rem)' }}
@@ -834,7 +834,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       {/* LOWER SECTION: DESCRIPTION & SEARCH PANEL */}
       <div className="relative z-30 w-full pb-5 sm:pb-8 lg:pb-10 px-3 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto flex flex-col items-center">
-          {/* Main Hero Description — hidden on mobile (shown near PESHAWARS heading above) */}
+          {/* Main Hero Description — hidden on mobile (shown near PESHAWAR heading above) */}
           <div
             ref={descriptionRef}
             className="text-center mb-4 sm:mb-8 max-w-4xl px-2 sm:px-4 hidden sm:block"
