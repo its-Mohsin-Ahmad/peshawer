@@ -41,7 +41,6 @@ export default {
       fontFamily: {
         heading: ['Plus Jakarta Sans', 'Manrope', 'sans-serif'],
         body: ['Inter', 'sans-serif'],
-        kover: ['Orbitron', 'Plus Jakarta Sans', 'sans-serif'],
       },
       boxShadow: {
         'premium': '0 20px 40px -15px rgba(2, 44, 34, 0.08)',

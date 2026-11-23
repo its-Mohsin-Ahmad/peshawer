@@ -304,7 +304,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         <div className="absolute inset-x-0 top-0 h-28 sm:h-36 bg-gradient-to-b from-black/55 via-black/20 to-transparent pointer-events-none" />
       </div>
 
-      {/* LAYER 1: 3D ANIMATED "PESHAWARS" HEADLINE (PHYSICALLY BEHIND THE HOMES) */}
+      {/* LAYER 1: 3D ANIMATED "PESHAWER" HEADLINE (PHYSICALLY BEHIND THE HOMES) */}
       <div
         ref={headlineContainerRef}
         className="absolute inset-x-0 top-[11vh] sm:top-[13vh] lg:top-[15vh] z-10 pointer-events-none flex justify-center px-2 sm:px-4 max-w-full overflow-hidden"
@@ -312,12 +312,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       >
         <div className="w-full max-w-7xl mx-auto flex items-center justify-center overflow-hidden">
           <h1
-            className="font-kover font-black uppercase select-none text-center max-w-full tracking-wider"
+            className="font-heading font-black uppercase select-none text-center max-w-full"
             style={{
-              fontFamily: "'Orbitron', 'Plus Jakarta Sans', sans-serif",
-              fontSize: 'clamp(2rem, 9.6vw, 11.2rem)',
-              letterSpacing: '0.04em',
-              lineHeight: 0.94,
+              fontSize: 'clamp(2.2rem, 14vw, 16rem)',
+              letterSpacing: '-0.045em',
+              lineHeight: 0.88,
+              color: '#FFC83D',
+              textShadow:
+                '1px 1px 0 #C48714, 2px 2px 0 #9E6805, 4px 4px 12px rgba(0,0,0,0.5)',
               transformStyle: 'preserve-3d',
             }}
           >
@@ -327,19 +329,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 ref={(el) => {
                   if (el) headlineLettersRef.current[index] = el;
                 }}
-                className="inline-block transform-gpu font-black font-kover"
+                className="inline-block transform-gpu"
                 style={{
                   display: 'inline-block',
                   transformStyle: 'preserve-3d',
-                  fontFamily: "'Orbitron', 'Plus Jakarta Sans', sans-serif",
-                  fontWeight: 900,
-                  background:
-                    'linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 42%, #E2E8F0 75%, #CBD5E1 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  color: '#FFFFFF',
-                  filter:
-                    'drop-shadow(0 4px 18px rgba(0,0,0,0.85)) drop-shadow(0 2px 4px rgba(0,0,0,0.9)) drop-shadow(0 0 28px rgba(255,255,255,0.35))',
                 }}
               >
                 {char}
@@ -352,7 +345,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       {/* LAYER 1.5: MOBILE-ONLY TAGLINE – sits just below PESHAWARS on small screens, z-25 above the cutout */}
       <div
         className="sm:hidden absolute inset-x-0 z-[25] flex justify-center px-4 pointer-events-none"
-        style={{ top: 'calc(11vh + clamp(2rem, 10vw, 8rem) + 0.5rem)' }}
+        style={{ top: 'calc(11vh + clamp(2.5rem, 16vw, 10rem) + 0.75rem)' }}
       >
         <p className="font-heading text-sm sm:text-base font-black tracking-normal drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] leading-snug bg-black/60 backdrop-blur-md rounded-full px-5 py-1.5 text-center border border-[#E6AA27]/40 text-[#FFC83D]">
           Buy, Sell, Invest
