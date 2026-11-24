@@ -342,6 +342,16 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         </div>
       </div>
 
+      {/* LAYER 1.5: MOBILE-ONLY TAGLINE – sits right below PESHAWARS */}
+      <div
+        className="sm:hidden absolute inset-x-0 z-[25] flex justify-center px-4 pointer-events-none"
+        style={{ top: 'calc(24.5% + clamp(2.35rem, 13.5vw, 4.5rem) + 0.35rem)' }}
+      >
+        <p className="font-heading text-xs font-black tracking-normal leading-snug bg-black/60 backdrop-blur-md rounded-full px-4 py-1.5 text-center border border-[#E6AA27]/40 text-[#FFC83D] drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)]">
+          Buy, Sell, Invest
+        </p>
+      </div>
+
       {/* LAYER 2: FOREGROUND CUTOUT OF THE HOMES (Roofs, walls & trees sit IN FRONT of the 3D text) */}
       <div className="absolute inset-0 z-20 overflow-hidden pointer-events-none">
         <img
@@ -822,12 +832,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       {/* LOWER SECTION: DESCRIPTION & SEARCH PANEL */}
       <div className="relative z-30 w-full pb-5 sm:pb-8 lg:pb-10 px-3 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto flex flex-col items-center">
-          {/* Main Hero Description */}
+          {/* Main Hero Description — hidden on mobile (shown near PESHAWARS heading above) */}
           <div
             ref={descriptionRef}
-            className="text-center mb-2.5 sm:mb-8 max-w-4xl px-2 sm:px-4"
+            className="text-center mb-4 sm:mb-8 max-w-4xl px-2 sm:px-4 hidden sm:block"
           >
-            <h2 className="text-[#FFC83D] font-heading text-base sm:text-2xl md:text-3xl lg:text-4xl xl:text-[54px] font-black tracking-tight drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)] leading-tight">
+            <h2 className="text-[#FFC83D] font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-[54px] font-black tracking-tight drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)] leading-tight">
               Buy, Sell, Invest
             </h2>
           </div>
