@@ -286,7 +286,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   return (
     <div
       ref={heroRef}
-      className="relative w-full h-[90vh] sm:h-[82vh] lg:h-[88vh] min-h-[600px] sm:min-h-[600px] lg:min-h-[640px] max-h-[960px] flex flex-col justify-between overflow-hidden bg-[#0A1210] select-none text-white"
+      className="relative w-full h-[76vh] sm:h-[82vh] lg:h-[88vh] min-h-[520px] sm:min-h-[600px] lg:min-h-[640px] max-h-[960px] flex flex-col justify-between overflow-hidden bg-[#0A1210] select-none text-white"
       style={{ perspective: '1200px' }}
     >
       {/* LAYER 0: BASE HIGH-RES HERO BACKGROUND (Sky + Villas + Lawn) */}
@@ -307,16 +307,19 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       {/* LAYER 1: 3D ANIMATED "PESHAWARS" HEADLINE (PHYSICALLY BEHIND THE HOMES) */}
       <div
         ref={headlineContainerRef}
-        className="absolute inset-x-0 top-[18vh] sm:top-[13vh] lg:top-[15vh] z-10 pointer-events-none flex justify-center px-1 sm:px-4 max-w-full overflow-hidden"
+        className="absolute inset-x-0 top-[24.5%] sm:top-[13vh] lg:top-[15vh] z-10 pointer-events-none flex justify-center px-2 sm:px-4 max-w-full overflow-hidden"
         style={{ transformStyle: 'preserve-3d' }}
       >
         <div className="w-full max-w-7xl mx-auto flex items-center justify-center overflow-hidden">
           <h1
-            className="hero-headline-3d font-bold sm:font-black uppercase select-none text-center max-w-full"
+            className="font-heading font-black uppercase select-none text-center max-w-full"
             style={{
+              fontSize: 'clamp(2.35rem, 13.5vw, 16rem)',
+              letterSpacing: '-0.035em',
+              lineHeight: 0.88,
               color: '#FFC83D',
               textShadow:
-                '1px 1px 0 #C48714, 2px 2px 0 #9E6805, 4px 4px 12px rgba(0,0,0,0.5)',
+                '1px 1px 0 #C48714, 2px 2px 0 #9E6805, 3px 3px 10px rgba(0,0,0,0.5)',
               transformStyle: 'preserve-3d',
             }}
           >
@@ -814,7 +817,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       </div>
 
       {/* FLEX-1 SPACER (LETS 3D HEADLINE REMAIN VISIBLE BEHIND THE ROOFLINE) */}
-      <div className="relative z-30 flex-1 min-h-[140px] sm:min-h-[160px] lg:min-h-[200px]" />
+      <div className="relative z-30 flex-1 min-h-[80px] sm:min-h-[160px] lg:min-h-[200px]" />
 
       {/* LOWER SECTION: DESCRIPTION & SEARCH PANEL */}
       <div className="relative z-30 w-full pb-5 sm:pb-8 lg:pb-10 px-3 sm:px-6 lg:px-8">
@@ -824,7 +827,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             ref={descriptionRef}
             className="text-center mb-2.5 sm:mb-8 max-w-4xl px-2 sm:px-4"
           >
-            <h2 className="text-[#FFC83D] font-heading text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-[54px] font-black tracking-tight drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)] leading-tight">
+            <h2 className="text-[#FFC83D] font-heading text-base sm:text-2xl md:text-3xl lg:text-4xl xl:text-[54px] font-black tracking-tight drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)] leading-tight">
               Buy, Sell, Invest
             </h2>
           </div>
