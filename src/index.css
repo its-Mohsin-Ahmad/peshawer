@@ -2,6 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Antonio';
+  src: url('/fonts/Antonio.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+.hero-headline-3d {
+  font-family: 'Antonio', 'Barlow Condensed', 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(3.2rem, 16.5vw, 4.6rem);
+  letter-spacing: 0.025em;
+  line-height: 0.85;
+  transform: scaleY(1.6);
+  transform-origin: bottom center;
+}
+
+@media (min-width: 640px) {
+  .hero-headline-3d {
+    font-family: 'Plus Jakarta Sans', 'Manrope', sans-serif;
+    font-size: clamp(2.5rem, 14vw, 16rem);
+    letter-spacing: -0.04em;
+    line-height: 0.88;
+    transform: none;
+  }
+}
+
 @layer base {
   *, ::before, ::after {
     box-sizing: border-box;

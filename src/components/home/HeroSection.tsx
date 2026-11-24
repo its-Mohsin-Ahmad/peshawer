@@ -304,21 +304,16 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         <div className="absolute inset-x-0 top-0 h-28 sm:h-36 bg-gradient-to-b from-black/55 via-black/20 to-transparent pointer-events-none" />
       </div>
 
-      {/* LAYER 1: 3D ANIMATED "PESHAWAR" HEADLINE (PHYSICALLY BEHIND THE HOMES) */}
-      {/* On mobile: positioned at ~22vh so the text straddles the roofline (which starts at ~27% of hero height)
-          giving the same "letters peeking behind the building" 3D depth as on desktop */}
+      {/* LAYER 1: 3D ANIMATED "PESHAWARS" HEADLINE (PHYSICALLY BEHIND THE HOMES) */}
       <div
         ref={headlineContainerRef}
-        className="absolute inset-x-0 top-[22vh] sm:top-[13vh] lg:top-[15vh] z-10 pointer-events-none flex justify-center px-1 sm:px-4 max-w-full"
+        className="absolute inset-x-0 top-[18vh] sm:top-[13vh] lg:top-[15vh] z-10 pointer-events-none flex justify-center px-1 sm:px-4 max-w-full overflow-hidden"
         style={{ transformStyle: 'preserve-3d' }}
       >
         <div className="w-full max-w-7xl mx-auto flex items-center justify-center overflow-hidden">
           <h1
-            className="font-heading font-black uppercase select-none text-center max-w-full"
+            className="hero-headline-3d font-bold sm:font-black uppercase select-none text-center max-w-full"
             style={{
-              fontSize: 'clamp(2.5rem, 16vw, 17rem)',
-              letterSpacing: '-0.045em',
-              lineHeight: 0.88,
               color: '#FFC83D',
               textShadow:
                 '1px 1px 0 #C48714, 2px 2px 0 #9E6805, 4px 4px 12px rgba(0,0,0,0.5)',
@@ -342,16 +337,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             ))}
           </h1>
         </div>
-      </div>
-
-      {/* LAYER 1.5: MOBILE-ONLY TAGLINE – sits just below PESHAWAR on small screens, z-25 above the cutout */}
-      <div
-        className="sm:hidden absolute inset-x-0 z-[25] flex justify-center px-4 pointer-events-none"
-        style={{ top: 'calc(22vh + clamp(2.5rem, 16vw, 10rem) + 1rem)' }}
-      >
-        <p className="font-heading text-sm sm:text-base font-black tracking-normal drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] leading-snug bg-black/60 backdrop-blur-md rounded-full px-5 py-1.5 text-center border border-[#E6AA27]/40 text-[#FFC83D]">
-          Buy, Sell, Invest
-        </p>
       </div>
 
       {/* LAYER 2: FOREGROUND CUTOUT OF THE HOMES (Roofs, walls & trees sit IN FRONT of the 3D text) */}
@@ -406,9 +391,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             >
               <span>Properties</span>
               <ChevronDown
-                className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                  propertiesDropdownOpen ? 'rotate-180 text-[#D6A84F]' : ''
-                }`}
+                className={`w-3.5 h-3.5 transition-transform duration-200 ${propertiesDropdownOpen ? 'rotate-180 text-[#D6A84F]' : ''
+                  }`}
               />
             </button>
 
@@ -558,9 +542,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             >
               <span>Projects</span>
               <ChevronDown
-                className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                  projectsDropdownOpen ? 'rotate-180 text-[#D6A84F]' : ''
-                }`}
+                className={`w-3.5 h-3.5 transition-transform duration-200 ${projectsDropdownOpen ? 'rotate-180 text-[#D6A84F]' : ''
+                  }`}
               />
             </button>
 
@@ -836,12 +819,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       {/* LOWER SECTION: DESCRIPTION & SEARCH PANEL */}
       <div className="relative z-30 w-full pb-5 sm:pb-8 lg:pb-10 px-3 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto flex flex-col items-center">
-          {/* Main Hero Description — hidden on mobile (shown near PESHAWAR heading above) */}
+          {/* Main Hero Description */}
           <div
             ref={descriptionRef}
-            className="text-center mb-4 sm:mb-8 max-w-4xl px-2 sm:px-4 hidden sm:block"
+            className="text-center mb-2.5 sm:mb-8 max-w-4xl px-2 sm:px-4"
           >
-            <h2 className="text-[#FFC83D] font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-[54px] font-black tracking-tight drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)] leading-tight">
+            <h2 className="text-[#FFC83D] font-heading text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-[54px] font-black tracking-tight drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)] leading-tight">
               Buy, Sell, Invest
             </h2>
           </div>
