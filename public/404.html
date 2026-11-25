@@ -2,21 +2,18 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Peshawars.com</title>
-    <link rel="icon" type="image/png" href="./favicon.png?v=7" />
+    <meta name="robots" content="noindex, follow" />
+    <title>Peshawars.com — PESHAWER REAL ESTATE</title>
+    <link rel="icon" type="image/png" href="/favicon.png?v=7" />
     <script>
       (function() {
-        var host = window.location.hostname;
-        var path = window.location.pathname;
+        var path = window.location.pathname || '/';
         var search = window.location.search || '';
-        var hash = window.location.hash || '';
-        var isGh = host.indexOf('github.io') !== -1;
-        var base = isGh ? ('/' + (path.split('/')[1] || 'peshawer')) : '';
-        var route = path.slice(base.length).replace(/\/+$/, '') || '/';
-        window.location.replace((base || '') + '/#' + route + search + hash);
+        if (path !== '/' && path !== '/index.html') {
+          window.location.replace('/' + search);
+        }
       })();
     </script>
   </head>
   <body></body>
 </html>
-

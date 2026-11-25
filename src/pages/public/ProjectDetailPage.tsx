@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { PageHero } from '../../components/common/PageHero';
+import { SeoHead } from '../../components/common/SeoHead';
+import { buildProjectSchema } from '../../seo/seoConfig';
 import { PaymentPlanCard } from '../../components/projects/PaymentPlanCard';
 import { TownGardenVideoPlayer } from '../../components/projects/TownGardenVideoPlayer';
 import { ProjectGallery } from '../../components/projects/ProjectGallery';
@@ -34,6 +36,12 @@ export const ProjectDetailPage: React.FC = () => {
   if (!project) {
     return (
       <div className="min-h-[70vh] flex flex-col items-center justify-center p-4 text-center">
+        <SeoHead
+          title="Project Not Found | Peshawars.com"
+          description="The requested development project could not be found on Peshawars.com."
+          path="/projects"
+          noIndex
+        />
         <h2 className="font-heading text-2xl font-bold text-[#022C22] mb-3">Project Not Found</h2>
         <p className="text-sm text-[#64748B] mb-6">The signature development you requested does not exist.</p>
         <Link
@@ -55,6 +63,14 @@ export const ProjectDetailPage: React.FC = () => {
 
   return (
     <div className="bg-[#002D1C] text-white min-h-screen relative overflow-hidden">
+      <SeoHead
+        title={`${project.name} (${project.city}) — Payment Plan & Details | Peshawars.com`}
+        description={`${project.tagline} ${project.verifiedApproval}. ${project.description.slice(0, 140)}`}
+        path={`/projects/${project.slug}`}
+        image={project.heroImage}
+        keywords={`${project.name}, ${project.name} ${project.city}, ${project.name} payment plan, ${project.verifiedApproval}, Peshawars.com`}
+        jsonLd={buildProjectSchema(project)}
+      />
       {/* 1. Unique Dedicated Project Hero */}
       <PageHero
         title={project.name}

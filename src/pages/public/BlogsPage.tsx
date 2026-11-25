@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PageHero } from '../../components/common/PageHero';
+import { SeoHead } from '../../components/common/SeoHead';
+import { buildBreadcrumbSchema, SITE_URL } from '../../seo/seoConfig';
 import { useData } from '../../contexts/DataContext';
 import { Calendar, Clock, ArrowRight, Search } from 'lucide-react';
 
@@ -24,6 +26,27 @@ export const BlogsPage: React.FC = () => {
 
   return (
     <div className="bg-[#002D1C] text-white min-h-screen relative overflow-hidden">
+      <SeoHead
+        title="Peshawar & Kalam Real Estate Blog & Investment Guides | Peshawars.com"
+        description="Read verified market intelligence, legal due diligence tips, University Town Peshawar buying guides, and Kalam Swat real estate investment insights."
+        path="/blogs"
+        image="/assets/hero/slide4.jpg"
+        keywords="Peshawar real estate blog, Kalam property investment guide, University Town Peshawar property advice, apartment installment breakdown"
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@graph': [
+            {
+              '@type': 'Blog',
+              name: 'PESHAWER REAL ESTATE Insights & News',
+              url: `${SITE_URL}/blogs`,
+            },
+            buildBreadcrumbSchema([
+              { name: 'Home', url: '/' },
+              { name: 'Blogs', url: '/blogs' },
+            ]),
+          ],
+        }}
+      />
       {/* Background glow effects */}
       <div className="absolute top-1/4 right-0 w-96 h-96 bg-[#004B2E]/25 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-[#006B40]/20 rounded-full blur-3xl pointer-events-none" />

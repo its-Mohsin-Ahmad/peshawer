@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { PageHero } from '../../components/common/PageHero';
+import { SeoHead } from '../../components/common/SeoHead';
+import { buildPropertySchema } from '../../seo/seoConfig';
 import { Lightbox } from '../../components/common/Lightbox';
 import { InquiryModal } from '../../components/common/InquiryModal';
 import { AppointmentModal } from '../../components/common/AppointmentModal';
@@ -38,6 +40,12 @@ export const PropertyDetailPage: React.FC = () => {
   if (!property) {
     return (
       <div className="min-h-[70vh] flex flex-col items-center justify-center p-4 text-center">
+        <SeoHead
+          title="Property Listing Not Found | Peshawars.com"
+          description="The requested property listing is unavailable or has been archived on Peshawars.com."
+          path="/properties"
+          noIndex
+        />
         <h2 className="font-heading text-2xl font-bold text-[#022C22] mb-3">Property Listing Not Found</h2>
         <p className="text-sm text-[#64748B] mb-6">The listing you requested is unavailable or has been archived.</p>
         <Link
@@ -56,8 +64,19 @@ export const PropertyDetailPage: React.FC = () => {
     .filter((p) => p.id !== property.id && p.published && (p.category === property.category || p.city === property.city))
     .slice(0, 3);
 
+  const canonicalPath = `/properties/${property.slug || property.id}`;
+
   return (
     <div className="bg-[#002D1C] text-white min-h-screen relative overflow-hidden">
+      <SeoHead
+        title={`${property.title} — ${formatPKRShort(property.pricePKR)} | Peshawars.com`}
+        description={`${property.purpose === 'Rent' ? 'For Rent' : 'For Sale'} in ${property.location}: ${property.description.slice(0, 155)}`}
+        path={canonicalPath}
+        image={property.featuredImage}
+        type="product"
+        keywords={`${property.title}, ${property.category} in ${property.city}, ${property.location} property, Peshawars.com`}
+        jsonLd={buildPropertySchema(property)}
+      />
       {/* Background glow effects */}
       <div className="absolute top-1/3 left-0 w-96 h-96 bg-[#004B2E]/25 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-[#006B40]/20 rounded-full blur-3xl pointer-events-none" />

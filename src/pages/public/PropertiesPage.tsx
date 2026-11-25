@@ -1,6 +1,8 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { PageHero } from '../../components/common/PageHero';
+import { SeoHead } from '../../components/common/SeoHead';
+import { buildBreadcrumbSchema, SITE_URL } from '../../seo/seoConfig';
 import { PropertyCard } from '../../components/common/PropertyCard';
 import { ExpandingPropertyCards } from '../../components/properties/ExpandingPropertyCards';
 import { InquiryModal } from '../../components/common/InquiryModal';
@@ -221,8 +223,39 @@ export const PropertiesPage: React.FC<PropertiesPageProps> = ({
     setSearchParams({});
   };
 
+  const canonicalPath = forcedPurpose
+    ? `/properties/${forcedPurpose.toLowerCase()}`
+    : forcedCategory === 'Commercial'
+    ? '/properties/commercial'
+    : forcedCategory === 'Plot'
+    ? '/properties/plots'
+    : '/properties';
+
   return (
     <div className="bg-[#002D1C] min-h-screen text-white">
+      <SeoHead
+        title={`${heroData.title} in Peshawar & Kalam | Peshawars.com`}
+        description={heroData.subtitle}
+        path={canonicalPath}
+        image={heroData.image}
+        keywords={`${heroData.title}, Peshawar property, DHA Peshawar plots, University Town villas, Kalam Swat apartments, Peshawars.com`}
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@graph': [
+            {
+              '@type': 'CollectionPage',
+              name: heroData.title,
+              description: heroData.subtitle,
+              url: `${SITE_URL}${canonicalPath}`,
+            },
+            buildBreadcrumbSchema([
+              { name: 'Home', url: '/' },
+              { name: 'Properties', url: '/properties' },
+              ...(canonicalPath !== '/properties' ? [{ name: heroData.title, url: canonicalPath }] : []),
+            ]),
+          ],
+        }}
+      />
       {/* Unique Dedicated Page Hero */}
       <PageHero
         title={heroData.title}

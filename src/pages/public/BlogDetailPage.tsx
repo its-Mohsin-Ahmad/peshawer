@@ -1,6 +1,8 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { PageHero } from '../../components/common/PageHero';
+import { SeoHead } from '../../components/common/SeoHead';
+import { buildBlogSchema } from '../../seo/seoConfig';
 import { useData } from '../../contexts/DataContext';
 import { Calendar, Clock, User, ArrowLeft, Share2, Facebook, Twitter, Linkedin } from 'lucide-react';
 
@@ -13,6 +15,12 @@ export const BlogDetailPage: React.FC = () => {
   if (!blog) {
     return (
       <div className="min-h-[70vh] flex flex-col items-center justify-center p-4 text-center">
+        <SeoHead
+          title="Article Not Found | Peshawars.com"
+          description="The requested real estate article could not be found on Peshawars.com."
+          path="/blogs"
+          noIndex
+        />
         <h2 className="font-heading text-2xl font-bold text-[#022C22] mb-3">Article Not Found</h2>
         <p className="text-sm text-[#64748B] mb-6">The blog post you requested could not be located.</p>
         <Link
@@ -42,6 +50,15 @@ export const BlogDetailPage: React.FC = () => {
 
   return (
     <div className="bg-[#002D1C] text-white min-h-screen relative overflow-hidden">
+      <SeoHead
+        title={`${blog.title} | Peshawars.com`}
+        description={blog.excerpt}
+        path={`/blogs/${blog.slug}`}
+        image={blog.coverImage}
+        type="article"
+        keywords={`${blog.category}, ${blog.title}, Peshawar real estate, Kalam property, Peshawars.com`}
+        jsonLd={buildBlogSchema(blog)}
+      />
       {/* Background glow effects */}
       <div className="absolute top-1/4 right-0 w-96 h-96 bg-[#004B2E]/25 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-[#006B40]/20 rounded-full blur-3xl pointer-events-none" />

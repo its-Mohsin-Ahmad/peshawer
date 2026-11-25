@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { PageHero } from '../../components/common/PageHero';
+import { SeoHead } from '../../components/common/SeoHead';
+import { buildBreadcrumbSchema, SITE_URL } from '../../seo/seoConfig';
 import { useData } from '../../contexts/DataContext';
 import { MapPin, ArrowRight, Video, Calendar, ShieldCheck } from 'lucide-react';
 import { EmeraldWaveBackground } from '../../components/common/EmeraldWaveBackground';
@@ -10,6 +12,27 @@ export const ProjectsPage: React.FC = () => {
 
   return (
     <div className="bg-[#002D1C] min-h-screen relative overflow-hidden text-white">
+      <SeoHead
+        title="Signature Real Estate Projects in Peshawar & Kalam | Peshawars.com"
+        description="Explore verified master-planned developments by PESHAWER REAL ESTATE: Town Garden (University Town Peshawar), Glamorous Heights (Kalam), Kalam Cottages, and Corner Apartments Kalam."
+        path="/projects"
+        image="/assets/hero/slide2.jpg"
+        keywords="Town Garden Peshawar, Glamorous Heights Kalam, Kalam Cottages, Corner Apartments Kalam, TMA approved apartments Kalam, Peshawar housing projects"
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@graph': [
+            {
+              '@type': 'CollectionPage',
+              name: 'Signature Developments — Peshawars.com',
+              url: `${SITE_URL}/projects`,
+            },
+            buildBreadcrumbSchema([
+              { name: 'Home', url: '/' },
+              { name: 'Projects', url: '/projects' },
+            ]),
+          ],
+        }}
+      />
       {/* Background architectural waves */}
       <div className="absolute inset-0 pointer-events-none opacity-40">
         <EmeraldWaveBackground intensity="deep" />

@@ -1,5 +1,5 @@
 import React, { useEffect, Suspense, lazy } from 'react';
-import { HashRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Lenis from 'lenis';
 
 import { DataProvider } from './contexts/DataContext';
@@ -60,11 +60,38 @@ const AdminSettingsPage = lazy(() => import('./pages/admin/AdminSettingsPage').t
 const AdminUsersPage = lazy(() => import('./pages/admin/AdminUsersPage').then(m => ({ default: m.AdminUsersPage })));
 
 const DocumentTitleAndFaviconManager: React.FC = () => {
-  useEffect(() => {
-    // Strictly enforce browser window title as requested
-    document.title = 'Peshawars.com';
+  const location = useLocation();
 
-    // Dynamically inject/refresh favicon with cache-busting version so all browser windows reflect the 3D gold emblem
+  useEffect(() => {
+    // Scroll to top cleanly on route change (preserving anchor hashes like #payment-plans)
+    if (!location.hash) {
+      window.scrollTo(0, 0);
+    }
+
+    // Prevent indexing of private dashboards, admin routes, and auth flows
+    const p = location.pathname;
+    const isPrivateRoute =
+      p.startsWith('/dashboard') ||
+      p.startsWith('/admin') ||
+      p.startsWith('/user') ||
+      p === '/login' ||
+      p === '/signup' ||
+      p === '/forgot-password' ||
+      p === '/auth/callback';
+
+    if (isPrivateRoute) {
+      const robotsMeta = document.querySelector('meta[name="robots"]');
+      if (robotsMeta) {
+        robotsMeta.setAttribute('content', 'noindex, nofollow');
+      }
+      document.title = p.startsWith('/dashboard') || p.startsWith('/admin')
+        ? 'Admin Portal | Peshawars.com'
+        : 'Client Portal | Peshawars.com';
+    }
+  }, [location.pathname, location.hash]);
+
+  useEffect(() => {
+    // Dynamically inject/refresh root-relative favicon with cache-busting version
     try {
       const v = '7';
       const existingIcons = document.querySelectorAll("link[rel*='icon'], link[rel='apple-touch-icon']");
@@ -76,18 +103,18 @@ const DocumentTitleAndFaviconManager: React.FC = () => {
       pngIcon.rel = 'icon';
       pngIcon.type = 'image/png';
       pngIcon.setAttribute('sizes', '32x32');
-      pngIcon.href = `./favicon.png?v=${v}`;
+      pngIcon.href = `/favicon.png?v=${v}`;
       head.appendChild(pngIcon);
 
       const shortcut = document.createElement('link');
       shortcut.rel = 'shortcut icon';
       shortcut.type = 'image/png';
-      shortcut.href = `./favicon.png?v=${v}`;
+      shortcut.href = `/favicon.png?v=${v}`;
       head.appendChild(shortcut);
 
       const apple = document.createElement('link');
       apple.rel = 'apple-touch-icon';
-      apple.href = `./apple-touch-icon.png?v=${v}`;
+      apple.href = `/apple-touch-icon.png?v=${v}`;
       head.appendChild(apple);
     } catch {
       // fallback safe
@@ -148,7 +175,7 @@ const SmoothScrollManager: React.FC = () => {
 
 export function App() {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <DocumentTitleAndFaviconManager />
       <SmoothScrollManager />
       <SparkleTrail />
@@ -249,7 +276,7 @@ export function App() {
         </UserAuthProvider>
         </AuthProvider>
       </DataProvider>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 

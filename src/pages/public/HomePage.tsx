@@ -1,5 +1,7 @@
 import React from 'react';
 import { useOutletContext } from 'react-router-dom';
+import { SeoHead } from '../../components/common/SeoHead';
+import { buildHomeFaqSchema, buildOrganizationAndWebsiteSchema } from '../../seo/seoConfig';
 import { HeroSection } from '../../components/home/HeroSection';
 import { SignatureProjects } from '../../components/home/SignatureProjects';
 import { ProjectsProgressingSection } from '../../components/home/ProjectsProgressingSection';
@@ -21,6 +23,13 @@ export const HomePage: React.FC = () => {
 
   return (
     <div className="flex flex-col">
+      <SeoHead
+        title="Peshawars.com | PESHAWER REAL ESTATE — Buy, Sell & Invest in Peshawar & Kalam"
+        description="PESHAWER REAL ESTATE (Peshawars.com) — Verified houses, luxury villas, DHA Peshawar plots, and TMA-approved projects in University Town Peshawar & Kalam Swat with 3 to 5 year installment plans."
+        path="/"
+        keywords="Peshawar real estate, Peshawars.com, property in Peshawar, houses for sale Peshawar, University Town Peshawar villas, DHA Peshawar plots, Glamorous Heights Kalam, Town Garden Peshawar, Kalam Cottages"
+        jsonLd={[buildOrganizationAndWebsiteSchema(), buildHomeFaqSchema()]}
+      />
       {/* 1. Cinematic Reference-Inspired Hero Section & Integrated Search Panel */}
       <HeroSection
         onOpenInquiry={() => context?.onOpenInquiry?.()}

@@ -1,5 +1,7 @@
 import React from 'react';
 import { PageHero } from '../../components/common/PageHero';
+import { SeoHead } from '../../components/common/SeoHead';
+import { buildBreadcrumbSchema, buildOrganizationAndWebsiteSchema } from '../../seo/seoConfig';
 import { ShieldCheck, Target, Eye, Compass, Award, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { EmeraldWaveBackground } from '../../components/common/EmeraldWaveBackground';
@@ -7,6 +9,23 @@ import { EmeraldWaveBackground } from '../../components/common/EmeraldWaveBackgr
 export const AboutPage: React.FC = () => {
   return (
     <div className="bg-[#002D1C] min-h-screen text-white relative overflow-hidden">
+      <SeoHead
+        title="About PESHAWER REAL ESTATE — Trusted Property Advisory in KPK | Peshawars.com"
+        description="Learn about PESHAWER REAL ESTATE (Peshawars.com): verified TMA-approved developments, transparent legal documentation, and luxury projects across Peshawar and Kalam Swat."
+        path="/about"
+        image="/assets/pages/about-hero.jpg"
+        keywords="About PESHAWER REAL ESTATE, Peshawars.com, trusted property dealer Peshawar, verified real estate KPK"
+        jsonLd={[
+          buildOrganizationAndWebsiteSchema(),
+          {
+            '@context': 'https://schema.org',
+            ...buildBreadcrumbSchema([
+              { name: 'Home', url: '/' },
+              { name: 'About Us', url: '/about' },
+            ]),
+          },
+        ]}
+      />
       {/* Background ambient lighting */}
       <div className="absolute top-1/3 left-0 w-96 h-96 bg-[#004B2E]/25 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-[#006B40]/20 rounded-full blur-3xl pointer-events-none" />

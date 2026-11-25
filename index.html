@@ -1,40 +1,79 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" sizes="32x32" href="./favicon.png?v=7" />
-    <link rel="icon" type="image/png" sizes="192x192" href="./favicon.png?v=7" />
-    <link rel="shortcut icon" href="./favicon.png?v=7" />
-    <link rel="apple-touch-icon" href="./favicon.png?v=7" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Peshawars.com</title>
-    <meta name="description" content="Discover premium real estate, residential developments, luxury apartments, and investment opportunities in Peshawar, Kalam, and Swat." />
-    <!-- Preload Critical Hero Visuals for Instant First Paint -->
-    <link rel="preload" as="image" href="./assets/navbar-logo.png" />
-    <link rel="preload" as="image" href="./assets/hero/home-clean.png" />
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Path to HashRouter redirect script for direct URL navigation on GitHub Pages / Vercel -->
-    <script>
-      (function() {
-        var host = window.location.hostname;
-        var path = window.location.pathname;
-        var search = window.location.search || '';
-        var hash = window.location.hash;
-        var isGh = host.indexOf('github.io') !== -1;
-        var base = isGh ? ('/' + (path.split('/')[1] || 'peshawer')) : '';
-        var route = path.slice(base.length).replace(/\/+$/, '') || '/';
-        if (route && route !== '/' && route !== '/index.html' && !hash) {
-          window.location.replace((base || '') + '/#' + route + search);
-        }
-      })();
-    </script>
-  </head>
-  <body class="bg-[#F8F6EA] text-[#102A24] font-body antialiased selection:bg-[#D6A84F] selection:text-[#022C22]">
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
 
+<head>
+  <meta charset="UTF-8" />
+  <meta name="google-site-verification" content="1Lxjj7V-d74afcrs0vxBUUSwTT12zT7tgFY-U1IzzhU" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#003D25" />
+
+  <!-- Primary SEO Meta Tags (dynamically overridden per route at build & runtime) -->
+  <title>Peshawars.com | PESHAWER REAL ESTATE — Buy, Sell & Invest in Peshawar & Kalam</title>
+  <meta name="description"
+    content="PESHAWER REAL ESTATE (Peshawars.com) — Verified houses, luxury villas, commercial plots, and TMA-approved apartment developments in University Town Peshawar, DHA Peshawar, Hayatabad, and Kalam Swat with transparent 3 to 5 year installment plans." />
+  <meta name="keywords"
+    content="Peshawar real estate, peshawar,Peshawars.com, PESHAWER REAL ESTATE, property in Peshawar, houses for sale in Peshawar, DHA Peshawar plots, University Town Peshawar villas, Town Garden Peshawar,real estate, property, plates for selling,  Glamorous Heights Kalam, Kalam Cottages, Corner Apartments Kalam, Swat apartments installment plan, real estate investment KPK" />
+  <meta name="author" content="PESHAWER REAL ESTATE" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <link rel="canonical" href="https://peshawars.com/" />
+
+  <!-- Local / Geo SEO Meta Tags -->
+  <meta name="geo.region" content="PK-KP" />
+  <meta name="geo.placename" content="Peshawar, Khyber Pakhtunkhwa, Pakistan" />
+  <meta name="geo.position" content="34.0083;71.5015" />
+  <meta name="ICBM" content="34.0083, 71.5015" />
+
+  <!-- Open Graph / Facebook / WhatsApp -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Peshawars.com — PESHAWER REAL ESTATE" />
+  <meta property="og:locale" content="en_PK" />
+  <meta property="og:title" content="Peshawars.com | PESHAWER REAL ESTATE — Buy, Sell & Invest in Peshawar & Kalam" />
+  <meta property="og:description"
+    content="Verified luxury houses, residential plots, commercial units, and TMA-approved projects in Peshawar & Kalam Swat. Explore Town Garden, Glamorous Heights & Kalam Cottages." />
+  <meta property="og:url" content="https://peshawars.com/" />
+  <meta property="og:image" content="https://peshawars.com/assets/hero/home-clean.png" />
+  <meta property="og:image:alt" content="PESHAWER REAL ESTATE Luxury Villas & Signature Developments" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Peshawars.com | PESHAWER REAL ESTATE — Buy, Sell & Invest" />
+  <meta name="twitter:description"
+    content="Explore verified properties and TMA-approved installment developments in Peshawar, University Town, DHA Peshawar, and Kalam Swat." />
+  <meta name="twitter:image" content="https://peshawars.com/assets/hero/home-clean.png" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=7" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon.png?v=7" />
+  <link rel="shortcut icon" href="/favicon.png?v=7" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=7" />
+
+  <!-- Preload Critical Hero Visuals for Instant First Paint (Core Web Vitals LCP) -->
+  <link rel="preload" as="image" href="/assets/navbar-logo.png" />
+  <link rel="preload" as="image" href="/assets/hero/home-clean.png" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+
+  <!-- Migrate legacy HashRouter URLs (/#/...) cleanly to BrowserRouter paths without touching OAuth hashes -->
+  <script>
+    (function () {
+      var h = window.location.hash || '';
+      if (h.indexOf('#/') === 0) {
+        var cleanPath = h.slice(1);
+        window.history.replaceState(null, '', cleanPath);
+      }
+    })();
+  </script>
+</head>
+
+<body class="bg-[#F8F6EA] text-[#102A24] font-body antialiased selection:bg-[#D6A84F] selection:text-[#022C22]">
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
+</html>

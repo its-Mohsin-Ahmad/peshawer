@@ -1,9 +1,16 @@
 import React from 'react';
 import { PageHero } from '../../components/common/PageHero';
+import { SeoHead } from '../../components/common/SeoHead';
 
 export const PrivacyPolicyPage: React.FC = () => {
   return (
     <div className="bg-[#002D1C] text-white min-h-screen">
+      <SeoHead
+        title="Privacy Policy | Peshawars.com"
+        description="Privacy Policy governing property inquiries, site visit bookings, and personal information protection at PESHAWER REAL ESTATE (Peshawars.com)."
+        path="/privacy-policy"
+        image="/assets/projects/town-garden/hero.png"
+      />
       {/* Unique subtle architectural background for Privacy Policy */}
       <PageHero
         title="Privacy Policy"

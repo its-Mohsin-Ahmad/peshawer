@@ -1,9 +1,16 @@
 import React from 'react';
 import { PageHero } from '../../components/common/PageHero';
+import { SeoHead } from '../../components/common/SeoHead';
 
 export const TermsPage: React.FC = () => {
   return (
     <div className="bg-[#002D1C] text-white min-h-screen">
+      <SeoHead
+        title="Terms and Conditions | Peshawars.com"
+        description="Official booking terms, installment schedule guidelines, and property documentation policies at PESHAWER REAL ESTATE (Peshawars.com)."
+        path="/terms-and-conditions"
+        image="/assets/projects/corner-apartments-kalam/hero.png"
+      />
       {/* Unique subtle architectural background for Terms and Conditions */}
       <PageHero
         title="Terms and Conditions"

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { PageHero } from '../../components/common/PageHero';
+import { SeoHead } from '../../components/common/SeoHead';
+import { buildBreadcrumbSchema, buildOrganizationAndWebsiteSchema } from '../../seo/seoConfig';
 import { useData } from '../../contexts/DataContext';
 import { MapPin, Mail, Clock, Send, CheckCircle2, MessageSquare } from 'lucide-react';
 
@@ -47,6 +49,23 @@ export const ContactPage: React.FC = () => {
 
   return (
     <div className="bg-[#002D1C] min-h-screen text-white relative overflow-hidden">
+      <SeoHead
+        title="Contact PESHAWER REAL ESTATE — Head Office University Road Peshawar | Peshawars.com"
+        description="Contact PESHAWER REAL ESTATE (Peshawars.com) for verified property bookings, site visits, and official payment plans in Peshawar & Kalam. UAN: 0311-7000900 • info@peshawars.com."
+        path="/contact"
+        image="/assets/pages/contact-hero.jpg"
+        keywords="contact PESHAWER REAL ESTATE, Peshawars.com phone number, University Road Peshawar property office, book site visit Peshawar Kalam"
+        jsonLd={[
+          buildOrganizationAndWebsiteSchema(),
+          {
+            '@context': 'https://schema.org',
+            ...buildBreadcrumbSchema([
+              { name: 'Home', url: '/' },
+              { name: 'Contact', url: '/contact' },
+            ]),
+          },
+        ]}
+      />
       {/* Background glow effects */}
       <div className="absolute top-1/4 right-0 w-96 h-96 bg-[#004B2E]/25 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 left-0 w-96 h-96 bg-[#006B40]/20 rounded-full blur-3xl pointer-events-none" />
