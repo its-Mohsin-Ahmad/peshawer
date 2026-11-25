@@ -1,6 +1,6 @@
 import { BlogPost, Project, Property } from '../types';
 
-export const SITE_URL = 'https://peshawars.com';
+export const SITE_URL = 'https://www.peshawars.com';
 export const SITE_NAME = 'Peshawars.com — PESHAWER REAL ESTATE';
 export const DEFAULT_OG_IMAGE = `${SITE_URL}/assets/hero/home-clean.png`;
 export const BRAND_LOGO_URL = `${SITE_URL}/assets/navbar-logo.png`;

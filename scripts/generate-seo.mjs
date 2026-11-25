@@ -11,7 +11,7 @@ const DIST_DIR = path.join(ROOT_DIR, 'dist');
 const PUBLIC_DIR = path.join(ROOT_DIR, 'public');
 const TMP_BUNDLE = path.join(ROOT_DIR, '.seo-tmp-bundle.cjs');
 
-const SITE_URL = 'https://peshawars.com';
+const SITE_URL = 'https://www.peshawars.com';
 
 function escapeHtml(str = '') {
   return String(str)

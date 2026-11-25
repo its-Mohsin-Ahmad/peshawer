@@ -12,4 +12,4 @@ Disallow: /signup
 Disallow: /forgot-password
 Disallow: /auth/
 
-Sitemap: https://peshawars.com/sitemap.xml
+Sitemap: https://www.peshawars.com/sitemap.xml
